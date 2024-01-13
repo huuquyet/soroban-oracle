@@ -103,7 +103,7 @@ dependencies = [
 
 [[package]]
 name = "btc-token"
-version = "0.0.6"
+version = "0.1.0"
 dependencies = [
  "soroban-sdk",
  "soroban-token-sdk",
@@ -327,7 +327,7 @@ dependencies = [
 
 [[package]]
 name = "donation-contract"
-version = "0.0.0"
+version = "0.1.0"
 dependencies = [
  "soroban-sdk",
 ]
@@ -1049,7 +1049,7 @@ dependencies = [
 
 [[package]]
 name = "soroban-oracle-contract"
-version = "0.0.0"
+version = "0.1.0"
 dependencies = [
  "soroban-sdk",
 ]

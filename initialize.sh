@@ -71,13 +71,14 @@ echo "{ \"network\": \"$NETWORK\", \"rpcUrl\": \"$SOROBAN_RPC_URL\", \"networkPa
 
 if !(soroban config identity ls | grep token-admin 2>&1 >/dev/null); then
   echo "Create the token-admin identity"
-  soroban config identity generate token-admin
+  soroban config identity generate token-admin --network $NETWORK
 fi
 ADMIN_ADDRESS="$(soroban config identity address token-admin)"
 
 # This will fail if the account already exists, but it'll still be fine.
 echo "Fund token-admin account from friendbot"
-curl --silent -X POST "$FRIENDBOT_URL?addr=$ADMIN_ADDRESS" >/dev/null
+soroban config identity fund token-admin --network $NETWORK
+# curl --silent -X POST "$FRIENDBOT_URL?addr=$ADMIN_ADDRESS" >/dev/null
 
 ARGS="--network $NETWORK --source token-admin"
 

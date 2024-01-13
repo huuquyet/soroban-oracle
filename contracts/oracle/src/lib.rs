@@ -112,7 +112,7 @@ impl OracleContract {
         e.storage().instance().set(&DataKey::ContractOwner, &caller);
         e.storage().instance().set(&DataKey::PairInfo, &pair_info);
         e.storage().instance().set(&DataKey::Initialized, &true);
-        e.storage().instance().bump(LIFETIME_THRESHOLD, BUMP_AMOUNT);
+        e.storage().instance().extend_ttl(LIFETIME_THRESHOLD, BUMP_AMOUNT);
     }
 
     pub fn update_pair_epoch_interval(e: Env, caller: Address, epoch_interval: u32) -> PairInfo {

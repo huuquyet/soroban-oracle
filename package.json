@@ -21,7 +21,7 @@
     "@emotion/styled": "^11.11.0",
     "@stellar/stellar-sdk": "^11.2.0",
     "@tabler/icons-react": "^2.46.0",
-    "@thirdweb-dev/react": "^4.3.1",
+    "@thirdweb-dev/react": "^3.10.3",
     "axios": "^1.6.5",
     "bigint-conversion": "^2.4.3",
     "btc-token": "file:.soroban/btc-token",
