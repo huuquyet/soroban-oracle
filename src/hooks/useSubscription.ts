@@ -1,15 +1,14 @@
 import { useEffect } from "react";
-import * as SorobanClient from "soroban-client";
-let xdr = SorobanClient.xdr;
+import { SorobanRpc, xdr } from "@stellar/stellar-sdk";
 
 interface GeneratedLibrary {
-  Server: SorobanClient.Server;
+  Server: SorobanRpc.Server;
   CONTRACT_ID_HEX: string;
 }
 
-interface GetEventsWithLatestLedger
-  extends SorobanClient.SorobanRpc.GetEventsResponse {
-  latestLedger: string;
+interface GetEventsWithLatestLedger extends SorobanRpc.Api.GetEventsResponse {
+  latestLedger: number;
+  events: SorobanRpc.Api.EventResponse[];
 }
 
 type PagingKey = string;
@@ -22,14 +21,14 @@ const paging: Record<
 export function useSubscription(
   library: GeneratedLibrary,
   topic: string,
-  onEvent: (event: SorobanClient.SorobanRpc.EventResponse) => void,
+  onEvent: (event: SorobanRpc.Api.EventResponse) => void,
   pollInterval = 5000
 ) {
   const id = `${library.CONTRACT_ID_HEX}:${topic}`;
   paging[id] = paging[id] || {};
 
   useEffect(() => {
-    let timeoutId: NodeJS.Timer | null = null;
+    let timeoutId: NodeJS.Timeout | null = null;
     let stop = false;
 
     async function pollEvents(): Promise<void> {
@@ -56,7 +55,7 @@ export function useSubscription(
 
         paging[id].pagingToken = undefined;
         if (response.latestLedger) {
-          paging[id].lastLedgerStart = parseInt(response.latestLedger);
+          paging[id].lastLedgerStart = response.latestLedger;
         }
         response.events &&
           response.events.forEach((event) => {

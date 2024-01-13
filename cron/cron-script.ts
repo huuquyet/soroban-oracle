@@ -1,39 +1,37 @@
-const cron = require("node-cron");
-const SorobanClient = require("soroban-client");
-const {
+import cron from "node-cron";
+import {
   xdr,
   Keypair,
   Networks,
   TransactionBuilder,
   Contract,
-  Server,
   nativeToScVal,
   scValToNative,
   Address,
-} = SorobanClient;
-const SorobanRpc = SorobanClient.SorobanRpc;
+  SorobanRpc,
+} from "@stellar/stellar-sdk";
 
 const API_NINJA_KEY = "YOUR_API_KEY";
 
 const sourceSecretKey = "YOUR_RELAYER_API_KEY";
-const sourceKeypair = SorobanClient.Keypair.fromSecret(sourceSecretKey);
+const sourceKeypair = Keypair.fromSecret(sourceSecretKey);
 const sourcePublicKey = sourceKeypair.publicKey();
 
 const contractId = "ADDRESS_OF_DEPLOYED_CONTRACT_ORACLE";
-const contract = new SorobanClient.Contract(contractId);
+const contract = new Contract(contractId);
 
-const server = new SorobanClient.Server(
+const server = new SorobanRpc.Server(
   "https://rpc-futurenet.stellar.org:443",
   { allowHttp: true }
 );
 
-const networkPassphrase = SorobanClient.Networks.FUTURENET;
+const networkPassphrase = Networks.FUTURENET;
 const fee = "100";
 
 const getTimestamp = async () => {
   let account = await server.getAccount(sourcePublicKey);
   try {
-    let transaction = new SorobanClient.TransactionBuilder(account, {
+    let transaction = new TransactionBuilder(account, {
       fee,
       networkPassphrase,
     })
@@ -47,7 +45,7 @@ const getTimestamp = async () => {
         `[ERROR] [getTimestamp]: ${JSON.stringify(resultSimulation)}`
       );
     }
-    return SorobanClient.scValToNative(resultSimulation.result.retval);
+    return scValToNative(resultSimulation.result.retval);
   } catch (e) {
     console.error(e);
     throw new Error("[getTimestamp] ERROR");
@@ -57,7 +55,7 @@ const getTimestamp = async () => {
 const getPairInfo = async () => {
   let account = await server.getAccount(sourcePublicKey);
   try {
-    let transaction = new SorobanClient.TransactionBuilder(account, {
+    let transaction = new TransactionBuilder(account, {
       fee,
       networkPassphrase,
     })
@@ -71,7 +69,7 @@ const getPairInfo = async () => {
         `[ERROR] [getPairInfo]: ${JSON.stringify(resultSimulation)}`
       );
     }
-    return SorobanClient.scValToNative(resultSimulation.result.retval);
+    return scValToNative(resultSimulation.result.retval);
   } catch (e) {
     console.error(e);
     throw new Error("[getPairInfo] ERROR");
@@ -81,9 +79,9 @@ const getPairInfo = async () => {
 const getEpochData = async (epochNr) => {
   let account = await server.getAccount(sourcePublicKey);
   try {
-    epochNr = SorobanClient.nativeToScVal(epochNr, { type: "u32" });
+    epochNr = nativeToScVal(epochNr, { type: "u32" });
 
-    let transaction = new SorobanClient.TransactionBuilder(account, {
+    let transaction = new TransactionBuilder(account, {
       fee,
       networkPassphrase,
     })
@@ -96,7 +94,7 @@ const getEpochData = async (epochNr) => {
       throw new Error(`[ERROR] [const getEpochData = async (epochNr) => {
         ]: ${JSON.stringify(resultSimulation)}`);
     }
-    return SorobanClient.scValToNative(resultSimulation.result.retval);
+    return scValToNative(resultSimulation.result.retval);
   } catch (e) {
     console.error(e);
     throw new Error("[getEpochData] ERROR");
@@ -124,11 +122,11 @@ const getPairPrice = async (pairName) => {
 const updatePairPrice = async (price) => {
   try {
     let account = await server.getAccount(sourcePublicKey);
-    const value = SorobanClient.nativeToScVal(price, { type: "u32" });
-    const caller = new SorobanClient.Address(account.accountId()).toScVal();
+    const value = nativeToScVal(price, { type: "u32" });
+    const caller = new Address(account.accountId()).toScVal();
 
     const operation = contract.call("set_epoch_data", ...[caller, value]);
-    let transaction = new SorobanClient.TransactionBuilder(account, {
+    let transaction = new TransactionBuilder(account, {
       fee,
       networkPassphrase,
     })

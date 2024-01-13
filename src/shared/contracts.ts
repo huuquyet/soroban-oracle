@@ -1,7 +1,7 @@
 import * as Btc from 'btc-token'
 import * as Donation from 'donation-contract'
 import * as Oracle from 'oracle-contract'
-import { Server } from 'soroban-client'
+import { SorobanRpc } from '@stellar/stellar-sdk'
 import config from './config.json'
 const { network, rpcUrl } = config
 
@@ -21,4 +21,4 @@ export const oracle = new Oracle.Contract({
 })
 
 
-export const server = new Server(rpcUrl, { allowHttp: rpcUrl.startsWith('http:') })
+export const server = new SorobanRpc.Server(rpcUrl, { allowHttp: rpcUrl.startsWith('http:') })
