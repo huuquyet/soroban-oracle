@@ -31,12 +31,12 @@ export const ItemCardContainer = ({
   const getPairInfo = async () => {
     setIsLoadingPairInfo(true);
     try {
-      let txPairInfo = await contract.getPairInfo();
-      let txPairDataAtEpoch = await contract.getPairDataAtEpoch({
-        epoch_nr: txPairInfo?.last_epoch,
+      const txPairInfo = await contract.getPairInfo();
+      const txPairDataAtEpoch = await contract.getPairDataAtEpoch({
+        epoch_nr: txPairInfo?.result.last_epoch,
       });
-      setPairInfo({ ...txPairInfo, ...txPairDataAtEpoch });
-      if (callback) callback({ ...txPairInfo, ...txPairDataAtEpoch });
+      setPairInfo({ ...txPairInfo.result, ...txPairDataAtEpoch.result });
+      if (callback) callback({ ...txPairInfo.result, ...txPairDataAtEpoch.result });
       setIsLoadingPairInfo(false);
     } catch (e) {
       console.log(e);
