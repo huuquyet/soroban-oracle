@@ -73,7 +73,7 @@ const DepositForm = ({
               amount: BigInt(Number(calculateValue) * 10 ** 10),
               user: account!.address,
             },
-            { fee: 100, secondsToWait: 20, responseType: "full" }
+            { fee: 100, }
           );
           await txDeposit.signAndSend()
           

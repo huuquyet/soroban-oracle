@@ -56,7 +56,7 @@ const OracleAddress = ({ pairInfo }: { pairInfo: PairInfo | null }) => {
             caller: account!.address,
             new_relayer_address: formData?.relayer,
           },
-          { fee: 1000, secondsToWait: 20, responseType: "full" }
+          { fee: 1000, }
         );
         await txPairEpochInterval.signAndSend()
 
@@ -168,7 +168,7 @@ const OracleEpochInterval = ({ pairInfo }: { pairInfo: PairInfo | null }) => {
           caller: account!.address,
           epoch_interval: Number(formData!.time),
         },
-        { fee: 1000, secondsToWait: 20, responseType: "full" }
+        { fee: 1000, }
       );
       await txPairEpochInterval.signAndSend()
 

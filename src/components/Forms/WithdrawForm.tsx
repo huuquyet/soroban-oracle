@@ -41,7 +41,7 @@ function WithdrawForm({
             {
               caller: account!.address,
             },
-            { fee: 100, secondsToWait: 20, responseType: "full" }
+            { fee: 100, }
           );
           await txWithdraw.signAndSend()
 

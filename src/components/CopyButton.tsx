@@ -1,8 +1,9 @@
 import { Button, Tooltip, useClipboard } from "@chakra-ui/react";
 import { IconCopy } from "@tabler/icons-react";
+import { Address } from '@stellar/stellar-sdk'
 
 type CopyButtonProps = {
-  str: string;
+  str: string | typeof Address | undefined | null;
   value: string;
   size: "sm" | "md" | "xs";
 };
@@ -17,7 +18,7 @@ const CopyButton = ({ str, value, size = "xs" }: CopyButtonProps) => {
         rightIcon={<IconCopy size={15} />}
         onClick={onCopy}
       >
-        {str}
+        {str as string}
       </Button>
     </Tooltip>
   );

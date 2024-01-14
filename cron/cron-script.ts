@@ -1,6 +1,5 @@
 import cron from "node-cron";
 import {
-  xdr,
   Keypair,
   Networks,
   TransactionBuilder,
@@ -17,7 +16,7 @@ const sourceSecretKey = "YOUR_RELAYER_API_KEY";
 const sourceKeypair = Keypair.fromSecret(sourceSecretKey);
 const sourcePublicKey = sourceKeypair.publicKey();
 
-const contractId = "ADDRESS_OF_DEPLOYED_CONTRACT_ORACLE";
+const contractId = "CCADJU57KE6J3SCEOVQAOH7E763623DUD3AOKS7XQUX77FRQL2IWK7SR";
 const contract = new Contract(contractId);
 
 const server = new SorobanRpc.Server(
@@ -40,12 +39,12 @@ const getTimestamp = async () => {
       .build();
 
     let resultSimulation = await server.simulateTransaction(transaction);
-    if (!SorobanRpc.isSimulationSuccess(resultSimulation)) {
+    if (!SorobanRpc.Api.isSimulationSuccess(resultSimulation)) {
       throw new Error(
         `[ERROR] [getTimestamp]: ${JSON.stringify(resultSimulation)}`
       );
     }
-    return scValToNative(resultSimulation.result.retval);
+    return scValToNative(resultSimulation.result!.retval);
   } catch (e) {
     console.error(e);
     throw new Error("[getTimestamp] ERROR");
@@ -64,19 +63,19 @@ const getPairInfo = async () => {
       .build();
 
     let resultSimulation = await server.simulateTransaction(transaction);
-    if (!SorobanRpc.isSimulationSuccess(resultSimulation)) {
+    if (!SorobanRpc.Api.isSimulationSuccess(resultSimulation)) {
       throw new Error(
         `[ERROR] [getPairInfo]: ${JSON.stringify(resultSimulation)}`
       );
     }
-    return scValToNative(resultSimulation.result.retval);
+    return scValToNative(resultSimulation.result!.retval);
   } catch (e) {
     console.error(e);
     throw new Error("[getPairInfo] ERROR");
   }
 };
 
-const getEpochData = async (epochNr) => {
+const getEpochData = async (epochNr: any) => {
   let account = await server.getAccount(sourcePublicKey);
   try {
     epochNr = nativeToScVal(epochNr, { type: "u32" });
@@ -90,18 +89,18 @@ const getEpochData = async (epochNr) => {
       .build();
 
     let resultSimulation = await server.simulateTransaction(transaction);
-    if (!SorobanRpc.isSimulationSuccess(resultSimulation)) {
+    if (!SorobanRpc.Api.isSimulationSuccess(resultSimulation)) {
       throw new Error(`[ERROR] [const getEpochData = async (epochNr) => {
         ]: ${JSON.stringify(resultSimulation)}`);
     }
-    return scValToNative(resultSimulation.result.retval);
+    return scValToNative(resultSimulation.result!.retval);
   } catch (e) {
     console.error(e);
     throw new Error("[getEpochData] ERROR");
   }
 };
 
-const getPairPrice = async (pairName) => {
+const getPairPrice = async (pairName: any) => {
   try {
     const response = await fetch(
       `https://api.api-ninjas.com/v1/cryptoprice?symbol=${pairName}`,
@@ -119,7 +118,7 @@ const getPairPrice = async (pairName) => {
   }
 };
 
-const updatePairPrice = async (price) => {
+const updatePairPrice = async (price: any) => {
   try {
     let account = await server.getAccount(sourcePublicKey);
     const value = nativeToScVal(price, { type: "u32" });
@@ -135,8 +134,7 @@ const updatePairPrice = async (price) => {
       .build();
 
     transaction = await server.prepareTransaction(
-      transaction,
-      networkPassphrase
+      transaction
     );
     transaction.sign(sourceKeypair);
     let response = await server.sendTransaction(transaction);
@@ -152,13 +150,13 @@ const updatePairPrice = async (price) => {
       throw new Error("[updatePairPrice] ERROR STATUS");
     }
 
-    while (response.status != "SUCCESS") {
+    while (response.status != "PENDING") {
       let response = await server.getTransaction(hash);
       console.log("[updatePairPrice] response.status: ", response.status);
       await new Promise((resolve) => setTimeout(resolve, 60));
     }
 
-    if (SorobanRpc.isSimulationSuccess(resultSimulation)) {
+    if (SorobanRpc.Api.isSimulationSuccess(resultSimulation)) {
       console.log("[updatePairPrice] SUCCESS");
       console.log("[updatePairPrice] Transaction status:", response.status);
     } else {

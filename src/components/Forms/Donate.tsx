@@ -37,7 +37,7 @@ const Donate = () => {
   const getPairInfo = async () => {
     setIsLoadingPairInfo(true);
     try {
-      const txPairInfo = await oracle.getPairInfo().result;
+      const txPairInfo = await oracle.getPairInfo();
       const txPairDataAtEpoch = await oracle.getPairDataAtEpoch({
         epoch_nr: txPairInfo?.result.last_epoch,
       });

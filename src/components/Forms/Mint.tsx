@@ -67,7 +67,7 @@ function Mint() {
             amount: BigInt(parseFloat(formData!.amount) * 10 ** 10),
             to: account!.address,
           },
-          { fee: 100, secondsToWait: 20, responseType: "full" }
+          { fee: 100, }
         );
         await txMint.signAndSend()
 
