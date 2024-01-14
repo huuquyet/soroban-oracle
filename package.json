@@ -9,9 +9,12 @@
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "setup": "./initialize.sh ${NETWORK:-futurenet} && npm run build-contracts && npm install",
+    "setup": "./initialize.sh ${NETWORK:-futurenet} && npm run bindings && npm install",
     "reset": "npm run clean && npm run setup",
-    "build-contracts": "soroban contract bindings typescript --wasm ./target/wasm32-unknown-unknown/release/soroban_oracle_contract.wasm --id $(cat ./.soroban-example-dapp/oracle_id) --rpc-url $(cat ./.soroban-example-dapp/rpc-url) --network-passphrase \"$(cat ./.soroban-example-dapp/passphrase)\" --output-dir ./.soroban/oracle-contract && soroban contract bindings typescript --wasm ./target/wasm32-unknown-unknown/release/soroban_token_contract.wasm --id $(cat ./.soroban-example-dapp/btc_token_id) --rpc-url $(cat ./.soroban-example-dapp/rpc-url) --network-passphrase \"$(cat ./.soroban-example-dapp/passphrase)\" --output-dir ./.soroban/token && soroban contract bindings typescript --wasm ./target/wasm32-unknown-unknown/release/soroban_donation_contract.wasm --id $(cat ./.soroban-example-dapp/donation_id) --rpc-url $(cat ./.soroban-example-dapp/rpc-url) --network-passphrase \"$(cat ./.soroban-example-dapp/passphrase)\" --output-dir ./.soroban/donation-contract"
+    "bindings:token": "soroban contract bindings typescript --wasm ./target/wasm32-unknown-unknown/release/soroban_token_contract.wasm --id $(cat ./.soroban-example-dapp/btc_token_id) --rpc-url $(cat ./.soroban-example-dapp/rpc-url) --network-passphrase \"$(cat ./.soroban-example-dapp/passphrase)\" --output-dir ./.soroban/token",
+    "bindings:donation": "soroban contract bindings typescript --wasm ./target/wasm32-unknown-unknown/release/soroban_donation_contract.wasm --id $(cat ./.soroban-example-dapp/donation_id) --rpc-url $(cat ./.soroban-example-dapp/rpc-url) --network-passphrase \"$(cat ./.soroban-example-dapp/passphrase)\" --output-dir ./.soroban/donation-contract",
+    "bindings:oracle": "soroban contract bindings typescript --wasm ./target/wasm32-unknown-unknown/release/soroban_oracle_contract.wasm --id $(cat ./.soroban-example-dapp/oracle_id) --rpc-url $(cat ./.soroban-example-dapp/rpc-url) --network-passphrase \"$(cat ./.soroban-example-dapp/passphrase)\" --output-dir ./.soroban/oracle-contract",
+    "bindings": "npm run bindings:token && npm run bindings:donation && npm run bindings:oracle"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.1.1",

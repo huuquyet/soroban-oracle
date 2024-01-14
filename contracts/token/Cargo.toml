@@ -3,6 +3,8 @@ name = "soroban-token-contract"
 description = "Soroban standard token contract"
 version = "0.1.0"
 edition = "2021"
+publish = false
+autobins = false
 
 [lib]
 crate-type = ["cdylib"]

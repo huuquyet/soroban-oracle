@@ -21,7 +21,7 @@ const contractId = "ADDRESS_OF_DEPLOYED_CONTRACT_ORACLE";
 const contract = new Contract(contractId);
 
 const server = new SorobanRpc.Server(
-  "https://rpc-futurenet.stellar.org:443",
+  "https://rpc-futurenet.stellar.org",
   { allowHttp: true }
 );
 

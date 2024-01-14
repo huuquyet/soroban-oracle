@@ -19,10 +19,7 @@ elif command -v soroban &> /dev/null; then
   echo "Using soroban cli"
 else
   echo "Soroban not found, install soroban cli"
-  # cargo install_soroban
-  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-  rustup target add wasm32-unknown-unknown
-  cargo install --locked --version 20.2.0 soroban-cli --debug --features opt
+  cargo install_soroban
 fi
 
 if [[ "$SOROBAN_RPC_HOST" == "" ]]; then
