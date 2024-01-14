@@ -92,7 +92,7 @@ soroban contract build
 echo "Deploy the BTC TOKEN contract"
 BTC_TOKEN_ID="$(
   soroban contract deploy $ARGS \
-    --wasm target/wasm32-unknown-unknown/release/btc_token.wasm
+    --wasm target/wasm32-unknown-unknown/release/soroban_token_contract.wasm
 )"
 echo "Contract deployed succesfully with ID: $BTC_TOKEN_ID"
 echo -n "$BTC_TOKEN_ID" > .soroban-example-dapp/btc_token_id
@@ -101,7 +101,7 @@ echo -n "$BTC_TOKEN_ID" > .soroban-example-dapp/btc_token_id
 echo "Deploy the DONATION contract"
 DONATION_ID="$(
   soroban contract deploy $ARGS \
-    --wasm target/wasm32-unknown-unknown/release/donation_contract.wasm
+    --wasm target/wasm32-unknown-unknown/release/soroban_donation_contract.wasm
 )"
 echo "Contract deployed succesfully with ID: $DONATION_ID"
 echo -n "$DONATION_ID" > .soroban-example-dapp/donation_id

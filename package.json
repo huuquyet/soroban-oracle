@@ -11,7 +11,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "setup": "./initialize.sh ${NETWORK:-futurenet} && npm run build-contracts && npm install",
     "reset": "npm run clean && npm run setup",
-    "build-contracts": "soroban contract bindings typescript --wasm ./target/wasm32-unknown-unknown/release/soroban_oracle_contract.wasm --id $(cat ./.soroban-example-dapp/oracle_id) --rpc-url $(cat ./.soroban-example-dapp/rpc-url) --network-passphrase \"$(cat ./.soroban-example-dapp/passphrase)\" --output-dir ./.soroban/oracle-contract          && soroban contract bindings typescript --wasm ./target/wasm32-unknown-unknown/release/btc_token.wasm --id $(cat ./.soroban-example-dapp/btc_token_id) --rpc-url $(cat ./.soroban-example-dapp/rpc-url) --network-passphrase \"$(cat ./.soroban-example-dapp/passphrase)\" --output-dir ./.soroban/btc-token          && soroban contract bindings typescript --wasm ./target/wasm32-unknown-unknown/release/donation_contract.wasm --id $(cat ./.soroban-example-dapp/donation_id) --rpc-url $(cat ./.soroban-example-dapp/rpc-url) --network-passphrase \"$(cat ./.soroban-example-dapp/passphrase)\" --output-dir ./.soroban/donation-contract"
+    "build-contracts": "soroban contract bindings typescript --wasm ./target/wasm32-unknown-unknown/release/soroban_oracle_contract.wasm --id $(cat ./.soroban-example-dapp/oracle_id) --rpc-url $(cat ./.soroban-example-dapp/rpc-url) --network-passphrase \"$(cat ./.soroban-example-dapp/passphrase)\" --output-dir ./.soroban/oracle-contract && soroban contract bindings typescript --wasm ./target/wasm32-unknown-unknown/release/soroban_token_contract.wasm --id $(cat ./.soroban-example-dapp/btc_token_id) --rpc-url $(cat ./.soroban-example-dapp/rpc-url) --network-passphrase \"$(cat ./.soroban-example-dapp/passphrase)\" --output-dir ./.soroban/token && soroban contract bindings typescript --wasm ./target/wasm32-unknown-unknown/release/soroban_donation_contract.wasm --id $(cat ./.soroban-example-dapp/donation_id) --rpc-url $(cat ./.soroban-example-dapp/rpc-url) --network-passphrase \"$(cat ./.soroban-example-dapp/passphrase)\" --output-dir ./.soroban/donation-contract"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.1.1",
@@ -24,7 +24,6 @@
     "@thirdweb-dev/react": "^3.10.3",
     "axios": "^1.6.5",
     "bigint-conversion": "^2.4.3",
-    "btc-token": "file:.soroban/btc-token",
     "donation-contract": "file:.soroban/donation-contract",
     "framer-motion": "^10.18.0",
     "humanize-duration": "^3.31.0",
@@ -36,6 +35,7 @@
     "react-hook-form": "^7.49.3",
     "react-router-dom": "^6.21.2",
     "stellar-wallets-kit": "github:Creit-Tech/Stellar-Wallets-Kit",
+    "token": "file:.soroban/token",
     "zustand": "^4.4.7"
   },
   "devDependencies": {

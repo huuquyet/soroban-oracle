@@ -19,18 +19,18 @@ fn test() {
     let e = Env::default();
     e.mock_all_auths();
 
-    let admin1 = Address::random(&e);
-    let admin2 = Address::random(&e);
-    let user1 = Address::random(&e);
-    let user2 = Address::random(&e);
-    let user3 = Address::random(&e);
+    let admin1 = Address::generate(&e);
+    let admin2 = Address::generate(&e);
+    let user1 = Address::generate(&e);
+    let user2 = Address::generate(&e);
+    let user3 = Address::generate(&e);
     let token = create_token(&e, &admin1);
 
     token.mint(&user1, &1000);
     assert_eq!(
         e.auths(),
         std::vec![(
-            user1.clone(),
+            admin1.clone(),
             AuthorizedInvocation {
                 function: AuthorizedFunction::Contract((
                     token.address.clone(),
@@ -116,43 +116,6 @@ fn test() {
         )]
     );
 
-    token.set_authorized(&user2, &false);
-    assert_eq!(
-        e.auths(),
-        std::vec![(
-            admin2.clone(),
-            AuthorizedInvocation {
-                function: AuthorizedFunction::Contract((
-                    token.address.clone(),
-                    Symbol::new(&e, "set_authorized"),
-                    (&user2, false).into_val(&e),
-                )),
-                sub_invocations: std::vec![]
-            }
-        )]
-    );
-    assert_eq!(token.authorized(&user2), false);
-
-    token.set_authorized(&user3, &true);
-    assert_eq!(token.authorized(&user3), true);
-
-    token.clawback(&user3, &100);
-    assert_eq!(
-        e.auths(),
-        std::vec![(
-            admin2.clone(),
-            AuthorizedInvocation {
-                function: AuthorizedFunction::Contract((
-                    token.address.clone(),
-                    symbol_short!("clawback"),
-                    (&user3, 100_i128).into_val(&e),
-                )),
-                sub_invocations: std::vec![]
-            }
-        )]
-    );
-    assert_eq!(token.balance(&user3), 200);
-
     // Increase to 500
     token.approve(&user2, &user3, &500, &200);
     assert_eq!(token.allowance(&user2, &user3), 500);
@@ -179,9 +142,9 @@ fn test_burn() {
     let e = Env::default();
     e.mock_all_auths();
 
-    let admin = Address::random(&e);
-    let user1 = Address::random(&e);
-    let user2 = Address::random(&e);
+    let admin = Address::generate(&e);
+    let user1 = Address::generate(&e);
+    let user2 = Address::generate(&e);
     let token = create_token(&e, &admin);
 
     token.mint(&user1, &1000);
@@ -236,9 +199,9 @@ fn transfer_insufficient_balance() {
     let e = Env::default();
     e.mock_all_auths();
 
-    let admin = Address::random(&e);
-    let user1 = Address::random(&e);
-    let user2 = Address::random(&e);
+    let admin = Address::generate(&e);
+    let user1 = Address::generate(&e);
+    let user2 = Address::generate(&e);
     let token = create_token(&e, &admin);
 
     token.mint(&user1, &1000);
@@ -248,51 +211,15 @@ fn transfer_insufficient_balance() {
 }
 
 #[test]
-#[should_panic(expected = "can't receive when deauthorized")]
-fn transfer_receive_deauthorized() {
-    let e = Env::default();
-    e.mock_all_auths();
-
-    let admin = Address::random(&e);
-    let user1 = Address::random(&e);
-    let user2 = Address::random(&e);
-    let token = create_token(&e, &admin);
-
-    token.mint(&user1, &1000);
-    assert_eq!(token.balance(&user1), 1000);
-
-    token.set_authorized(&user2, &false);
-    token.transfer(&user1, &user2, &1);
-}
-
-#[test]
-#[should_panic(expected = "can't spend when deauthorized")]
-fn transfer_spend_deauthorized() {
-    let e = Env::default();
-    e.mock_all_auths();
-
-    let admin = Address::random(&e);
-    let user1 = Address::random(&e);
-    let user2 = Address::random(&e);
-    let token = create_token(&e, &admin);
-
-    token.mint(&user1, &1000);
-    assert_eq!(token.balance(&user1), 1000);
-
-    token.set_authorized(&user1, &false);
-    token.transfer(&user1, &user2, &1);
-}
-
-#[test]
 #[should_panic(expected = "insufficient allowance")]
 fn transfer_from_insufficient_allowance() {
     let e = Env::default();
     e.mock_all_auths();
 
-    let admin = Address::random(&e);
-    let user1 = Address::random(&e);
-    let user2 = Address::random(&e);
-    let user3 = Address::random(&e);
+    let admin = Address::generate(&e);
+    let user1 = Address::generate(&e);
+    let user2 = Address::generate(&e);
+    let user3 = Address::generate(&e);
     let token = create_token(&e, &admin);
 
     token.mint(&user1, &1000);
@@ -308,7 +235,7 @@ fn transfer_from_insufficient_allowance() {
 #[should_panic(expected = "already initialized")]
 fn initialize_already_initialized() {
     let e = Env::default();
-    let admin = Address::random(&e);
+    let admin = Address::generate(&e);
     let token = create_token(&e, &admin);
 
     token.initialize(&admin, &10, &"name".into_val(&e), &"symbol".into_val(&e));
@@ -318,7 +245,7 @@ fn initialize_already_initialized() {
 #[should_panic(expected = "Decimal must fit in a u8")]
 fn decimal_is_over_max() {
     let e = Env::default();
-    let admin = Address::random(&e);
+    let admin = Address::generate(&e);
     let token = TokenClient::new(&e, &e.register_contract(None, Token {}));
     token.initialize(
         &admin,
@@ -326,4 +253,19 @@ fn decimal_is_over_max() {
         &"name".into_val(&e),
         &"symbol".into_val(&e),
     );
+}
+
+#[test]
+fn test_zero_allowance() {
+    // Here we test that transfer_from with a 0 amount does not create an empty allowance
+    let e = Env::default();
+    e.mock_all_auths();
+
+    let admin = Address::generate(&e);
+    let spender = Address::generate(&e);
+    let from = Address::generate(&e);
+    let token = create_token(&e, &admin);
+
+    token.transfer_from(&spender, &from, &spender, &0);
+    assert!(token.get_allowance(&from, &spender).is_none());
 }

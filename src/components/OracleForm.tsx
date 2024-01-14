@@ -51,13 +51,14 @@ const OracleAddress = ({ pairInfo }: { pairInfo: PairInfo | null }) => {
     if (account) {
       setIsLoadingSetRelayer(true);
       try {
-        let txPairEpochInterval = await oracle.updateRelayerAddress(
+        const txPairEpochInterval = await oracle.updateRelayerAddress(
           {
             caller: account!.address,
             new_relayer_address: formData?.relayer,
           },
           { fee: 1000, secondsToWait: 20, responseType: "full" }
         );
+        await txPairEpochInterval.signAndSend()
 
         toast({
           title: "Update Relayer Successfully!",
@@ -162,13 +163,14 @@ const OracleEpochInterval = ({ pairInfo }: { pairInfo: PairInfo | null }) => {
   const onSubmitEpochData = async (formData: FormTypes): Promise<void> => {
     setIsLoadingSetEpochData(true);
     try {
-      let txPairEpochInterval = await oracle.updatePairEpochInterval(
+      const txPairEpochInterval = await oracle.updatePairEpochInterval(
         {
           caller: account!.address,
           epoch_interval: Number(formData!.time),
         },
         { fee: 1000, secondsToWait: 20, responseType: "full" }
       );
+      await txPairEpochInterval.signAndSend()
 
       toast({
         title: "Update Epoch Data Successfully!",

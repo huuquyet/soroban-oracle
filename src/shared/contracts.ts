@@ -1,13 +1,13 @@
-import * as Btc from 'btc-token'
+import * as Token from 'token'
 import * as Donation from 'donation-contract'
 import * as Oracle from 'oracle-contract'
 import { SorobanRpc } from '@stellar/stellar-sdk'
 import config from './config.json'
 const { network, rpcUrl } = config
 
-export const btc = new Btc.Contract({
+export const btc = new Token.Contract({
   rpcUrl,
-  ...Btc.networks[network as keyof typeof Btc.networks],
+  ...Token.networks[network as keyof typeof Token.networks],
 })
 
 export const donation = new Donation.Contract({
