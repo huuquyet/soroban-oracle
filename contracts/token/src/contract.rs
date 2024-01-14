@@ -22,6 +22,7 @@ fn check_nonnegative_amount(amount: i128) {
 pub struct Token;
 
 #[contractimpl]
+#[allow(unused)]
 impl Token {
     pub fn initialize(e: Env, admin: Address, decimal: u32, name: String, symbol: String) {
         if has_administrator(&e) {
@@ -70,8 +71,7 @@ impl Token {
     #[cfg(test)]
     pub fn get_allowance(e: Env, from: Address, spender: Address) -> Option<AllowanceValue> {
         let key = DataKey::Allowance(AllowanceDataKey { from, spender });
-        let allowance = e.storage().temporary().get::<_, AllowanceValue>(&key);
-        allowance
+        e.storage().temporary().get::<_, AllowanceValue>(&key)
     }
 }
 

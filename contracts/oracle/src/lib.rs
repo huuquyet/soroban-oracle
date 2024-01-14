@@ -75,14 +75,14 @@ fn get_pair_data_at_epoch(e: &Env, epoch_nr: &u32) -> EpochData {
     );
     e.storage()
         .instance()
-        .get::<_, EpochData>(&DataKey::EpochData(epoch_nr.clone()))
+        .get::<_, EpochData>(&DataKey::EpochData(*epoch_nr))
         .expect("Inexistent Epoch")
 }
 
 fn set_epoch_data(e: &Env, epoch_nr: &u32, epoch_data: &EpochData) {
     e.storage()
         .instance()
-        .set(&DataKey::EpochData(epoch_nr.clone()), epoch_data);
+        .set(&DataKey::EpochData(*epoch_nr), epoch_data);
 }
 
 #[contract]
@@ -105,7 +105,7 @@ impl OracleContract {
         let pair_info = PairInfo {
             pair_name: pair_name.clone(),
             relayer: relayer.clone(),
-            epoch_interval: epoch_interval.clone(),
+            epoch_interval: epoch_interval,
             create_time: e.ledger().timestamp(),
             last_epoch: 0,
         };
@@ -126,7 +126,7 @@ impl OracleContract {
         );
 
         let mut pair_info = Self::get_pair_info(e.clone());
-        pair_info.epoch_interval = epoch_interval.clone();
+        pair_info.epoch_interval = epoch_interval;
         e.storage().instance().set(&DataKey::PairInfo, &pair_info);
         pair_info
     }
@@ -161,13 +161,13 @@ impl OracleContract {
         last_epoch += 1u32;
 
         let mut pair_info = Self::get_pair_info(e.clone());
-        pair_info.last_epoch = last_epoch.clone();
+        pair_info.last_epoch = last_epoch;
         e.storage().instance().set(&DataKey::PairInfo, &pair_info);
 
         let epoch_data = EpochData {
             id: last_epoch.clone(),
             time: e.ledger().timestamp(),
-            value: value.clone(),
+            value: value,
         };
         set_epoch_data(&e, &last_epoch, &epoch_data);
         epoch_data
