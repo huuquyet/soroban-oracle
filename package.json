@@ -9,12 +9,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "setup": "./initialize.sh ${NETWORK:-futurenet} && npm run bindings && npm install",
-    "reset": "npm run clean && npm run setup",
-    "bindings:token": "soroban contract bindings typescript --wasm ./target/wasm32-unknown-unknown/release/soroban_token_contract.wasm --id $(cat ./.soroban-example-dapp/btc_token_id) --rpc-url $(cat ./.soroban-example-dapp/rpc-url) --network-passphrase \"$(cat ./.soroban-example-dapp/passphrase)\" --output-dir ./.soroban/token",
-    "bindings:donation": "soroban contract bindings typescript --wasm ./target/wasm32-unknown-unknown/release/soroban_donation_contract.wasm --id $(cat ./.soroban-example-dapp/donation_id) --rpc-url $(cat ./.soroban-example-dapp/rpc-url) --network-passphrase \"$(cat ./.soroban-example-dapp/passphrase)\" --output-dir ./.soroban/donation-contract",
-    "bindings:oracle": "soroban contract bindings typescript --wasm ./target/wasm32-unknown-unknown/release/soroban_oracle_contract.wasm --id $(cat ./.soroban-example-dapp/oracle_id) --rpc-url $(cat ./.soroban-example-dapp/rpc-url) --network-passphrase \"$(cat ./.soroban-example-dapp/passphrase)\" --output-dir ./.soroban/oracle-contract",
-    "bindings": "npm run bindings:token && npm run bindings:donation && npm run bindings:oracle"
+    "setup": "./initialize.sh ${NETWORK:-futurenet} && npm install",
+    "reset": "npm run clean && npm run setup"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.1.1",
@@ -27,18 +23,18 @@
     "@thirdweb-dev/react": "^3.10.3",
     "axios": "^1.6.5",
     "bigint-conversion": "^2.4.3",
-    "donation-contract": "file:.soroban/donation-contract",
+    "donation-contract": "file:.soroban/contracts/donation",
     "framer-motion": "^10.18.0",
     "humanize-duration": "^3.31.0",
     "moment": "^2.30.1",
-    "oracle-contract": "file:.soroban/oracle-contract",
+    "oracle-contract": "file:.soroban/contracts/oracle",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-error-boundary": "^4.0.12",
     "react-hook-form": "^7.49.3",
     "react-router-dom": "^6.21.2",
     "stellar-wallets-kit": "github:Creit-Tech/Stellar-Wallets-Kit",
-    "token": "file:.soroban/token",
+    "token": "file:.soroban/contracts/token",
     "zustand": "^4.4.7"
   },
   "devDependencies": {
