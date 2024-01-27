@@ -1,5 +1,5 @@
 {
-  "name": "oracle-cron",
+  "name": "cron",
   "version": "0.1.0",
   "description": "",
   "private": true,
@@ -11,7 +11,7 @@
     "start": "tsc && node dist/cron-script"
   },
   "dependencies": {
-    "@stellar/stellar-sdk": "^11.2.0",
+    "@stellar/stellar-sdk": "^11.2.1",
     "node-cron": "^3.0.3"
   },
   "devDependencies": {
