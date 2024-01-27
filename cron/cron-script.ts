@@ -10,9 +10,9 @@ import {
   SorobanRpc,
 } from "@stellar/stellar-sdk";
 
-const API_NINJA_KEY = "T4h5fYItj+wjWfXgkbeXOg==EsnPAMaIRZ0618O4";
+const API_NINJA_KEY = "YOUR_API_KEY";
 
-const sourceSecretKey = "SBLUWQWVZLCDI3YIAFXWNU24GYHNKUMI47W6UKXVJ5HI7P2JV7MFK4OX";
+const sourceSecretKey = "YOUR_RELAYER_API_KEY";
 const sourceKeypair = Keypair.fromSecret(sourceSecretKey);
 const sourcePublicKey = sourceKeypair.publicKey();
 
