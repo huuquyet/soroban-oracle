@@ -28,7 +28,7 @@ tasks:
       make all
     command: |
       npm run setup
-      npm run dev
+      yarn dev
 vscode:
   extensions:
     - rust-lang.rust-analyzer
