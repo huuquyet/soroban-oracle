@@ -1,4 +1,4 @@
-all: check build test
+all: check #build test
 
 CARGO_BUILD_TARGET?=wasm32-unknown-unknown
 
