@@ -8,6 +8,8 @@ SOROBAN_RPC_HOST="$2"
 
 PATH=./target/bin:$PATH
 
+USER="YOUR_PUBLIC_KEY" # your freighter public key
+
 if [[ -f "./.soroban/contracts/oracle" ]]; then
   echo "Found existing '.soroban/contracts' directory; already initialized."
   exit 0
@@ -63,16 +65,15 @@ echo "Add $NETWORK to shared config"
 echo "{ \"network\": \"$NETWORK\", \"rpcUrl\": \"$SOROBAN_RPC_URL\", \"networkPassphrase\": \"$SOROBAN_NETWORK_PASSPHRASE\" }" > ./src/shared/config.json
 
 if !(soroban config identity ls | grep token-admin 2>&1 >/dev/null); then
-  echo "Create the token-admin & donation identity"
+  echo "Create the token-admin identity"
   soroban config identity generate token-admin --network $NETWORK
-  soroban config identity generate donation --network $NETWORK
 fi
 ADMIN_ADDRESS="$(soroban config identity address token-admin)"
 
 # This will fail if the account already exists, but it'll still be fine.
-echo "Fund token-admin & donation account from friendbot"
+echo "Fund token-admin & user account from friendbot"
 soroban config identity fund token-admin --network $NETWORK
-soroban config identity fund donation --network $NETWORK
+soroban config identity fund $USER --network $NETWORK
 # curl --silent -X POST "$FRIENDBOT_URL?addr=$ADMIN_ADDRESS" >/dev/null
 
 ARGS="--network $NETWORK --source token-admin"
@@ -136,7 +137,7 @@ soroban contract invoke \
   --id "$DONATION_ID" \
   -- \
   initialize \
-  --recipient donation \
+  --recipient $USER \
   --token "$BTC_TOKEN_ID"
 
 # Relayer is the account that will be used to relay transactions to the oracle contract
@@ -146,10 +147,10 @@ soroban contract invoke \
   --id "$ORACLE_ID" \
   -- \
   initialize \
-  --caller donation \
+  --caller $USER \
   --pair_name BTC_USDT \
   --epoch_interval 600 \
-  --relayer donation
+  --relayer $USER
 
 echo "Generate bindings contracts"
 soroban contract bindings typescript --network $NETWORK --id $BTC_TOKEN_ID --wasm $TOKEN_PATH".optimized.wasm" --output-dir ./.soroban/contracts/token --overwrite

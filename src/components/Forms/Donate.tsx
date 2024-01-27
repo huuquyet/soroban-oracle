@@ -37,11 +37,10 @@ const Donate = () => {
   const getPairInfo = async () => {
     setIsLoadingPairInfo(true);
     try {
-      const txPairInfo = await oracle.getPairInfo();
-      const txPairDataAtEpoch = await oracle.getPairDataAtEpoch({
-        epoch_nr: txPairInfo?.last_epoch,
-      });
-      setPairInfo({ ...txPairInfo, ...txPairDataAtEpoch });
+      const txPairInfo = await oracle.getPairInfo().then(tx => tx.result);
+      await oracle.getPairDataAtEpoch({
+        epoch_nr: txPairInfo.last_epoch,
+      }).then(tx => setPairInfo({ ...txPairInfo, ...tx.result }));
       setIsLoadingPairInfo(false);
     } catch (e) {
       console.log(e);
@@ -52,8 +51,7 @@ const Donate = () => {
   const getTotalDeposits = async () => {
     try {
       setIsLoadingDeposits(true);
-      const txTotalDeposits = await donation.getTotalDeposits();
-      setDeposits(parseFloat(txTotalDeposits?.toString()) / 10 ** 10);
+      await donation.getTotalDeposits().then(tx => setDeposits(parseFloat(tx.result.toString()) / 10 ** 10));
       setIsLoadingDeposits(false);
     } catch (e) {
       console.log(e);
@@ -64,8 +62,7 @@ const Donate = () => {
   const getContractBalance = async () => {
     try {
       setIsLoadingDeposits(true);
-      const txContractBalance = await donation.getContractBalance();
-      setContractBalance(parseFloat(txContractBalance?.toString()) / 10 ** 10);
+      await donation.getContractBalance().then( tx => setContractBalance(parseFloat(tx.result.toString()) / 10 ** 10));
       setIsLoadingDeposits(false);
     } catch (e) {
       console.log(e);
@@ -76,8 +73,7 @@ const Donate = () => {
   const getRecipient = async () => {
     try {
       setIsLoadingRecipient(true);
-      const txRecipient = await donation.recipient();
-      setRecipient(txRecipient);
+      await donation.recipient().then(tx => setRecipient(tx.result));
       setIsLoadingRecipient(false);
     } catch (e) {
       console.log(e);
@@ -88,10 +84,9 @@ const Donate = () => {
   const getMyBalance = async () => {
     try {
       setIsLoadingMyBalance(true);
-      const txBalance = await btc.balance({
+      await btc.balance({
         id: account!.address,
-      });
-      setMyBalance(parseFloat(txBalance!.toString()) / 10 ** 10);
+      }).then(tx => setMyBalance(parseFloat(tx.result.toString()) / 10 ** 10));
       setIsLoadingMyBalance(false);
     } catch (e) {
       console.log(e);

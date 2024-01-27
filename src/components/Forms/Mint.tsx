@@ -47,10 +47,9 @@ function Mint() {
   const getMyBalance = async () => {
     try {
       setIsLoadingMyBalance(true);
-      const txBalance = await btc.balance({
+      await btc.balance({
         id: account!.address,
-      });
-      setMyBalance(parseFloat(txBalance!.toString()) / 10 ** 10);
+      }).then(tx => setMyBalance(parseFloat(tx.result.toString()) / 10 ** 10));
       setIsLoadingMyBalance(false);
     } catch (e) {
       console.log(e);
