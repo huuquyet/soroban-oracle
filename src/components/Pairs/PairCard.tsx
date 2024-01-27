@@ -33,10 +33,10 @@ export const ItemCardContainer = ({
     try {
       const txPairInfo = await contract.getPairInfo();
       const txPairDataAtEpoch = await contract.getPairDataAtEpoch({
-        epoch_nr: txPairInfo?.result.last_epoch,
+        epoch_nr: txPairInfo?.last_epoch,
       });
-      setPairInfo({ ...txPairInfo.result, ...txPairDataAtEpoch.result });
-      if (callback) callback({ ...txPairInfo.result, ...txPairDataAtEpoch.result });
+      setPairInfo({ ...txPairInfo, ...txPairDataAtEpoch });
+      if (callback) callback({ ...txPairInfo, ...txPairDataAtEpoch });
       setIsLoadingPairInfo(false);
     } catch (e) {
       console.log(e);

@@ -39,9 +39,9 @@ const Donate = () => {
     try {
       const txPairInfo = await oracle.getPairInfo();
       const txPairDataAtEpoch = await oracle.getPairDataAtEpoch({
-        epoch_nr: txPairInfo?.result.last_epoch,
+        epoch_nr: txPairInfo?.last_epoch,
       });
-      setPairInfo({ ...txPairInfo.result, ...txPairDataAtEpoch.result });
+      setPairInfo({ ...txPairInfo, ...txPairDataAtEpoch });
       setIsLoadingPairInfo(false);
     } catch (e) {
       console.log(e);
@@ -53,7 +53,7 @@ const Donate = () => {
     try {
       setIsLoadingDeposits(true);
       const txTotalDeposits = await donation.getTotalDeposits();
-      setDeposits(parseFloat(txTotalDeposits?.result.toString()) / 10 ** 10);
+      setDeposits(parseFloat(txTotalDeposits?.toString()) / 10 ** 10);
       setIsLoadingDeposits(false);
     } catch (e) {
       console.log(e);
@@ -65,7 +65,7 @@ const Donate = () => {
     try {
       setIsLoadingDeposits(true);
       const txContractBalance = await donation.getContractBalance();
-      setContractBalance(parseFloat(txContractBalance?.result.toString()) / 10 ** 10);
+      setContractBalance(parseFloat(txContractBalance?.toString()) / 10 ** 10);
       setIsLoadingDeposits(false);
     } catch (e) {
       console.log(e);
@@ -77,7 +77,7 @@ const Donate = () => {
     try {
       setIsLoadingRecipient(true);
       const txRecipient = await donation.recipient();
-      setRecipient(txRecipient.result);
+      setRecipient(txRecipient);
       setIsLoadingRecipient(false);
     } catch (e) {
       console.log(e);
@@ -91,7 +91,7 @@ const Donate = () => {
       const txBalance = await btc.balance({
         id: account!.address,
       });
-      setMyBalance(parseFloat(txBalance!.result.toString()) / 10 ** 10);
+      setMyBalance(parseFloat(txBalance!.toString()) / 10 ** 10);
       setIsLoadingMyBalance(false);
     } catch (e) {
       console.log(e);

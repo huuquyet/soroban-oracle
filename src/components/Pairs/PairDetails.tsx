@@ -19,9 +19,9 @@ const PairDetails = ({ contract }: { contract: typeof oracle }) => {
     try {
       const txPairInfo = await contract.getPairInfo();
       const txPairDataAtEpoch = await contract.getPairDataAtEpoch({
-        epoch_nr: txPairInfo?.result.last_epoch,
+        epoch_nr: txPairInfo?.last_epoch,
       });
-      setPairInfo({ ...txPairInfo.result, ...txPairDataAtEpoch.result });
+      setPairInfo({ ...txPairInfo, ...txPairDataAtEpoch });
       setIsLoadingPairInfo(false);
     } catch (e) {
       console.log(e);
@@ -40,7 +40,7 @@ const PairDetails = ({ contract }: { contract: typeof oracle }) => {
     setIsLoadingContractOwner(true);
     try {
       const txContractOwner = await contract.getContractOwner();
-      if (txContractOwner.result === account?.address) {
+      if (txContractOwner === account?.address) {
         setIsContractOwner(true);
       }
       setIsLoadingContractOwner(false);
