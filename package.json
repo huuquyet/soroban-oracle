@@ -9,7 +9,7 @@
   "scripts": {
     "build": "vite build",
     "clean": "cargo clean && yarn cache clean && git clean -xdf",
-    "dev": "vite --host",
+    "dev": "vite --host --port 4000",
     "doctor": "yarn dlx @yarnpkg/doctor",
     "lint": "yarn dlx @biomejs/biome check --apply .",
     "preview": "vite preview",
@@ -34,7 +34,7 @@
     "react-hook-form": "^7.49.3",
     "react-router-dom": "^6.21.3",
     "stellar-wallets-kit": "github:Creit-Tech/Stellar-Wallets-Kit#276328e4d0747d72888a6a58b93e2e4d9f764c8e",
-    "token": "file:.soroban/contracts/token",
+    "token-contract": "file:.soroban/contracts/token",
     "zustand": "^4.5.0"
   },
   "devDependencies": {

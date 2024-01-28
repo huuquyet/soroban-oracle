@@ -1,4 +1,4 @@
-import * as Token from 'token'
+import * as Token from 'token-contract'
 import * as Donation from 'donation-contract'
 import * as Oracle from 'oracle-contract'
 import { SorobanRpc } from '@stellar/stellar-sdk'
