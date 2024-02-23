@@ -111,7 +111,7 @@ const getPairPrice = async (pairName: any) => {
       }
     );
     const result = await response.json();
-    return parseInt((parseFloat(result?.price) * 10 ** 5).toString());
+    return parseInt(String(parseFloat(result?.price) * 10 ** 5));
   } catch (e) {
     console.error(e);
     throw new Error("[getPairPrice] ERROR");

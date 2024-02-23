@@ -2485,13 +2485,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@magic-sdk/commons@npm:^18.0.0":
-  version: 18.0.0
-  resolution: "@magic-sdk/commons@npm:18.0.0"
+"@magic-sdk/commons@npm:^18.1.1":
+  version: 18.1.1
+  resolution: "@magic-sdk/commons@npm:18.1.1"
   peerDependencies:
     "@magic-sdk/provider": ">=18.6.0"
     "@magic-sdk/types": ">=15.8.0"
-  checksum: 10c0/015efc6460141d9871e4069a752f6b0a69f21a38269b83048c3b795b191cca498e49ad7f1c5b4bdddb29efe2e2641bd9c63f12965d8145aa6d11996b6902d850
+  checksum: 10c0/ece5c46dfae63eee0bbdddb3a9e65cdc34a3c962f6f64b8c0704af2d015716af1a487ea9e1f3a5c843b9837def18757479f0ca6601b92eca2ea7dda9afcb7c12
   languageName: node
   linkType: hard
 
@@ -2518,16 +2518,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@magic-sdk/provider@npm:^22.0.0":
-  version: 22.0.0
-  resolution: "@magic-sdk/provider@npm:22.0.0"
+"@magic-sdk/provider@npm:^22.1.1":
+  version: 22.1.1
+  resolution: "@magic-sdk/provider@npm:22.1.1"
   dependencies:
-    "@magic-sdk/types": "npm:^18.0.0"
+    "@magic-sdk/types": "npm:^18.1.1"
     eventemitter3: "npm:^4.0.4"
     web3-core: "npm:1.5.2"
   peerDependencies:
     localforage: ^1.7.4
-  checksum: 10c0/191601607a8744f18cefd7a0e0e9b27b0015f9e3fabdf4ccb0d84a921002bf3a6ea8b8c2bd6a21f41584194ae7d0484c9a2115ae63cbe063369ac0cd61233ed3
+  checksum: 10c0/4e7d3754a80f12211d18037db1c84176087c18dc220f61932b1dc2f40fa8a8a257e6aaec9d79041669d7e504d863997616da259316a8b49f461ce296f8a710e9
   languageName: node
   linkType: hard
 
@@ -2538,10 +2538,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@magic-sdk/types@npm:^18.0.0":
-  version: 18.0.0
-  resolution: "@magic-sdk/types@npm:18.0.0"
-  checksum: 10c0/59f5c85b69f9b6c7757fae514f0f70f3470dda2aa3e24a42878541ef139f46c3d67b8e9d2a2a51f51f57054274b2183bdb8aec518667a52d539361fc0b6ea824
+"@magic-sdk/types@npm:^18.1.1":
+  version: 18.1.1
+  resolution: "@magic-sdk/types@npm:18.1.1"
+  checksum: 10c0/ac66efa669c17f92ed31cce551254edf7d3a35f392e37ad754bf5011c760f98152665ce7526469902fb1cb3d771c432b7935be5f27a49910dd054ad303dc042d
   languageName: node
   linkType: hard
 
@@ -3629,10 +3629,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@remix-run/router@npm:1.15.0":
-  version: 1.15.0
-  resolution: "@remix-run/router@npm:1.15.0"
-  checksum: 10c0/4805b5761ccbce3a522d3313c74ece7d4a411f02fd6d495d20f4352dcc87d8899f1b79a4c172a130e0f7a73b5f63a29177d8860131c35e3388552b1bd38a97f2
+"@remix-run/router@npm:1.15.1":
+  version: 1.15.1
+  resolution: "@remix-run/router@npm:1.15.1"
+  checksum: 10c0/2f84d998defe9943a40fd5bf8794ee6ede521116ff24275cc2294830adb039ef86e34dbdd6555300600016fd8a58a244d4f4df73ff0b2cec7bd749f63d172587
   languageName: node
   linkType: hard
 
@@ -4037,6 +4037,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@stellar/js-xdr@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "@stellar/js-xdr@npm:3.1.0"
+  checksum: 10c0/1b483355e42fe0e982fd46e1652c3cad85747061f2a950b95f0ea929ade6107e24755d0a96dad6e47a6f24549a6b6689f34a133914b2334ef634dc81734f36c4
+  languageName: node
+  linkType: hard
+
 "@stellar/stellar-base@npm:10.0.1":
   version: 10.0.1
   resolution: "@stellar/stellar-base@npm:10.0.1"
@@ -4055,22 +4062,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@stellar/stellar-base@npm:^10.0.2":
-  version: 10.0.2
-  resolution: "@stellar/stellar-base@npm:10.0.2"
+"@stellar/stellar-base@npm:^11.0.0":
+  version: 11.0.0
+  resolution: "@stellar/stellar-base@npm:11.0.0"
   dependencies:
-    "@stellar/js-xdr": "npm:^3.0.1"
+    "@stellar/js-xdr": "npm:^3.1.0"
     base32.js: "npm:^0.1.0"
     bignumber.js: "npm:^9.1.2"
     buffer: "npm:^6.0.3"
     sha.js: "npm:^2.3.6"
-    sodium-native: "npm:^4.0.5"
+    sodium-native: "npm:^4.0.8"
     tweetnacl: "npm:^1.0.3"
     typescript: "npm:^5.3.3"
   dependenciesMeta:
     sodium-native:
       optional: true
-  checksum: 10c0/90593e1f45cbde740a5f3be58739c13a65453dd3058f0726dffa66e80b84faef9c49f943b8c4dd11e2a078f1a77534faef7cda00e50251f05909a4a66e53e140
+  checksum: 10c0/0d984ee36d2998a2850dce177f5c962f09ea2d8b0ef3c20b0cf62711eaee855b40dc8a37b369b43a787bbdcd766d703cbbe5eb137b0fe96d9483492fbcea3b97
   languageName: node
   linkType: hard
 
@@ -4089,19 +4096,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@stellar/stellar-sdk@npm:^11.2.1":
-  version: 11.2.1
-  resolution: "@stellar/stellar-sdk@npm:11.2.1"
+"@stellar/stellar-sdk@npm:^11.2.2":
+  version: 11.2.2
+  resolution: "@stellar/stellar-sdk@npm:11.2.2"
   dependencies:
-    "@stellar/stellar-base": "npm:^10.0.2"
-    axios: "npm:^1.6.5"
+    "@stellar/stellar-base": "npm:^11.0.0"
+    axios: "npm:^1.6.7"
     bignumber.js: "npm:^9.1.2"
     eventsource: "npm:^2.0.2"
     randombytes: "npm:^2.1.0"
     toml: "npm:^3.0.0"
     typescript: "npm:^5.3.3"
     urijs: "npm:^1.19.1"
-  checksum: 10c0/318b9b0f612bb3c290bedf0f9e55363ec0fa970cc8096a13644fedf595c28e4d242e82c5f0a983e843ed5fe599a404b2ee85a33b0a9e8ba5e23b48ff6674e98d
+  checksum: 10c0/51a1ffec39c2d8bf7d6358ad3cb49170a8094500b0027beb0fdb19d0e12f4a5f938fedcde14dc964cd6362a0cc001cba325d2bc81b04f127dc589edf3124a04c
   languageName: node
   linkType: hard
 
@@ -4298,12 +4305,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@thirdweb-dev/auth@npm:4.1.30":
-  version: 4.1.30
-  resolution: "@thirdweb-dev/auth@npm:4.1.30"
+"@thirdweb-dev/auth@npm:4.1.33":
+  version: 4.1.33
+  resolution: "@thirdweb-dev/auth@npm:4.1.33"
   dependencies:
     "@fastify/cookie": "npm:^9.1.0"
-    "@thirdweb-dev/wallets": "npm:2.4.8"
+    "@thirdweb-dev/wallets": "npm:2.4.11"
     cookie: "npm:^0.5.0"
     fastify-type-provider-zod: "npm:^1.1.9"
     uuid: "npm:^9.0.1"
@@ -4328,14 +4335,14 @@ __metadata:
       optional: true
     next-auth:
       optional: true
-  checksum: 10c0/8acc29486b73b9561a68fb2fe044428b931b87c80b8131818643419c9612b39de1b563884d58b0bec8e388c4dc1b457a273a45f2b8c20b21f5a1fdf548e34280
+  checksum: 10c0/46d6ac87811ca58af9dea1c32f98b3d1eef2d270dae7db74d110818078c79a364cc22e3c941ba7a05a914880fdafa8861bf479fa839d0e2e37b443d78cda4410
   languageName: node
   linkType: hard
 
-"@thirdweb-dev/chains@npm:0.1.70":
-  version: 0.1.70
-  resolution: "@thirdweb-dev/chains@npm:0.1.70"
-  checksum: 10c0/7d1a758607342b8196d9b3b9192992ec568aad657922cc19c8faa8a4e38d0254d94729b48dc44698cde542b8a414d7ee979ff90244cd2baffdd8e8479d281388
+"@thirdweb-dev/chains@npm:0.1.73":
+  version: 0.1.73
+  resolution: "@thirdweb-dev/chains@npm:0.1.73"
+  checksum: 10c0/92fba20085637de0ad85b92793e2c1c122cdf1c90019b3f4ad6200795da5b40554504e3665704dcf04d81c53583c01be53e970ebaf609d95a61b8ed2e0bc4298
   languageName: node
   linkType: hard
 
@@ -4408,29 +4415,29 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@thirdweb-dev/react-core@npm:4.4.5":
-  version: 4.4.5
-  resolution: "@thirdweb-dev/react-core@npm:4.4.5"
+"@thirdweb-dev/react-core@npm:4.4.9":
+  version: 4.4.9
+  resolution: "@thirdweb-dev/react-core@npm:4.4.9"
   dependencies:
     "@tanstack/react-query": "npm:^4.33.0"
-    "@thirdweb-dev/auth": "npm:4.1.30"
-    "@thirdweb-dev/chains": "npm:0.1.70"
+    "@thirdweb-dev/auth": "npm:4.1.33"
+    "@thirdweb-dev/chains": "npm:0.1.73"
     "@thirdweb-dev/generated-abis": "npm:^0.0.1"
-    "@thirdweb-dev/sdk": "npm:4.0.33"
+    "@thirdweb-dev/sdk": "npm:4.0.36"
     "@thirdweb-dev/storage": "npm:2.0.9"
-    "@thirdweb-dev/wallets": "npm:2.4.8"
+    "@thirdweb-dev/wallets": "npm:2.4.11"
     mime: "npm:3.0.0"
     tiny-invariant: "npm:^1.2.0"
   peerDependencies:
     ethers: ">=5.5.1"
     react: ">=18.0.0"
-  checksum: 10c0/d5c6515c2f3aa9dfa965b8cc833e45d378197450cde40036952ea4fd930ab23fd8114b802ee194b1526fe0849c8f518cf9a126ece6b18fcf5ced392597dcbe48
+  checksum: 10c0/32bf8b606dceecbb15815e749fcef2ccc4230c63391b31c2b1f3319bb71187d0faa84bdb680c03200fb99050bcbf0757f52c39085ec45d43fdbdff1205dab09f
   languageName: node
   linkType: hard
 
-"@thirdweb-dev/react@npm:^4.4.5":
-  version: 4.4.5
-  resolution: "@thirdweb-dev/react@npm:4.4.5"
+"@thirdweb-dev/react@npm:^4.4.9":
+  version: 4.4.9
+  resolution: "@thirdweb-dev/react@npm:4.4.9"
   dependencies:
     "@emotion/css": "npm:11.10.5"
     "@emotion/react": "npm:^11.11.1"
@@ -4445,11 +4452,11 @@ __metadata:
     "@radix-ui/react-tabs": "npm:^1.0.4"
     "@radix-ui/react-tooltip": "npm:^1.0.7"
     "@tanstack/react-query": "npm:^4.33.0"
-    "@thirdweb-dev/chains": "npm:0.1.70"
+    "@thirdweb-dev/chains": "npm:0.1.73"
     "@thirdweb-dev/payments": "npm:1.0.2"
-    "@thirdweb-dev/react-core": "npm:4.4.5"
-    "@thirdweb-dev/sdk": "npm:4.0.33"
-    "@thirdweb-dev/wallets": "npm:2.4.8"
+    "@thirdweb-dev/react-core": "npm:4.4.9"
+    "@thirdweb-dev/sdk": "npm:4.0.36"
+    "@thirdweb-dev/wallets": "npm:2.4.11"
     buffer: "npm:^6.0.3"
     copy-to-clipboard: "npm:^3.3.2"
     detect-browser: "npm:^5.3.0"
@@ -4457,19 +4464,19 @@ __metadata:
     qrcode: "npm:^1.5.3"
     tiny-invariant: "npm:^1.2.0"
   peerDependencies:
-    "@thirdweb-dev/sdk": ^4.0.33
+    "@thirdweb-dev/sdk": ^4.0.36
     ethers: ">=5.5.1"
     react: ">=18.0.0"
     react-dom: ">=18.0.0"
-  checksum: 10c0/8683336f4c98ca211b18c0505bbd7fabeb2b236325bb1c737336e17e86aea2b1e34ccfa2eeff4212120e23032d9f0e38ccc14782a80f71c5a266689576ed97f1
+  checksum: 10c0/97158373f8052acd19519d38bf5489a5bb094f2102d44f94c82eca95616bd26eb63c924a0fc96055519090b71ad19d4b1cf62ddac1778a016a6a089f085a3d3a
   languageName: node
   linkType: hard
 
-"@thirdweb-dev/sdk@npm:4.0.33":
-  version: 4.0.33
-  resolution: "@thirdweb-dev/sdk@npm:4.0.33"
+"@thirdweb-dev/sdk@npm:4.0.36":
+  version: 4.0.36
+  resolution: "@thirdweb-dev/sdk@npm:4.0.36"
   dependencies:
-    "@thirdweb-dev/chains": "npm:0.1.70"
+    "@thirdweb-dev/chains": "npm:0.1.73"
     "@thirdweb-dev/contracts-js": "npm:1.3.16"
     "@thirdweb-dev/crypto": "npm:0.2.0"
     "@thirdweb-dev/generated-abis": "npm:0.0.1"
@@ -4484,7 +4491,7 @@ __metadata:
     tiny-invariant: "npm:^1.2.0"
     tweetnacl: "npm:^1.0.3"
     uuid: "npm:^9.0.1"
-    yaml: "npm:^2.3.1"
+    yaml: "npm:^2.3.4"
     zod: "npm:^3.22.3"
   peerDependencies:
     "@aws-sdk/client-secrets-manager": ^3.215.0
@@ -4498,7 +4505,7 @@ __metadata:
       optional: true
     zksync-web3:
       optional: true
-  checksum: 10c0/02b6290de7768b74056a4747029711bd8ee4467c8e02c08dd906bb604cb12659630e5cf1eee4ba19c92ea6beb7997c1ed622f72e13630da7ec7eda58f8836bc6
+  checksum: 10c0/f3672c89b2a482c113eec26f1dc4385e8b35ff1f65e8e8ac278e1d2899146d42347d4674ee131656f11420528e6d2642ea5eee6577b3c9e072d202821e835875
   languageName: node
   linkType: hard
 
@@ -4514,9 +4521,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@thirdweb-dev/wallets@npm:2.4.8":
-  version: 2.4.8
-  resolution: "@thirdweb-dev/wallets@npm:2.4.8"
+"@thirdweb-dev/wallets@npm:2.4.11":
+  version: 2.4.11
+  resolution: "@thirdweb-dev/wallets@npm:2.4.11"
   dependencies:
     "@account-abstraction/contracts": "npm:^0.5.0"
     "@blocto/sdk": "npm:^0.5.4"
@@ -4530,10 +4537,10 @@ __metadata:
     "@paperxyz/sdk-common-utilities": "npm:^0.1.0"
     "@safe-global/protocol-kit": "npm:1.3.0"
     "@safe-global/safe-ethers-adapters": "npm:0.1.0-alpha.17"
-    "@thirdweb-dev/chains": "npm:0.1.70"
+    "@thirdweb-dev/chains": "npm:0.1.73"
     "@thirdweb-dev/contracts-js": "npm:1.3.16"
     "@thirdweb-dev/crypto": "npm:0.2.0"
-    "@thirdweb-dev/sdk": "npm:4.0.33"
+    "@thirdweb-dev/sdk": "npm:4.0.36"
     "@walletconnect/core": "npm:^2.9.1"
     "@walletconnect/ethereum-provider": "npm:^2.9.1"
     "@walletconnect/jsonrpc-utils": "npm:^1.0.8"
@@ -4570,7 +4577,7 @@ __metadata:
       optional: true
     tweetnacl:
       optional: true
-  checksum: 10c0/5026f8d2cd3a26fb390b64276d27f8c21c3da82945ead72a6c13055e47424145b32e4dfbb5f3c1761449bd215d46412146d739a226ac7a4dff9955a9f927d824
+  checksum: 10c0/670c69c33558dc94d90cea59593803d9314acd5a0c55f3a4d33eee310a8cb8134501e78583f9d128dbc373dd3462aaa3f9a78c3040bac6018a0a9358f1e3dc54
   languageName: node
   linkType: hard
 
@@ -4762,12 +4769,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^18.2.18":
-  version: 18.2.18
-  resolution: "@types/react-dom@npm:18.2.18"
+"@types/react-dom@npm:^18.2.19":
+  version: 18.2.19
+  resolution: "@types/react-dom@npm:18.2.19"
   dependencies:
     "@types/react": "npm:*"
-  checksum: 10c0/74dba11a1b8156f3a763f3fca1fb4ec1dcd349153279b8bf79210024a69f994bf2cf0728198c047f8130c5318420ea56281b0a4ef84c8ae943cd9a0cac705220
+  checksum: 10c0/88d7c6daa4659f661d0c97985d9fca492f24b421a34bb614dcd94c343aed7bea121463149e97fb01ecaa693be17b7d1542cf71ddb1705f3889a81eb2639a88aa
   languageName: node
   linkType: hard
 
@@ -4782,14 +4789,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^18.2.51":
-  version: 18.2.51
-  resolution: "@types/react@npm:18.2.51"
+"@types/react@npm:^18.2.57":
+  version: 18.2.57
+  resolution: "@types/react@npm:18.2.57"
   dependencies:
     "@types/prop-types": "npm:*"
     "@types/scheduler": "npm:*"
     csstype: "npm:^3.0.2"
-  checksum: 10c0/409f684dc1cb03ed542e1f185da7e84f81186d7945119adb553fe0e4e28bad3468213fce9096e1867b358c87fb57fc80b53a3e544a3779f7080ddde7c1b99eb1
+  checksum: 10c0/d5ed2f04c069c591e41ef1bea5b70f89dc7a4edff2254c4df801ddaa21b43b2aa70c106c049b9b6736f98f5afe66576d0e75a9e47c7044f2660b1744ff64f535
   languageName: node
   linkType: hard
 
@@ -6486,7 +6493,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "cron@workspace:cron"
   dependencies:
-    "@stellar/stellar-sdk": "npm:^11.2.1"
+    "@stellar/stellar-sdk": "npm:^11.2.2"
     "@types/node-cron": "npm:^3.0.11"
     node-cron: "npm:^3.0.3"
     typescript: "npm:^5.3.3"
@@ -6732,12 +6739,12 @@ __metadata:
 
 "donation-contract@file:.soroban/contracts/donation::locator=soroban-oracle-project%40workspace%3A.":
   version: 0.0.0
-  resolution: "donation-contract@file:.soroban/contracts/donation#.soroban/contracts/donation::hash=86c3f3&locator=soroban-oracle-project%40workspace%3A."
+  resolution: "donation-contract@file:.soroban/contracts/donation#.soroban/contracts/donation::hash=43b3d1&locator=soroban-oracle-project%40workspace%3A."
   dependencies:
     "@stellar/freighter-api": "npm:1.7.1"
     "@stellar/stellar-sdk": "npm:11.2.0"
     buffer: "npm:6.0.3"
-  checksum: 10c0/5440a06c68f68067513313d563971eb36d60409aee8ef2be0c5ba79923277699f122c4c0c0d3816e4c36f886415c623903ab6d4bd5c9154709bbf93dae9f1637
+  checksum: 10c0/887e7d4c55c0e8b6a7315e3ee9cb7b86ee3f1fb44e1383f159894550c6ffae9b7bf7ddc9199318903b3c6dd85cef19b9258ad5e406c06766f421ea1f7880780f
   languageName: node
   linkType: hard
 
@@ -7726,9 +7733,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"framer-motion@npm:^11.0.3":
-  version: 11.0.3
-  resolution: "framer-motion@npm:11.0.3"
+"framer-motion@npm:^11.0.5":
+  version: 11.0.5
+  resolution: "framer-motion@npm:11.0.5"
   dependencies:
     "@emotion/is-prop-valid": "npm:^0.8.2"
     tslib: "npm:^2.4.0"
@@ -7743,7 +7750,7 @@ __metadata:
       optional: true
     react-dom:
       optional: true
-  checksum: 10c0/a9a70196ea5d264f749a7dea1ccb7c33decf969680a907c595eb48d84510b60fb51e3e0d16d5bcac0997eea041f796f2cba4a5505e0a00f373ffbadfb5f36564
+  checksum: 10c0/a7ed2c56f2d25b610a11a7056304c2ed92cb37ca448c820432db162ae05c920fb3853b703130fbaded534099d4bced8af34168bd2b464d93f5bb8897951ce057
   languageName: node
   linkType: hard
 
@@ -9209,15 +9216,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"magic-sdk@npm:^22.0.0":
-  version: 22.0.0
-  resolution: "magic-sdk@npm:22.0.0"
+"magic-sdk@npm:^22.1.1":
+  version: 22.1.1
+  resolution: "magic-sdk@npm:22.1.1"
   dependencies:
-    "@magic-sdk/commons": "npm:^18.0.0"
-    "@magic-sdk/provider": "npm:^22.0.0"
-    "@magic-sdk/types": "npm:^18.0.0"
+    "@magic-sdk/commons": "npm:^18.1.1"
+    "@magic-sdk/provider": "npm:^22.1.1"
+    "@magic-sdk/types": "npm:^18.1.1"
     localforage: "npm:^1.7.4"
-  checksum: 10c0/741e447787ffe4f85101c7c9393622cca83a4bbf49bd35dc416844c41fd651a88482756aa87dec14069baa849b3729e7426e26161d74df8b97c39f27c249f96b
+  checksum: 10c0/9404c2f153bc752b1bc547f069916427a8a1ccd864e117ba4afe67473a9bf8a9161c595bb87c84465f9817e60f1e77865a7b3b468cb39f6849d36344bcec37c3
   languageName: node
   linkType: hard
 
@@ -10010,12 +10017,12 @@ __metadata:
 
 "oracle-contract@file:.soroban/contracts/oracle::locator=soroban-oracle-project%40workspace%3A.":
   version: 0.0.0
-  resolution: "oracle-contract@file:.soroban/contracts/oracle#.soroban/contracts/oracle::hash=cf9b39&locator=soroban-oracle-project%40workspace%3A."
+  resolution: "oracle-contract@file:.soroban/contracts/oracle#.soroban/contracts/oracle::hash=4b9a17&locator=soroban-oracle-project%40workspace%3A."
   dependencies:
     "@stellar/freighter-api": "npm:1.7.1"
     "@stellar/stellar-sdk": "npm:11.2.0"
     buffer: "npm:6.0.3"
-  checksum: 10c0/ec2ced2a68df7d69b8c7bea698d2d77e71eb40722eb1ed946efa497c9c347304947d19f2eaf5834a2f124dde85f02c1735052680d1bd6f4da19002acaebd5e92
+  checksum: 10c0/2eb17bff6a3a3672aa3b45aa5eb69f6dec9fc1377543bc4db32d8adb293265373265b65fb50b4e7b3ca7b2abf93d079f94c8bf427587db987fc4fadef2518f99
   languageName: node
   linkType: hard
 
@@ -10309,14 +10316,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.4.32":
-  version: 8.4.33
-  resolution: "postcss@npm:8.4.33"
+"postcss@npm:^8.4.35":
+  version: 8.4.35
+  resolution: "postcss@npm:8.4.35"
   dependencies:
     nanoid: "npm:^3.3.7"
     picocolors: "npm:^1.0.0"
     source-map-js: "npm:^1.0.2"
-  checksum: 10c0/16eda83458fcd8a91bece287b5920c7f57164c3ea293e6c80d0ea71ce7843007bcd8592260a5160b9a7f02693e6ac93e2495b02d8c7596d3f3f72c1447e3ba79
+  checksum: 10c0/e8dd04e48001eb5857abc9475365bf08f4e508ddf9bc0b8525449a95d190f10d025acebc5b56ac2e94b3c7146790e4ae78989bb9633cb7ee20d1cc9b7dc909b2
   languageName: node
   linkType: hard
 
@@ -10702,12 +10709,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-hook-form@npm:^7.50.0":
-  version: 7.50.0
-  resolution: "react-hook-form@npm:7.50.0"
+"react-hook-form@npm:^7.50.1":
+  version: 7.50.1
+  resolution: "react-hook-form@npm:7.50.1"
   peerDependencies:
     react: ^16.8.0 || ^17 || ^18
-  checksum: 10c0/632d02590bb912d5b1bb3102263be06cfef1918146a79925284c0874da48c5080132a819f4083682e8156956f88329ddc266eb4e5c75b6fcf3fe642dbd4db499
+  checksum: 10c0/4905c33afbea67dc817e8be53c360d5c009dfd5c5a93f6ac632e1fc258a8a59587add364842b2d39f7bf126e4e20b1883e90f9c3a2f916c5b79173ce4cf30491
   languageName: node
   linkType: hard
 
@@ -10772,27 +10779,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-router-dom@npm:^6.22.0":
-  version: 6.22.0
-  resolution: "react-router-dom@npm:6.22.0"
+"react-router-dom@npm:^6.22.1":
+  version: 6.22.1
+  resolution: "react-router-dom@npm:6.22.1"
   dependencies:
-    "@remix-run/router": "npm:1.15.0"
-    react-router: "npm:6.22.0"
+    "@remix-run/router": "npm:1.15.1"
+    react-router: "npm:6.22.1"
   peerDependencies:
     react: ">=16.8"
     react-dom: ">=16.8"
-  checksum: 10c0/f1c338d6a37ee331f141d683a9139bc397128f6c15ef796589894ba29de1101eeeab7c4bf26429632c86bbca7376a9d900a6bfbd351ac5c9e1e231ac1b05fe5d
+  checksum: 10c0/1e6ec4596f134204934d4f701b8acc426867532342c8aec1b5c4ffeaf23afa0099727f58ab8687f7838db069616b8d6ed05a065570f23b3b60cbff405b3fbccd
   languageName: node
   linkType: hard
 
-"react-router@npm:6.22.0":
-  version: 6.22.0
-  resolution: "react-router@npm:6.22.0"
+"react-router@npm:6.22.1":
+  version: 6.22.1
+  resolution: "react-router@npm:6.22.1"
   dependencies:
-    "@remix-run/router": "npm:1.15.0"
+    "@remix-run/router": "npm:1.15.1"
   peerDependencies:
     react: ">=16.8"
-  checksum: 10c0/aa3878321797e526e4f3a57f97e8dd06f7cf6d7b9f95db39ea5d74259a2058404a04af0f852296ba6f09f9cecd7ca5f67125b9853ceb7fe6a852ffa5e3369dca
+  checksum: 10c0/bb33c3a6457e73fa9977133be0c27b60accfc6452cc5d7b62c729cdd2d091a1345a9567cf852c651315548f1f16adac258eeab8ad193b46e4ce926c911dc857c
   languageName: node
   linkType: hard
 
@@ -11330,13 +11337,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sodium-native@npm:^4.0.1, sodium-native@npm:^4.0.5":
+"sodium-native@npm:^4.0.1":
   version: 4.0.6
   resolution: "sodium-native@npm:4.0.6"
   dependencies:
     node-gyp: "npm:latest"
     node-gyp-build: "npm:^4.6.0"
   checksum: 10c0/6ca4de2f934bdc5408460363afb7c17777a20f626653701c2f87bda34f601498cf4fa82156f03bbb58f1ce5d95d9194c74c47b882875588f9f36c44abc9ff325
+  languageName: node
+  linkType: hard
+
+"sodium-native@npm:^4.0.8":
+  version: 4.0.10
+  resolution: "sodium-native@npm:4.0.10"
+  dependencies:
+    node-gyp: "npm:latest"
+    node-gyp-build: "npm:^4.6.0"
+  checksum: 10c0/95fcc84a3b4589833a41ac9e6abebb719978bbdc50945cf4e78df87d0273f021e1f4079d9b788dca563b34ceb9d83d0d2aab12448da66af9c489fe30bcadc0c1
   languageName: node
   linkType: hard
 
@@ -11366,29 +11383,29 @@ __metadata:
     "@ethersproject/bytes": "npm:^5.7.0"
     "@ethersproject/hash": "npm:^5.7.0"
     "@ethersproject/web": "npm:^5.7.1"
-    "@stellar/stellar-sdk": "npm:^11.2.1"
+    "@stellar/stellar-sdk": "npm:^11.2.2"
     "@tabler/icons-react": "npm:^2.47.0"
-    "@thirdweb-dev/react": "npm:^4.4.5"
-    "@types/react": "npm:^18.2.51"
-    "@types/react-dom": "npm:^18.2.18"
+    "@thirdweb-dev/react": "npm:^4.4.9"
+    "@types/react": "npm:^18.2.57"
+    "@types/react-dom": "npm:^18.2.19"
     "@vitejs/plugin-react-swc": "npm:^3.6.0"
     axios: "npm:^1.6.7"
     donation-contract: "file:.soroban/contracts/donation"
     ethers: "npm:^5.7.2"
-    framer-motion: "npm:^11.0.3"
+    framer-motion: "npm:^11.0.5"
     lit-html: "npm:^3.1.2"
-    magic-sdk: "npm:^22.0.0"
+    magic-sdk: "npm:^22.1.1"
     oracle-contract: "file:.soroban/contracts/oracle"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
     react-error-boundary: "npm:^4.0.12"
-    react-hook-form: "npm:^7.50.0"
-    react-router-dom: "npm:^6.22.0"
+    react-hook-form: "npm:^7.50.1"
+    react-router-dom: "npm:^6.22.1"
     stellar-wallets-kit: "github:Creit-Tech/Stellar-Wallets-Kit#276328e4d0747d72888a6a58b93e2e4d9f764c8e"
     token-contract: "file:.soroban/contracts/token"
     typescript: "npm:^5.3.3"
-    vite: "npm:^5.0.12"
-    zustand: "npm:^4.5.0"
+    vite: "npm:^5.1.4"
+    zustand: "npm:^4.5.1"
   languageName: unknown
   linkType: soft
 
@@ -11781,12 +11798,12 @@ __metadata:
 
 "token-contract@file:.soroban/contracts/token::locator=soroban-oracle-project%40workspace%3A.":
   version: 0.0.0
-  resolution: "token-contract@file:.soroban/contracts/token#.soroban/contracts/token::hash=02afbb&locator=soroban-oracle-project%40workspace%3A."
+  resolution: "token-contract@file:.soroban/contracts/token#.soroban/contracts/token::hash=2440f3&locator=soroban-oracle-project%40workspace%3A."
   dependencies:
     "@stellar/freighter-api": "npm:1.7.1"
     "@stellar/stellar-sdk": "npm:11.2.0"
     buffer: "npm:6.0.3"
-  checksum: 10c0/a247ae8304827a0b400e3514543fdf99d337956af261d0fbf09f710f700706fd12900700c0b54c825fb3e580de1626e9eedf4e28355299f4770321e7c33a09a5
+  checksum: 10c0/2e8430f8d5f59ee33dc8c2f8b3e9a3af3716154a09866e3288e53cca2bc647b39e673755228d7c2a734ecc820c3444abbac3c2401d788657833ce3c3080c2dcf
   languageName: node
   linkType: hard
 
@@ -12332,13 +12349,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^5.0.12":
-  version: 5.0.12
-  resolution: "vite@npm:5.0.12"
+"vite@npm:^5.1.4":
+  version: 5.1.4
+  resolution: "vite@npm:5.1.4"
   dependencies:
     esbuild: "npm:^0.19.3"
     fsevents: "npm:~2.3.3"
-    postcss: "npm:^8.4.32"
+    postcss: "npm:^8.4.35"
     rollup: "npm:^4.2.0"
   peerDependencies:
     "@types/node": ^18.0.0 || >=20.0.0
@@ -12368,7 +12385,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 10c0/c51b8e458851943c903fddde6973e720099ef8a5f364fb107cddade59c9e90f6d9ad98b61a7419cdfa0c6374236e10bff965d0c2d9e7b1790c68b874e5e7950c
+  checksum: 10c0/8f04c8bed33f266bde27f432412456a3b893b51fe1857f0b8cd259100b376c1393a7927db1dd6344a4376baed72ed179ec5b0428aef2ae8508f1f28f95acb908
   languageName: node
   linkType: hard
 
@@ -13059,7 +13076,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yaml@npm:^2.3.1":
+"yaml@npm:^2.3.4":
   version: 2.3.4
   resolution: "yaml@npm:2.3.4"
   checksum: 10c0/cf03b68f8fef5e8516b0f0b54edaf2459f1648317fc6210391cf606d247e678b449382f4bd01f77392538429e306c7cba8ff46ff6b37cac4de9a76aff33bd9e1
@@ -13192,9 +13209,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zustand@npm:^4.5.0":
-  version: 4.5.0
-  resolution: "zustand@npm:4.5.0"
+"zustand@npm:^4.5.1":
+  version: 4.5.1
+  resolution: "zustand@npm:4.5.1"
   dependencies:
     use-sync-external-store: "npm:1.2.0"
   peerDependencies:
@@ -13208,6 +13225,6 @@ __metadata:
       optional: true
     react:
       optional: true
-  checksum: 10c0/4802c4e26f2c1ec0d8e0ce8e596413cafb8b3d383e664de4eb30af63cedd23686f17b96a8a4d4583fc4470b187de0bbeafcfb94894efc50f6e62813e02a70b64
+  checksum: 10c0/3c928236f716f026760ddfff9910c37f9e3696169650cd677139dc2fe2623fa215dc31c899caf5b9b6a0668ed003c505918c2a953dbbd295fe7f90092634a90c
   languageName: node
   linkType: hard
