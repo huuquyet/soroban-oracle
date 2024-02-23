@@ -3,12 +3,12 @@
 /.soroban
 /src/shared/config.json
 # dependencies
-/node_modules
+**/node_modules
 /.pnp.*
 .pnp.js
 # We use npm in this project.
 .yarn/*
-.yarn/install-state.gz
+**/.yarn/install-state.gz
 !.yarn/patches
 !.yarn/plugins
 !.yarn/releases

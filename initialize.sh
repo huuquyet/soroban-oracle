@@ -81,7 +81,7 @@ ADMIN_ADDRESS="$(soroban config identity address token-admin)"
 # This will fail if the account already exists, but it'll still be fine.
 echo "Fund token-admin & user account from friendbot"
 soroban config identity fund token-admin --network $NETWORK
-soroban config identity fund $USER --network $NETWORK
+# soroban config identity fund $USER --network $NETWORK
 # curl --silent -X POST "$FRIENDBOT_URL?addr=$ADMIN_ADDRESS" >/dev/null
 
 ARGS="--network $NETWORK --source token-admin"
@@ -145,7 +145,7 @@ soroban contract invoke \
   --id "$DONATION_ID" \
   -- \
   initialize \
-  --recipient $USER \
+  --recipient token-admin \
   --token "$BTC_TOKEN_ID"
 
 # Relayer is the account that will be used to relay transactions to the oracle contract
@@ -155,10 +155,10 @@ soroban contract invoke \
   --id "$ORACLE_ID" \
   -- \
   initialize \
-  --caller $USER \
+  --caller token-admin \
   --pair_name BTC_USDT \
   --epoch_interval 600 \
-  --relayer $USER
+  --relayer token-admin
 
 echo "Generate bindings contracts"
 soroban contract bindings typescript --network $NETWORK --id $BTC_TOKEN_ID --wasm $TOKEN_PATH".optimized.wasm" --output-dir ./.soroban/contracts/token --overwrite
