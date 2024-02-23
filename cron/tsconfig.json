@@ -11,6 +11,8 @@
       "skipLibCheck": true,
       "rootDir": "."
     },
-    "lib": ["ESNext"]
+    "lib": ["ESNext"],
+    "include": ["*.ts"],
+    "ts-node": {"esm": true,},
   }
   

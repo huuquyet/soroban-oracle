@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { donation } from "@/shared/contracts";
+import { useAccount } from '@/hooks'
+import { donation } from '@/shared/contracts'
 import {
   Alert,
   AlertIcon,
@@ -25,10 +25,10 @@ import {
   Text,
   useColorModeValue,
   useToast,
-} from "@chakra-ui/react";
-import { useAccount } from "@/hooks";
-import { useForm } from "react-hook-form";
-import { EpochData, PairInfo } from "oracle-contract";
+} from '@chakra-ui/react'
+import { EpochData, PairInfo } from 'oracle-contract'
+import React, { useState } from 'react'
+import { useForm } from 'react-hook-form'
 
 const DepositForm = ({
   submitFormCallback,
@@ -36,16 +36,16 @@ const DepositForm = ({
   recipient,
   myBalance,
 }: {
-  submitFormCallback: any;
-  recipient: any;
-  myBalance: any;
-  pairInfo: (PairInfo & EpochData) | null;
+  submitFormCallback: any
+  recipient: any
+  myBalance: any
+  pairInfo: (PairInfo & EpochData) | null
 }) => {
-  const toast = useToast();
-  const account = useAccount();
-  const [isLoadingDeposit, setIsLoadingDeposit] = useState(false);
-  const [calculateValue, setCalculateValue] = useState(0);
-  const [isCalculating, setIsCalculating] = useState(false);
+  const toast = useToast()
+  const account = useAccount()
+  const [isLoadingDeposit, setIsLoadingDeposit] = useState(false)
+  const [calculateValue, setCalculateValue] = useState(0)
+  const [isCalculating, setIsCalculating] = useState(false)
   const {
     reset,
     handleSubmit,
@@ -53,122 +53,120 @@ const DepositForm = ({
     register,
     formState: { errors },
   } = useForm<{
-    amount: string;
+    amount: string
   }>({
     defaultValues: {
-      amount: "",
+      amount: '',
     },
-    mode: "all",
-  });
+    mode: 'all',
+  })
 
   const onSubmitDeposit = async (formData: {
-    amount: string;
+    amount: string
   }): Promise<void> => {
     if (account) {
       if (myBalance >= Number(calculateValue)) {
-        setIsLoadingDeposit(true);
+        setIsLoadingDeposit(true)
         try {
           const txDeposit = await donation.deposit(
             {
               amount: BigInt(Number(calculateValue) * 10 ** 10),
               user: account!.address,
             },
-            { fee: 100, }
-          );
+            { fee: 100 }
+          )
           await txDeposit.signAndSend()
-          
+
           toast({
-            title: "Deposit Successful!",
-            description: "",
-            position: "bottom-right",
-            status: "success",
+            title: 'Deposit Successful!',
+            description: '',
+            position: 'bottom-right',
+            status: 'success',
             duration: 3000,
             isClosable: true,
-            variant: "subtle",
-          });
+            variant: 'subtle',
+          })
 
           if (submitFormCallback) {
             setTimeout(() => {
-              submitFormCallback();
-            }, 1000);
+              submitFormCallback()
+            }, 1000)
           }
 
-          reset({ amount: "" });
-          setIsLoadingDeposit(false);
+          reset({ amount: '' })
+          setIsLoadingDeposit(false)
         } catch (e) {
-          console.log(e);
-          reset({ amount: "" });
-          setIsLoadingDeposit(false);
+          console.log(e)
+          reset({ amount: '' })
+          setIsLoadingDeposit(false)
           toast({
-            title: "Deposit Error!",
-            description: "",
-            position: "bottom-right",
-            status: "error",
+            title: 'Deposit Error!',
+            description: '',
+            position: 'bottom-right',
+            status: 'error',
             duration: 3000,
             isClosable: true,
-            variant: "subtle",
-          });
+            variant: 'subtle',
+          })
         }
       } else {
         toast({
           title: "You don't have enough BTC token!",
-          description: "",
-          position: "bottom-right",
-          status: "error",
+          description: '',
+          position: 'bottom-right',
+          status: 'error',
           duration: 3000,
           isClosable: true,
-          variant: "subtle",
-        });
+          variant: 'subtle',
+        })
       }
     } else {
       toast({
-        title: "Connect wallet!",
-        description: "",
-        position: "bottom-right",
-        status: "error",
+        title: 'Connect wallet!',
+        description: '',
+        position: 'bottom-right',
+        status: 'error',
         duration: 3000,
         isClosable: true,
-        variant: "subtle",
-      });
+        variant: 'subtle',
+      })
     }
-  };
+  }
 
   const handlerCalculateValue = (e: any) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsCalculating(true);
+    e.preventDefault()
+    e.stopPropagation()
+    setIsCalculating(true)
     if (pairInfo && getValues) {
       setCalculateValue(
         // @ts-ignore
-        Number(
-          Number(getValues()!.amount) / (Number(pairInfo!.value) / 10 ** 5)
-        ).toFixed(10)
-      );
+        Number(Number(getValues()!.amount) / (Number(pairInfo!.value) / 10 ** 5)).toFixed(10)
+      )
     }
-  };
+  }
 
   return (
     <Box
-      bg={useColorModeValue("white", "gray.800")}
-      boxShadow={"md"}
+      bg={useColorModeValue('white', 'gray.800')}
+      boxShadow={'md'}
       borderWidth="3px"
       rounded="lg"
       p={6}
     >
       <>
-        <Heading w="100%" textAlign={"center"} fontWeight="normal" mb="2%">
+        <Heading w="100%" textAlign={'center'} fontWeight="normal" mb="2%">
           Donate
         </Heading>
         <Stack>
           {account?.address !== recipient ? (
             <form onSubmit={handleSubmit(onSubmitDeposit)}>
-              <Flex gap={3} align={"flex-start"}>
+              <Flex gap={3} align={'flex-start'}>
                 <FormControl isInvalid={!!errors.amount} id="bio" mt={1}>
                   <FormLabel
                     fontSize="sm"
                     fontWeight="md"
                     color="gray.700"
-                    _dark={{ color: "gray.50" }}
+                    _dark={{ color: 'gray.50' }}
                   >
                     Amount in USD
                   </FormLabel>
@@ -177,23 +175,23 @@ const DepositForm = ({
                     <NumberInputField
                       shadow="sm"
                       disabled={isLoadingDeposit}
-                      fontSize={{ sm: "sm" }}
-                      {...register("amount", {
-                        required: "This field is required",
+                      fontSize={{ sm: 'sm' }}
+                      {...register('amount', {
+                        required: 'This field is required',
                         min: {
                           value: 0.000000001,
-                          message: "Enter a value greater than 0!",
+                          message: 'Enter a value greater than 0!',
                         },
                       })}
                       onChange={(e) => {
-                        setIsCalculating(false);
-                        register("amount", {
-                          required: "This field is required",
+                        setIsCalculating(false)
+                        register('amount', {
+                          required: 'This field is required',
                           min: {
                             value: 0.000000001,
-                            message: "Enter a value greater than 0!",
+                            message: 'Enter a value greater than 0!',
                           },
-                        }).onChange(e);
+                        }).onChange(e)
                       }}
                       placeholder="Amount"
                     />
@@ -203,9 +201,7 @@ const DepositForm = ({
                     </NumberInputStepper>
                   </NumberInput>
 
-                  <FormErrorMessage>
-                    {errors.amount && errors.amount.message}
-                  </FormErrorMessage>
+                  <FormErrorMessage>{errors.amount && errors.amount.message}</FormErrorMessage>
                 </FormControl>
 
                 {isCalculating ? (
@@ -225,7 +221,7 @@ const DepositForm = ({
                     isLoading={isLoadingDeposit}
                     type="button"
                     w="7rem"
-                    variant={"outline"}
+                    variant={'outline'}
                     colorScheme="blue"
                     onClick={handlerCalculateValue}
                   >
@@ -235,15 +231,15 @@ const DepositForm = ({
               </Flex>
               {isCalculating && (
                 <Flex
-                  w={"100%"}
+                  w={'100%'}
                   style={{ marginTop: 10 }}
-                  align={"center"}
-                  justify={"space-between"}
+                  align={'center'}
+                  justify={'space-between'}
                 >
                   <Box
-                    w={"100%"}
-                    bg={useColorModeValue("white", "gray.800")}
-                    boxShadow={"md"}
+                    w={'100%'}
+                    bg={useColorModeValue('white', 'gray.800')}
+                    boxShadow={'md'}
                     borderWidth="1px"
                     rounded="lg"
                     p={3}
@@ -253,9 +249,7 @@ const DepositForm = ({
                       <StatNumber>
                         <Text>{calculateValue} BTC</Text>
                       </StatNumber>
-                      <StatHelpText>
-                        1 BTC = {Number(pairInfo?.value) / 10 ** 5} $
-                      </StatHelpText>
+                      <StatHelpText>1 BTC = {Number(pairInfo?.value) / 10 ** 5} $</StatHelpText>
                     </Stat>
                   </Box>
                 </Flex>
@@ -264,15 +258,13 @@ const DepositForm = ({
           ) : (
             <Alert status="info">
               <AlertIcon />
-              <AlertTitle>
-                You cannot donate because you are the receiver
-              </AlertTitle>
+              <AlertTitle>You cannot donate because you are the receiver</AlertTitle>
             </Alert>
           )}
         </Stack>
       </>
     </Box>
-  );
-};
+  )
+}
 
-export default DepositForm;
+export default DepositForm

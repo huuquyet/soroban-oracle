@@ -1,213 +1,201 @@
-import cron from "node-cron";
 import {
+  Address,
+  Contract,
   Keypair,
   Networks,
+  SorobanRpc,
   TransactionBuilder,
-  Contract,
   nativeToScVal,
   scValToNative,
-  Address,
-  SorobanRpc,
-} from "@stellar/stellar-sdk";
+} from '@stellar/stellar-sdk'
+import cron from 'node-cron'
 
-const API_NINJA_KEY = "YOUR_API_KEY";
+const API_NINJA_KEY = "YOUR_API_KEY"
 
-const sourceSecretKey = "YOUR_RELAYER_API_KEY";
-const sourceKeypair = Keypair.fromSecret(sourceSecretKey);
-const sourcePublicKey = sourceKeypair.publicKey();
+const sourceSecretKey = "YOUR_RELAYER_API_KEY"
+const sourceKeypair = Keypair.fromSecret(sourceSecretKey)
+const sourcePublicKey = sourceKeypair.publicKey()
 
-const contractId = "CCADJU57KE6J3SCEOVQAOH7E763623DUD3AOKS7XQUX77FRQL2IWK7SR";
-const contract = new Contract(contractId);
+const contractId = 'CCADJU57KE6J3SCEOVQAOH7E763623DUD3AOKS7XQUX77FRQL2IWK7SR'
+const contract = new Contract(contractId)
 
-const server = new SorobanRpc.Server(
-  "https://rpc-futurenet.stellar.org",
-  { allowHttp: true }
-);
+const server = new SorobanRpc.Server('https://rpc-futurenet.stellar.org', { allowHttp: true })
 
-const networkPassphrase = Networks.FUTURENET;
-const fee = "100";
+const networkPassphrase = Networks.FUTURENET
+const fee = '100'
 
 const getTimestamp = async () => {
-  let account = await server.getAccount(sourcePublicKey);
+  const account = await server.getAccount(sourcePublicKey)
   try {
-    let transaction = new TransactionBuilder(account, {
+    const transaction = new TransactionBuilder(account, {
       fee,
       networkPassphrase,
     })
-      .addOperation(contract.call("get_timestamp"))
+      .addOperation(contract.call('get_timestamp'))
       .setTimeout(30)
-      .build();
+      .build()
 
-    let resultSimulation = await server.simulateTransaction(transaction);
+    const resultSimulation = await server.simulateTransaction(transaction)
     if (!SorobanRpc.Api.isSimulationSuccess(resultSimulation)) {
-      throw new Error(
-        `[ERROR] [getTimestamp]: ${JSON.stringify(resultSimulation)}`
-      );
+      throw new Error(`[ERROR] [getTimestamp]: ${JSON.stringify(resultSimulation)}`)
     }
-    return scValToNative(resultSimulation.result!.retval);
+    return scValToNative(resultSimulation.result!.retval)
   } catch (e) {
-    console.error(e);
-    throw new Error("[getTimestamp] ERROR");
+    console.error(e)
+    throw new Error('[getTimestamp] ERROR')
   }
-};
+}
 
 const getPairInfo = async () => {
-  let account = await server.getAccount(sourcePublicKey);
+  const account = await server.getAccount(sourcePublicKey)
   try {
-    let transaction = new TransactionBuilder(account, {
+    const transaction = new TransactionBuilder(account, {
       fee,
       networkPassphrase,
     })
-      .addOperation(contract.call("get_pair_info"))
+      .addOperation(contract.call('get_pair_info'))
       .setTimeout(30)
-      .build();
+      .build()
 
-    let resultSimulation = await server.simulateTransaction(transaction);
+    const resultSimulation = await server.simulateTransaction(transaction)
     if (!SorobanRpc.Api.isSimulationSuccess(resultSimulation)) {
-      throw new Error(
-        `[ERROR] [getPairInfo]: ${JSON.stringify(resultSimulation)}`
-      );
+      throw new Error(`[ERROR] [getPairInfo]: ${JSON.stringify(resultSimulation)}`)
     }
-    return scValToNative(resultSimulation.result!.retval);
+    return scValToNative(resultSimulation.result!.retval)
   } catch (e) {
-    console.error(e);
-    throw new Error("[getPairInfo] ERROR");
+    console.error(e)
+    throw new Error('[getPairInfo] ERROR')
   }
-};
+}
 
 const getEpochData = async (epochNr: any) => {
-  let account = await server.getAccount(sourcePublicKey);
+  const account = await server.getAccount(sourcePublicKey)
   try {
-    epochNr = nativeToScVal(epochNr, { type: "u32" });
+    epochNr = nativeToScVal(epochNr, { type: 'u32' })
 
-    let transaction = new TransactionBuilder(account, {
+    const transaction = new TransactionBuilder(account, {
       fee,
       networkPassphrase,
     })
-      .addOperation(contract.call("get_pair_data_at_epoch", ...[epochNr]))
+      .addOperation(contract.call('get_pair_data_at_epoch', ...[epochNr]))
       .setTimeout(30)
-      .build();
+      .build()
 
-    let resultSimulation = await server.simulateTransaction(transaction);
+    const resultSimulation = await server.simulateTransaction(transaction)
     if (!SorobanRpc.Api.isSimulationSuccess(resultSimulation)) {
       throw new Error(`[ERROR] [const getEpochData = async (epochNr) => {
-        ]: ${JSON.stringify(resultSimulation)}`);
+        ]: ${JSON.stringify(resultSimulation)}`)
     }
-    return scValToNative(resultSimulation.result!.retval);
+    return scValToNative(resultSimulation.result!.retval)
   } catch (e) {
-    console.error(e);
-    throw new Error("[getEpochData] ERROR");
+    console.error(e)
+    throw new Error('[getEpochData] ERROR')
   }
-};
+}
 
 const getPairPrice = async (pairName: any) => {
   try {
-    const response = await fetch(
-      `https://api.api-ninjas.com/v1/cryptoprice?symbol=${pairName}`,
-      {
-        headers: {
-          "X-Api-Key": API_NINJA_KEY,
-        },
-      }
-    );
-    const result = await response.json();
-    return parseInt(String(parseFloat(result?.price) * 10 ** 5));
+    const response = await fetch(`https://api.api-ninjas.com/v1/cryptoprice?symbol=${pairName}`, {
+      headers: {
+        'X-Api-Key': API_NINJA_KEY,
+      },
+    })
+    const result = await response.json()
+    return parseInt(String(parseFloat(result?.price) * 10 ** 5))
   } catch (e) {
-    console.error(e);
-    throw new Error("[getPairPrice] ERROR");
+    console.error(e)
+    throw new Error('[getPairPrice] ERROR')
   }
-};
+}
 
 const updatePairPrice = async (price: any) => {
   try {
-    let account = await server.getAccount(sourcePublicKey);
-    const value = nativeToScVal(price, { type: "u32" });
-    const caller = new Address(account.accountId()).toScVal();
+    const account = await server.getAccount(sourcePublicKey)
+    const value = nativeToScVal(price, { type: 'u32' })
+    const caller = new Address(account.accountId()).toScVal()
 
-    const operation = contract.call("set_epoch_data", ...[caller, value]);
+    const operation = contract.call('set_epoch_data', ...[caller, value])
     let transaction = new TransactionBuilder(account, {
       fee,
       networkPassphrase,
     })
       .addOperation(operation)
       .setTimeout(30)
-      .build();
+      .build()
 
-    transaction = await server.prepareTransaction(
-      transaction
-    );
-    transaction.sign(sourceKeypair);
-    let response = await server.sendTransaction(transaction);
-    let resultSimulation = await server.simulateTransaction(transaction);
+    transaction = await server.prepareTransaction(transaction)
+    transaction.sign(sourceKeypair)
+    const response = await server.sendTransaction(transaction)
+    const resultSimulation = await server.simulateTransaction(transaction)
     console.log(
-      "[updatePairPrice] Transaction hash:",
+      '[updatePairPrice] Transaction hash:',
       `https://futurenet.steexp.com/${response.hash}`
-    );
+    )
 
-    const hash = response.hash;
-    if (response.status === "ERROR") {
-      console.log("[updatePairPrice] ERROR STATUS");
-      throw new Error("[updatePairPrice] ERROR STATUS");
+    const hash = response.hash
+    if (response.status === 'ERROR') {
+      console.log('[updatePairPrice] ERROR STATUS')
+      throw new Error('[updatePairPrice] ERROR STATUS')
     }
 
-    while (response.status != "PENDING") {
-      let response = await server.getTransaction(hash);
-      console.log("[updatePairPrice] response.status: ", response.status);
-      await new Promise((resolve) => setTimeout(resolve, 60));
+    while (response.status != 'PENDING') {
+      const response = await server.getTransaction(hash)
+      console.log('[updatePairPrice] response.status: ', response.status)
+      await new Promise((resolve) => setTimeout(resolve, 60))
     }
 
     if (SorobanRpc.Api.isSimulationSuccess(resultSimulation)) {
-      console.log("[updatePairPrice] SUCCESS");
-      console.log("[updatePairPrice] Transaction status:", response.status);
+      console.log('[updatePairPrice] SUCCESS')
+      console.log('[updatePairPrice] Transaction status:', response.status)
     } else {
-      console.log("[updatePairPrice] ERROR ");
-      throw new Error("[updatePairPrice] ERROR ");
+      console.log('[updatePairPrice] ERROR ')
+      throw new Error('[updatePairPrice] ERROR ')
     }
   } catch (e) {
-    console.error(e);
-    throw new Error("[updatePairPrice] ERROR");
+    console.error(e)
+    throw new Error('[updatePairPrice] ERROR')
   }
-};
+}
 
 const main = async () => {
   try {
-    const pairInfo = await getPairInfo();
-    const epochInterval = parseInt(pairInfo.epoch_interval);
-    const currentTimestamp = await getTimestamp();
-    const lastEpochNr = pairInfo.last_epoch;
-    console.log("lastEpochNr ", lastEpochNr);
+    const pairInfo = await getPairInfo()
+    const epochInterval = parseInt(pairInfo.epoch_interval)
+    const currentTimestamp = await getTimestamp()
+    const lastEpochNr = pairInfo.last_epoch
+    console.log('lastEpochNr ', lastEpochNr)
 
-    let lastEpochTimestamp = 0;
+    let lastEpochTimestamp = 0
     if (lastEpochNr > 0) {
-      const lastEpochData = await getEpochData(lastEpochNr);
-      lastEpochTimestamp = parseInt(lastEpochData.time);
+      const lastEpochData = await getEpochData(lastEpochNr)
+      lastEpochTimestamp = parseInt(lastEpochData.time)
 
-      const lastEpochPrice = parseInt(lastEpochData.value);
-      console.log("lastEpochPrice ", lastEpochPrice);
+      const lastEpochPrice = parseInt(lastEpochData.value)
+      console.log('lastEpochPrice ', lastEpochPrice)
     }
 
-    let deltaTimestamp = Number(currentTimestamp) - lastEpochTimestamp;
-    console.log("deltaTimestamp ", deltaTimestamp);
+    const deltaTimestamp = Number(currentTimestamp) - lastEpochTimestamp
+    console.log('deltaTimestamp ', deltaTimestamp)
     if (deltaTimestamp >= epochInterval) {
-      console.log("Need to update the value");
+      console.log('Need to update the value')
     } else {
-      console.log("Don't need to update the value");
-      return;
+      console.log("Don't need to update the value")
+      return
     }
 
-    const priceData = await getPairPrice("BTCUSDT");
-    console.log("fetched priceData ", priceData);
+    const priceData = await getPairPrice('BTCUSDT')
+    console.log('fetched priceData ', priceData)
 
-    const updatePairPriceResult = await updatePairPrice(priceData);
-    console.log("value set!");
+    const updatePairPriceResult = await updatePairPrice(priceData)
+    console.log('value set!')
   } catch (e) {
-    console.log("ERROR");
-    console.error(e);
+    console.log('ERROR')
+    console.error(e)
   }
-};
+}
 
-cron.schedule("*/15 * * * *", async () => {
-  console.log("Running a task every 15 minutes");
-  console.log("Current Time: ", new Date());
-  await main();
-});
+cron.schedule('*/15 * * * *', async () => {
+  console.log('Running a task every 15 minutes')
+  console.log('Current Time: ', new Date())
+  await main()
+})

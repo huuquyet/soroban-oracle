@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useAccount } from '@/hooks'
+import { oracle } from '@/shared/contracts'
 import {
   Box,
   Button,
@@ -16,19 +17,18 @@ import {
   Stack,
   useColorModeValue,
   useToast,
-} from "@chakra-ui/react";
-import { useForm } from "react-hook-form";
-import { useAccount } from "@/hooks";
-import { oracle } from "@/shared/contracts";
-import { PairInfo } from "oracle-contract";
+} from '@chakra-ui/react'
+import { PairInfo } from 'oracle-contract'
+import React, { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
 
-type FormTypes = { relayer: string; time: string };
+type FormTypes = { relayer: string; time: string }
 
 const OracleAddress = ({ pairInfo }: { pairInfo: PairInfo | null }) => {
-  const toast = useToast();
-  const account = useAccount();
+  const toast = useToast()
+  const account = useAccount()
 
-  const [isLoadingSetRelayer, setIsLoadingSetRelayer] = useState(false);
+  const [isLoadingSetRelayer, setIsLoadingSetRelayer] = useState(false)
 
   const {
     reset,
@@ -37,91 +37,84 @@ const OracleAddress = ({ pairInfo }: { pairInfo: PairInfo | null }) => {
     formState: { errors },
   } = useForm<FormTypes>({
     defaultValues: {
-      relayer: "",
+      relayer: '',
     },
-  });
+  })
 
   useEffect(() => {
     if (pairInfo) {
-      reset({ time: pairInfo?.relayer?.toString() });
+      reset({ time: pairInfo?.relayer?.toString() })
     }
-  }, [pairInfo]);
+  }, [pairInfo])
 
   const onSubmitRelayer = async (formData: FormTypes): Promise<void> => {
     if (account) {
-      setIsLoadingSetRelayer(true);
+      setIsLoadingSetRelayer(true)
       try {
         const txPairEpochInterval = await oracle.updateRelayerAddress(
           {
             caller: account!.address,
             new_relayer_address: formData?.relayer,
           },
-          { fee: 1000, }
-        );
+          { fee: 1000 }
+        )
         await txPairEpochInterval.signAndSend()
 
         toast({
-          title: "Update Relayer Successfully!",
-          description: "",
-          position: "bottom-right",
-          status: "success",
+          title: 'Update Relayer Successfully!',
+          description: '',
+          position: 'bottom-right',
+          status: 'success',
           duration: 3000,
           isClosable: true,
-          variant: "subtle",
-        });
+          variant: 'subtle',
+        })
 
-        setIsLoadingSetRelayer(false);
+        setIsLoadingSetRelayer(false)
       } catch (e) {
-        console.log(e);
-        reset({ time: "0" });
-        setIsLoadingSetRelayer(false);
+        console.log(e)
+        reset({ time: '0' })
+        setIsLoadingSetRelayer(false)
         toast({
-          title: "Update Relayer Error!",
-          description: "",
-          position: "bottom-right",
-          status: "error",
+          title: 'Update Relayer Error!',
+          description: '',
+          position: 'bottom-right',
+          status: 'error',
           duration: 3000,
           isClosable: true,
-          variant: "subtle",
-        });
+          variant: 'subtle',
+        })
       }
     } else {
       toast({
-        title: "Connect wallet!",
-        description: "",
-        position: "bottom-right",
-        status: "error",
+        title: 'Connect wallet!',
+        description: '',
+        position: 'bottom-right',
+        status: 'error',
         duration: 3000,
         isClosable: true,
-        variant: "subtle",
-      });
+        variant: 'subtle',
+      })
     }
-  };
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmitRelayer)}>
-      <Flex gap={3} align={"flex-start"}>
+      <Flex gap={3} align={'flex-start'}>
         <FormControl isInvalid={!!errors.relayer}>
-          <FormLabel
-            fontSize="sm"
-            fontWeight="md"
-            color="gray.700"
-            _dark={{ color: "gray.50" }}
-          >
+          <FormLabel fontSize="sm" fontWeight="md" color="gray.700" _dark={{ color: 'gray.50' }}>
             Change relayer address
           </FormLabel>
           <Input
             disabled={isLoadingSetRelayer}
             id="name"
             placeholder="New relayer address"
-            {...register("relayer", {
-              required: "This field is required",
-              minLength: { value: 1, message: "Minimum length should be 1" },
+            {...register('relayer', {
+              required: 'This field is required',
+              minLength: { value: 1, message: 'Minimum length should be 1' },
             })}
           />
-          <FormErrorMessage>
-            {errors.relayer && errors.relayer.message}
-          </FormErrorMessage>
+          <FormErrorMessage>{errors.relayer && errors.relayer.message}</FormErrorMessage>
         </FormControl>
         <Button
           isLoading={isLoadingSetRelayer}
@@ -134,14 +127,14 @@ const OracleAddress = ({ pairInfo }: { pairInfo: PairInfo | null }) => {
         </Button>
       </Flex>
     </form>
-  );
-};
+  )
+}
 
 const OracleEpochInterval = ({ pairInfo }: { pairInfo: PairInfo | null }) => {
-  const toast = useToast();
-  const account = useAccount();
+  const toast = useToast()
+  const account = useAccount()
 
-  const [isLoadingSetEpochData, setIsLoadingSetEpochData] = useState(false);
+  const [isLoadingSetEpochData, setIsLoadingSetEpochData] = useState(false)
 
   const {
     reset,
@@ -150,65 +143,60 @@ const OracleEpochInterval = ({ pairInfo }: { pairInfo: PairInfo | null }) => {
     formState: { errors },
   } = useForm<FormTypes>({
     defaultValues: {
-      time: "0",
+      time: '0',
     },
-  });
+  })
 
   useEffect(() => {
     if (pairInfo) {
-      reset({ time: pairInfo?.epoch_interval?.toString() });
+      reset({ time: pairInfo?.epoch_interval?.toString() })
     }
-  }, [pairInfo]);
+  }, [pairInfo])
 
   const onSubmitEpochData = async (formData: FormTypes): Promise<void> => {
-    setIsLoadingSetEpochData(true);
+    setIsLoadingSetEpochData(true)
     try {
       const txPairEpochInterval = await oracle.updatePairEpochInterval(
         {
           caller: account!.address,
           epoch_interval: Number(formData!.time),
         },
-        { fee: 1000, }
-      );
+        { fee: 1000 }
+      )
       await txPairEpochInterval.signAndSend()
 
       toast({
-        title: "Update Epoch Data Successfully!",
-        description: "",
-        position: "bottom-right",
-        status: "success",
+        title: 'Update Epoch Data Successfully!',
+        description: '',
+        position: 'bottom-right',
+        status: 'success',
         duration: 3000,
         isClosable: true,
-        variant: "subtle",
-      });
+        variant: 'subtle',
+      })
 
-      setIsLoadingSetEpochData(false);
+      setIsLoadingSetEpochData(false)
     } catch (e) {
-      console.log(e);
-      reset({ time: "0" });
-      setIsLoadingSetEpochData(false);
+      console.log(e)
+      reset({ time: '0' })
+      setIsLoadingSetEpochData(false)
       toast({
-        title: "Update Epoch Data Error!",
-        description: "",
-        position: "bottom-right",
-        status: "error",
+        title: 'Update Epoch Data Error!',
+        description: '',
+        position: 'bottom-right',
+        status: 'error',
         duration: 3000,
         isClosable: true,
-        variant: "subtle",
-      });
+        variant: 'subtle',
+      })
     }
-  };
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmitEpochData)}>
-      <Flex gap={3} align={"flex-start"}>
+      <Flex gap={3} align={'flex-start'}>
         <FormControl isInvalid={!!errors.time} id="bio" mt={1}>
-          <FormLabel
-            fontSize="sm"
-            fontWeight="md"
-            color="gray.700"
-            _dark={{ color: "gray.50" }}
-          >
+          <FormLabel fontSize="sm" fontWeight="md" color="gray.700" _dark={{ color: 'gray.50' }}>
             Change epoch interval (sec)
           </FormLabel>
 
@@ -216,11 +204,11 @@ const OracleEpochInterval = ({ pairInfo }: { pairInfo: PairInfo | null }) => {
             <NumberInputField
               shadow="sm"
               disabled={isLoadingSetEpochData}
-              fontSize={{ sm: "sm" }}
+              fontSize={{ sm: 'sm' }}
               placeholder="Seconds"
-              {...register("time", {
-                required: "This field is required",
-                min: { value: 300, message: "Minimum 300 sec" },
+              {...register('time', {
+                required: 'This field is required',
+                min: { value: 300, message: 'Minimum 300 sec' },
               })}
             />
             <NumberInputStepper>
@@ -229,9 +217,7 @@ const OracleEpochInterval = ({ pairInfo }: { pairInfo: PairInfo | null }) => {
             </NumberInputStepper>
           </NumberInput>
 
-          <FormErrorMessage>
-            {errors.time && errors.time.message}
-          </FormErrorMessage>
+          <FormErrorMessage>{errors.time && errors.time.message}</FormErrorMessage>
         </FormControl>
 
         <Button
@@ -245,40 +231,40 @@ const OracleEpochInterval = ({ pairInfo }: { pairInfo: PairInfo | null }) => {
         </Button>
       </Flex>
     </form>
-  );
-};
+  )
+}
 
 const OracleForm = ({ pairInfo }: { pairInfo: PairInfo | null }) => {
   return (
     <Box
-      bg={useColorModeValue("white", "gray.800")}
-      boxShadow={"md"}
+      bg={useColorModeValue('white', 'gray.800')}
+      boxShadow={'md'}
       borderWidth="1px"
       rounded="lg"
       p={6}
       mb={20}
     >
       <>
-        <Heading w="100%" textAlign={"center"} fontWeight="normal" mb="2%">
+        <Heading w="100%" textAlign={'center'} fontWeight="normal" mb="2%">
           Oracle config
         </Heading>
         <Stack>
           <Box
-            bg={useColorModeValue("white", "gray.800")}
+            bg={useColorModeValue('white', 'gray.800')}
             borderWidth="1px"
             rounded="lg"
             p={3}
-            w={"100%"}
+            w={'100%'}
             m="10px auto"
           >
             <OracleAddress pairInfo={pairInfo} />
           </Box>
           <Box
-            bg={useColorModeValue("white", "gray.800")}
+            bg={useColorModeValue('white', 'gray.800')}
             borderWidth="1px"
             rounded="lg"
             p={3}
-            w={"100%"}
+            w={'100%'}
             m="10px auto"
           >
             <OracleEpochInterval pairInfo={pairInfo} />
@@ -286,7 +272,7 @@ const OracleForm = ({ pairInfo }: { pairInfo: PairInfo | null }) => {
         </Stack>
       </>
     </Box>
-  );
-};
+  )
+}
 
-export default OracleForm;
+export default OracleForm

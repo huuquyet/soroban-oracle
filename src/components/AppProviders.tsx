@@ -1,10 +1,10 @@
-import { ErrorBoundary } from "react-error-boundary";
-import ErrorPage from "../pages/Share/ErrorPage.tsx";
-import { ThirdwebProvider } from "@thirdweb-dev/react";
-import AppRoutes from "./AppRoutes.tsx";
-import { BrowserRouter } from "react-router-dom";
-import { ChakraProvider } from "@chakra-ui/react";
-import { AppProvider } from "@/context/appContext.tsx";
+import { AppProvider } from '@/context/appContext.tsx'
+import { ChakraProvider } from '@chakra-ui/react'
+import { ThirdwebProvider } from '@thirdweb-dev/react'
+import { ErrorBoundary } from 'react-error-boundary'
+import { BrowserRouter } from 'react-router-dom'
+import ErrorPage from '../pages/Share/ErrorPage.tsx'
+import AppRoutes from './AppRoutes.tsx'
 
 const AppProviders = () => {
   return (
@@ -19,7 +19,7 @@ const AppProviders = () => {
         </ChakraProvider>
       </ThirdwebProvider>
     </BrowserRouter>
-  );
-};
+  )
+}
 
-export default AppProviders;
+export default AppProviders

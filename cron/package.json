@@ -8,7 +8,7 @@
   "keywords": [],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc && node dist/cron-script"
+    "start": "npx ts-node cron-script.ts"
   },
   "dependencies": {
     "@stellar/stellar-sdk": "^11.2.2",
@@ -16,6 +16,8 @@
   },
   "devDependencies": {
     "@types/node-cron": "^3.0.11",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.7.1",
     "typescript": "^5.3.3"
   }
 }

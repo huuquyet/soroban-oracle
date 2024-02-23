@@ -1,3 +1,6 @@
+import CopyButton from '@/components/CopyButton.tsx'
+import { oracle } from '@/shared/contracts'
+import { formatDate, formatShortAddress } from '@/utils/utils.tsx'
 import {
   Badge,
   Box,
@@ -10,52 +13,45 @@ import {
   Stack,
   Text,
   useColorModeValue,
-} from "@chakra-ui/react";
-import { Link, useLocation } from "react-router-dom";
-import { oracle } from "@/shared/contracts";
-import { EpochData, PairInfo } from "oracle-contract";
-import { useEffect, useState } from "react";
-import { formatDate, formatShortAddress } from "@/utils/utils.tsx";
-import CopyButton from "@/components/CopyButton.tsx";
+} from '@chakra-ui/react'
+import { EpochData, PairInfo } from 'oracle-contract'
+import { useEffect, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 
 export const ItemCardContainer = ({
   contract,
   callback,
 }: {
-  contract: typeof oracle;
-  callback?: any;
+  contract: typeof oracle
+  callback?: any
 }) => {
-  const [pairInfo, setPairInfo] = useState<(PairInfo & EpochData) | null>(null);
-  const [isLoadingPairInfo, setIsLoadingPairInfo] = useState<boolean>(false);
+  const [pairInfo, setPairInfo] = useState<(PairInfo & EpochData) | null>(null)
+  const [isLoadingPairInfo, setIsLoadingPairInfo] = useState<boolean>(false)
 
   const getPairInfo = async () => {
-    setIsLoadingPairInfo(true);
+    setIsLoadingPairInfo(true)
     try {
-      const txPairInfo = await contract.getPairInfo().then(tx => tx.result);
-      const txPairDataAtEpoch = await contract.getPairDataAtEpoch({
-        epoch_nr: txPairInfo?.last_epoch,
-      }).then(tx => tx.result);
-      setPairInfo({ ...txPairInfo, ...txPairDataAtEpoch });
-      if (callback) callback({ ...txPairInfo, ...txPairDataAtEpoch });
-      setIsLoadingPairInfo(false);
+      const txPairInfo = await contract.getPairInfo().then((tx) => tx.result)
+      const txPairDataAtEpoch = await contract
+        .getPairDataAtEpoch({
+          epoch_nr: txPairInfo?.last_epoch,
+        })
+        .then((tx) => tx.result)
+      setPairInfo({ ...txPairInfo, ...txPairDataAtEpoch })
+      if (callback) callback({ ...txPairInfo, ...txPairDataAtEpoch })
+      setIsLoadingPairInfo(false)
     } catch (e) {
-      console.log(e);
-      setIsLoadingPairInfo(false);
+      console.log(e)
+      setIsLoadingPairInfo(false)
     }
-  };
+  }
 
   useEffect(() => {
-    if (contract) getPairInfo();
-  }, [contract]);
+    if (contract) getPairInfo()
+  }, [contract])
 
-  return (
-    <PairCard
-      isLoadingPairInfo={isLoadingPairInfo}
-      contract={contract}
-      pairInfo={pairInfo}
-    />
-  );
-};
+  return <PairCard isLoadingPairInfo={isLoadingPairInfo} contract={contract} pairInfo={pairInfo} />
+}
 
 export default function PairCard({
   contract,
@@ -63,14 +59,14 @@ export default function PairCard({
   pairInfo,
   isLoadingPairInfo,
 }: {
-  isLoadingPairInfo: boolean;
-  contract: typeof oracle;
-  callback?: any;
-  pairInfo: (PairInfo & EpochData) | null;
+  isLoadingPairInfo: boolean
+  contract: typeof oracle
+  callback?: any
+  pairInfo: (PairInfo & EpochData) | null
 }) {
-  const { pathname } = useLocation();
+  const { pathname } = useLocation()
 
-  if (!isLoadingPairInfo && !pairInfo) return <></>;
+  if (!isLoadingPairInfo && !pairInfo) return <></>
 
   return (
     <Center py={6}>
@@ -78,29 +74,29 @@ export default function PairCard({
         borderWidth="1px"
         borderRadius="lg"
         // height={{sm: '250px', md: '350px'}}
-        direction={{ base: "column", sm: "row" }}
-        bg={useColorModeValue("white", "gray.900")}
-        boxShadow={"md"}
-        w={"100%"}
+        direction={{ base: 'column', sm: 'row' }}
+        bg={useColorModeValue('white', 'gray.900')}
+        boxShadow={'md'}
+        w={'100%'}
         padding={4}
       >
         {isLoadingPairInfo ? (
-          <Flex w={"100%"} justify={"center"} align={"center"}>
+          <Flex w={'100%'} justify={'center'} align={'center'}>
             <Spinner size="lg" />
           </Flex>
         ) : (
           <>
-            <Stack gap={1} align={"center"} justify={"center"} flex={1}>
+            <Stack gap={1} align={'center'} justify={'center'} flex={1}>
               <Image
                 objectFit="cover"
-                height={{ sm: "150px", md: "200px" }}
+                height={{ sm: '150px', md: '200px' }}
                 src={
-                  "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/800px-Bitcoin.svg.png"
+                  'https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/800px-Bitcoin.svg.png'
                 }
                 alt="#"
               />
               <Text fontSize="3xl" fontWeight="bold">
-                <Badge fontSize="1em" w={"max-content"} colorScheme={"orange"}>
+                <Badge fontSize="1em" w={'max-content'} colorScheme={'orange'}>
                   {Number(pairInfo?.value) / 10 ** 5} $
                 </Badge>
               </Text>
@@ -113,7 +109,7 @@ export default function PairCard({
               p={1}
               pt={2}
             >
-              <Heading fontSize={"2xl"} fontFamily={"body"}>
+              <Heading fontSize={'2xl'} fontFamily={'body'}>
                 {pairInfo?.pair_name}
               </Heading>
               <Box
@@ -124,59 +120,53 @@ export default function PairCard({
                 m="10px auto"
                 p={3}
               >
-                <Flex gap={10} justify={"space-between"}>
-                  <Text fontWeight={600} color={"gray.500"} size="sm">
+                <Flex gap={10} justify={'space-between'}>
+                  <Text fontWeight={600} color={'gray.500'} size="sm">
                     Created time:
                   </Text>
-                  <Text fontWeight={600} color={"gray.500"} size="sm">
-                    {formatDate(
-                      new Date(
-                        parseInt(pairInfo!.create_time?.toString()) * 1000
-                      )
-                    )}
+                  <Text fontWeight={600} color={'gray.500'} size="sm">
+                    {formatDate(new Date(parseInt(pairInfo!.create_time?.toString()) * 1000))}
                   </Text>
                 </Flex>
-                <Flex gap={10} justify={"space-between"}>
-                  <Text fontWeight={600} color={"gray.500"} size="sm">
+                <Flex gap={10} justify={'space-between'}>
+                  <Text fontWeight={600} color={'gray.500'} size="sm">
                     Updated time:
                   </Text>
-                  <Text fontWeight={600} color={"gray.500"} size="sm">
-                    {formatDate(
-                      new Date(parseInt(pairInfo!.time?.toString()) * 1000)
-                    )}
+                  <Text fontWeight={600} color={'gray.500'} size="sm">
+                    {formatDate(new Date(parseInt(pairInfo!.time?.toString()) * 1000))}
                   </Text>
                 </Flex>
-                <Flex gap={10} justify={"space-between"}>
-                  <Text fontWeight={600} color={"gray.500"} size="sm">
+                <Flex gap={10} justify={'space-between'}>
+                  <Text fontWeight={600} color={'gray.500'} size="sm">
                     Epoch interval:
                   </Text>
-                  <Text fontWeight={600} color={"gray.500"} size="sm">
+                  <Text fontWeight={600} color={'gray.500'} size="sm">
                     {pairInfo!.epoch_interval} sec
                   </Text>
                 </Flex>
-                <Flex gap={10} justify={"space-between"}>
-                  <Text fontWeight={600} color={"gray.500"} size="sm">
+                <Flex gap={10} justify={'space-between'}>
+                  <Text fontWeight={600} color={'gray.500'} size="sm">
                     Last epoch:
                   </Text>
-                  <Text fontWeight={600} color={"gray.500"} size="sm">
+                  <Text fontWeight={600} color={'gray.500'} size="sm">
                     {pairInfo!.last_epoch}
                   </Text>
                 </Flex>
               </Box>
-              <Text fontSize={"sm"} color={"gray.500"}>
+              <Text fontSize={'sm'} color={'gray.500'}>
                 Relayer Address:
               </Text>
               <CopyButton
                 str={String(formatShortAddress(pairInfo!.relayer))}
                 value={pairInfo!.relayer}
-                size={"md"}
+                size={'md'}
               />
               <Stack
-                width={"70%"}
-                direction={"row"}
+                width={'70%'}
+                direction={'row'}
                 padding={2}
-                justifyContent={"space-between"}
-                alignItems={"center"}
+                justifyContent={'space-between'}
+                alignItems={'center'}
               >
                 {/* {pathname?.includes("home") && (
                   <Button
@@ -209,5 +199,5 @@ export default function PairCard({
         )}
       </Stack>
     </Center>
-  );
+  )
 }

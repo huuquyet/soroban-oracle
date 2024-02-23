@@ -1,14 +1,7 @@
-import { FC } from "react";
-import {
-  Alert,
-  AlertDescription,
-  AlertIcon,
-  AlertTitle,
-  Button,
-  Stack,
-} from "@chakra-ui/react";
+import { Alert, AlertDescription, AlertIcon, AlertTitle, Button, Stack } from '@chakra-ui/react'
+import { FC } from 'react'
 
-type ErrorPageProps = { error: any; resetErrorBoundary: any };
+type ErrorPageProps = { error: any; resetErrorBoundary: any }
 
 const ErrorPage: FC<ErrorPageProps> = ({ error, resetErrorBoundary }) => {
   return (
@@ -22,7 +15,7 @@ const ErrorPage: FC<ErrorPageProps> = ({ error, resetErrorBoundary }) => {
       </Alert>
       <Button onClick={resetErrorBoundary}>Try again</Button>
     </Stack>
-  );
-};
+  )
+}
 
-export default ErrorPage;
+export default ErrorPage

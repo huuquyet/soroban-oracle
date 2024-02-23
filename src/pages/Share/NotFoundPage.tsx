@@ -1,15 +1,8 @@
-import { useNavigate } from "react-router-dom";
-import {
-  Alert,
-  AlertDescription,
-  AlertIcon,
-  AlertTitle,
-  Button,
-  Stack,
-} from "@chakra-ui/react";
+import { Alert, AlertDescription, AlertIcon, AlertTitle, Button, Stack } from '@chakra-ui/react'
+import { useNavigate } from 'react-router-dom'
 
 export const NotFoundPage = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   return (
     <Stack mt={20}>
       <Alert status="info">
@@ -17,7 +10,7 @@ export const NotFoundPage = () => {
         <AlertTitle>404</AlertTitle>
         <AlertDescription>You have found a secret place.</AlertDescription>
       </Alert>
-      <Button onClick={() => navigate("/")}>Home</Button>
+      <Button onClick={() => navigate('/')}>Home</Button>
     </Stack>
-  );
-};
+  )
+}

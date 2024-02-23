@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { donation } from "@/shared/contracts";
+import { useAccount } from '@/hooks'
+import { donation } from '@/shared/contracts'
 import {
   Alert,
   AlertIcon,
@@ -11,9 +11,9 @@ import {
   Stack,
   useColorModeValue,
   useToast,
-} from "@chakra-ui/react";
-import { useAccount } from "@/hooks";
-import { EpochData, PairInfo } from "oracle-contract";
+} from '@chakra-ui/react'
+import { EpochData, PairInfo } from 'oracle-contract'
+import React, { useState } from 'react'
 
 function WithdrawForm({
   submitFormCallback,
@@ -22,105 +22,100 @@ function WithdrawForm({
   myBalance,
   contractBalance,
 }: {
-  recipient: any;
-  myBalance: any;
-  contractBalance: any;
-  submitFormCallback: any;
-  pairInfo: (PairInfo & EpochData) | null;
+  recipient: any
+  myBalance: any
+  contractBalance: any
+  submitFormCallback: any
+  pairInfo: (PairInfo & EpochData) | null
 }) {
-  const toast = useToast();
-  const account = useAccount();
-  const [isLoadingWithdraw, setIsLoadingWithdraw] = useState(false);
+  const toast = useToast()
+  const account = useAccount()
+  const [isLoadingWithdraw, setIsLoadingWithdraw] = useState(false)
 
   const onSubmitWithdraw4 = async (): Promise<void> => {
     if (account) {
       if (contractBalance > 0) {
-        setIsLoadingWithdraw(true);
+        setIsLoadingWithdraw(true)
         try {
           const txWithdraw = await donation.withdraw(
             {
               caller: account!.address,
             },
-            { fee: 100, }
-          );
+            { fee: 100 }
+          )
           await txWithdraw.signAndSend()
 
           toast({
-            title: "Withdraw Successfully!",
-            description: "",
-            position: "bottom-right",
-            status: "success",
+            title: 'Withdraw Successfully!',
+            description: '',
+            position: 'bottom-right',
+            status: 'success',
             duration: 3000,
             isClosable: true,
-            variant: "subtle",
-          });
+            variant: 'subtle',
+          })
 
           if (submitFormCallback) {
             setTimeout(() => {
-              submitFormCallback();
-            }, 1000);
+              submitFormCallback()
+            }, 1000)
           }
 
-          setIsLoadingWithdraw(false);
+          setIsLoadingWithdraw(false)
         } catch (e) {
-          console.log(e);
-          setIsLoadingWithdraw(false);
+          console.log(e)
+          setIsLoadingWithdraw(false)
           toast({
-            title: "Withdraw Error!",
-            description: "",
-            position: "bottom-right",
-            status: "error",
+            title: 'Withdraw Error!',
+            description: '',
+            position: 'bottom-right',
+            status: 'error',
             duration: 3000,
             isClosable: true,
-            variant: "subtle",
-          });
+            variant: 'subtle',
+          })
         }
       } else {
         toast({
-          title: "Contract balance is 0",
-          description: "",
-          position: "bottom-right",
-          status: "error",
+          title: 'Contract balance is 0',
+          description: '',
+          position: 'bottom-right',
+          status: 'error',
           duration: 3000,
           isClosable: true,
-          variant: "subtle",
-        });
+          variant: 'subtle',
+        })
       }
     } else {
       toast({
-        title: "Connect wallet!",
-        description: "",
-        position: "bottom-right",
-        status: "error",
+        title: 'Connect wallet!',
+        description: '',
+        position: 'bottom-right',
+        status: 'error',
         duration: 3000,
         isClosable: true,
-        variant: "subtle",
-      });
+        variant: 'subtle',
+      })
     }
-  };
+  }
 
-  if (
-    !recipient ||
-    !account ||
-    (!isLoadingWithdraw && account?.address !== recipient)
-  )
-    return <></>;
+  if (!recipient || !account || (!isLoadingWithdraw && account?.address !== recipient)) return <></>
 
   return (
     <Box
-      bg={useColorModeValue("white", "gray.800")}
-      boxShadow={"md"}
+      bg={useColorModeValue('white', 'gray.800')}
+      boxShadow={'md'}
       borderWidth="3px"
       rounded="lg"
       p={6}
     >
       <>
-        <Heading w="100%" textAlign={"center"} fontWeight="normal" mb="2%">
+        <Heading w="100%" textAlign={'center'} fontWeight="normal" mb="2%">
           Withdraw
         </Heading>
         <Stack>
           {account?.address === recipient ? (
-            <Flex gap={3} align={"flex-end"}>
+            <Flex gap={3} align={'flex-end'}>
               <Button
                 onClick={onSubmitWithdraw4}
                 isLoading={isLoadingWithdraw}
@@ -140,7 +135,7 @@ function WithdrawForm({
         </Stack>
       </>
     </Box>
-  );
+  )
 }
 
-export default WithdrawForm;
+export default WithdrawForm

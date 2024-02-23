@@ -1,4 +1,9 @@
-import React, { useEffect, useState } from "react";
+import DepositForm from '@/components/Forms/DepositForm.tsx'
+import WithdrawForm from '@/components/Forms/WithdrawForm.tsx'
+import { useAccount } from '@/hooks'
+import { donation } from '@/shared/contracts'
+import { oracle } from '@/shared/contracts'
+import { btc } from '@/shared/contracts'
 import {
   Box,
   Flex,
@@ -10,132 +15,134 @@ import {
   StatNumber,
   Text,
   useColorModeValue,
-} from "@chakra-ui/react";
-import { useAccount } from "@/hooks";
-import { donation } from "@/shared/contracts";
-import DepositForm from "@/components/Forms/DepositForm.tsx";
-import WithdrawForm from "@/components/Forms/WithdrawForm.tsx";
-import { oracle } from "@/shared/contracts";
-import { btc } from "@/shared/contracts";
-import { EpochData, PairInfo } from "oracle-contract";
-
+} from '@chakra-ui/react'
+import { EpochData, PairInfo } from 'oracle-contract'
+import React, { useEffect, useState } from 'react'
 
 const Donate = () => {
-  const account = useAccount();
+  const account = useAccount()
 
-  const [isLoadingDeposits, setIsLoadingDeposits] = useState(false);
-  const [deposits, setDeposits] = useState(0);
-  const [contractBalance, setContractBalance] = useState(0);
-  const [pairInfo, setPairInfo] = useState<(PairInfo & EpochData) | null>(null);
-  const [isLoadingPairInfo, setIsLoadingPairInfo] = useState<boolean>(false);
-  const [isLoadingRecipient, setIsLoadingRecipient] = useState(false);
-  const [recipient, setRecipient] = useState<any>(null);
-  const [myBalance, setMyBalance] = useState(0);
-  const [isLoadingMint, setIsLoadingMint] = useState(false);
-  const [isLoadingMyBalance, setIsLoadingMyBalance] = useState(false);
+  const [isLoadingDeposits, setIsLoadingDeposits] = useState(false)
+  const [deposits, setDeposits] = useState(0)
+  const [contractBalance, setContractBalance] = useState(0)
+  const [pairInfo, setPairInfo] = useState<(PairInfo & EpochData) | null>(null)
+  const [isLoadingPairInfo, setIsLoadingPairInfo] = useState<boolean>(false)
+  const [isLoadingRecipient, setIsLoadingRecipient] = useState(false)
+  const [recipient, setRecipient] = useState<any>(null)
+  const [myBalance, setMyBalance] = useState(0)
+  const [isLoadingMint, setIsLoadingMint] = useState(false)
+  const [isLoadingMyBalance, setIsLoadingMyBalance] = useState(false)
 
   const getPairInfo = async () => {
-    setIsLoadingPairInfo(true);
+    setIsLoadingPairInfo(true)
     try {
-      const txPairInfo = await oracle.getPairInfo().then(tx => tx.result);
-      await oracle.getPairDataAtEpoch({
-        epoch_nr: txPairInfo?.last_epoch,
-      }).then(tx => setPairInfo({ ...txPairInfo, ...tx.result }));
-      setIsLoadingPairInfo(false);
+      const txPairInfo = await oracle.getPairInfo().then((tx) => tx.result)
+      await oracle
+        .getPairDataAtEpoch({
+          epoch_nr: txPairInfo?.last_epoch,
+        })
+        .then((tx) => setPairInfo({ ...txPairInfo, ...tx.result }))
+      setIsLoadingPairInfo(false)
     } catch (e) {
-      console.log(e);
-      setIsLoadingPairInfo(false);
+      console.log(e)
+      setIsLoadingPairInfo(false)
     }
-  };
+  }
 
   const getTotalDeposits = async () => {
     try {
-      setIsLoadingDeposits(true);
-      await donation.getTotalDeposits().then(tx => setDeposits(parseFloat(tx.result.toString()) / 10 ** 10));
-      setIsLoadingDeposits(false);
+      setIsLoadingDeposits(true)
+      await donation
+        .getTotalDeposits()
+        .then((tx) => setDeposits(parseFloat(tx.result.toString()) / 10 ** 10))
+      setIsLoadingDeposits(false)
     } catch (e) {
-      console.log(e);
-      setIsLoadingDeposits(false);
+      console.log(e)
+      setIsLoadingDeposits(false)
     }
-  };
+  }
 
   const getContractBalance = async () => {
     try {
-      setIsLoadingDeposits(true);
-      await donation.getContractBalance().then( tx => setContractBalance(parseFloat(tx.result.toString()) / 10 ** 10));
-      setIsLoadingDeposits(false);
+      setIsLoadingDeposits(true)
+      await donation
+        .getContractBalance()
+        .then((tx) => setContractBalance(parseFloat(tx.result.toString()) / 10 ** 10))
+      setIsLoadingDeposits(false)
     } catch (e) {
-      console.log(e);
-      setIsLoadingDeposits(false);
+      console.log(e)
+      setIsLoadingDeposits(false)
     }
-  };
+  }
 
   const getRecipient = async () => {
     try {
-      setIsLoadingRecipient(true);
-      await donation.recipient().then(tx => setRecipient(tx.result));
-      setIsLoadingRecipient(false);
+      setIsLoadingRecipient(true)
+      await donation.recipient().then((tx) => setRecipient(tx.result))
+      setIsLoadingRecipient(false)
     } catch (e) {
-      console.log(e);
-      setIsLoadingRecipient(false);
+      console.log(e)
+      setIsLoadingRecipient(false)
     }
-  };
+  }
 
   const getMyBalance = async () => {
     try {
-      setIsLoadingMyBalance(true);
-      await btc.balance({
-        id: account!.address,
-      }).then(tx => setMyBalance(parseFloat(tx.result.toString()) / 10 ** 10));
-      setIsLoadingMyBalance(false);
+      setIsLoadingMyBalance(true)
+      await btc
+        .balance({
+          id: account!.address,
+        })
+        .then((tx) => setMyBalance(parseFloat(tx.result.toString()) / 10 ** 10))
+      setIsLoadingMyBalance(false)
     } catch (e) {
-      console.log(e);
-      setIsLoadingMyBalance(false);
+      console.log(e)
+      setIsLoadingMyBalance(false)
     }
-  };
+  }
 
   const getData = () => {
-    getTotalDeposits();
-    getContractBalance();
-  };
+    getTotalDeposits()
+    getContractBalance()
+  }
 
   useEffect(() => {
     if (donation) {
-      getData();
-      getRecipient();
+      getData()
+      getRecipient()
     }
-  }, [donation]);
+  }, [donation])
 
   useEffect(() => {
-    if (account) getMyBalance();
-  }, [account]);
+    if (account) getMyBalance()
+  }, [account])
 
   useEffect(() => {
     if (btc) {
-      getPairInfo();
+      getPairInfo()
     }
-  }, [btc]);
+  }, [btc])
 
   if (isLoadingPairInfo || isLoadingMyBalance)
     return (
-      <Flex justify={"center"} align={"center"}>
+      <Flex justify={'center'} align={'center'}>
         <Spinner size="lg" />
       </Flex>
-    );
+    )
 
   return (
     <Stack>
       {isLoadingDeposits || isLoadingPairInfo ? (
-        <Flex justify={"center"} align={"center"}>
+        <Flex justify={'center'} align={'center'}>
           <Spinner size="lg" />
         </Flex>
       ) : (
-        <Flex direction={{ base: "column", sm: "row" }} w={"100%"} gap={3}>
+        <Flex direction={{ base: 'column', sm: 'row' }} w={'100%'} gap={3}>
           <Box
-            bg={useColorModeValue("white", "gray.800")}
-            boxShadow={"md"}
+            bg={useColorModeValue('white', 'gray.800')}
+            boxShadow={'md'}
             borderWidth="3px"
-            w={{ base: "100%", sm: "50%" }}
+            w={{ base: '100%', sm: '50%' }}
             rounded="lg"
             p={3}
           >
@@ -144,18 +151,16 @@ const Donate = () => {
               <StatNumber>
                 <Text>{deposits} BTC</Text>
               </StatNumber>
-              <StatHelpText>
-                {deposits * (Number(pairInfo?.value) / 10 ** 5)} $
-              </StatHelpText>
+              <StatHelpText>{deposits * (Number(pairInfo?.value) / 10 ** 5)} $</StatHelpText>
             </Stat>
           </Box>
           {pairInfo && (
             <Box
-              bg={useColorModeValue("white", "gray.800")}
-              boxShadow={"md"}
+              bg={useColorModeValue('white', 'gray.800')}
+              boxShadow={'md'}
               borderWidth="3px"
               rounded="lg"
-              w={{ base: "100%", sm: "50%" }}
+              w={{ base: '100%', sm: '50%' }}
               p={3}
             >
               <Stat>
@@ -187,7 +192,7 @@ const Donate = () => {
         />
       </>
     </Stack>
-  );
-};
+  )
+}
 
-export default Donate;
+export default Donate

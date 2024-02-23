@@ -11,7 +11,7 @@
     "clean": "cargo clean && yarn cache clean && git clean -xdf",
     "dev": "vite --host --port 4000",
     "doctor": "yarn dlx @yarnpkg/doctor",
-    "lint": "yarn dlx @biomejs/biome check --apply .",
+    "lint": "yarn dlx @biomejs/biome@1.4.1 check --apply .",
     "preview": "vite preview",
     "reset": "yarn clean && npm run setup",
     "setup": "./initialize.sh ${NETWORK:-futurenet} && yarn install",
