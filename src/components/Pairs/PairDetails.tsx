@@ -19,7 +19,7 @@ const PairDetails = ({ contract }: { contract: typeof oracle }) => {
     try {
       const txPairInfo = await contract.getPairInfo().then(tx => tx.result);
       await contract.getPairDataAtEpoch({
-        epoch_nr: txPairInfo.last_epoch,
+        epoch_nr: txPairInfo?.last_epoch,
       }).then(tx => setPairInfo({ ...txPairInfo, ...tx.result }));
       setIsLoadingPairInfo(false);
     } catch (e) {
