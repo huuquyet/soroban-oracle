@@ -20,7 +20,7 @@ pub struct PairInfo {
 pub struct EpochData {
     pub id: u32,
     pub time: u64,
-    pub value: u32,
+    pub value: u64,
 }
 
 #[derive(Clone)]
@@ -149,7 +149,7 @@ impl OracleContract {
         pair_info
     }
 
-    pub fn set_epoch_data(e: Env, caller: Address, value: u32) -> EpochData {
+    pub fn set_epoch_data(e: Env, caller: Address, value: u64) -> EpochData {
         caller.require_auth();
         assert_eq!(
             caller,

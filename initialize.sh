@@ -24,6 +24,11 @@ else
   cargo install_soroban
 fi
 
+if ! command -v jq &> /dev/null; then
+  echo "Install jq to get price"
+  sudo apt install jq bc -y
+fi
+
 if [[ "$SOROBAN_RPC_HOST" == "" ]]; then
   if [[ "$NETWORK" == "futurenet" ]]; then
     SOROBAN_RPC_HOST="https://rpc-futurenet.stellar.org"
@@ -159,6 +164,18 @@ soroban contract invoke \
   --pair_name BTC_USDT \
   --epoch_interval 600 \
   --relayer token-admin
+
+# Call set_epoch_data to set price for BTC_USDT
+echo "Initialize BTC_USDT price"
+PRICE_STRING="$(curl -s https://blockchain.info/ticker | jq -r '.USD.last')"
+BTC_PRICE=$( echo "$PRICE_STRING * 10 ^ 5 / 1" | bc )
+soroban contract invoke \
+  $ARGS \
+  --id "$ORACLE_ID" \
+  -- \
+  set_epoch_data \
+  --caller token-admin \
+  --value $BTC_PRICE
 
 echo "Generate bindings contracts"
 soroban contract bindings typescript --network $NETWORK --id $BTC_TOKEN_ID --wasm $TOKEN_PATH".optimized.wasm" --output-dir ./.soroban/contracts/token --overwrite
