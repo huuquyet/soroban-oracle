@@ -1,4 +1,4 @@
-import { AppProvider } from '@/context/appContext.tsx'
+import MySorobanReactProvider from '@/soroban/provider'
 import { ChakraProvider } from '@chakra-ui/react'
 import { ThirdwebProvider } from '@thirdweb-dev/react'
 import { ErrorBoundary } from 'react-error-boundary'
@@ -12,9 +12,9 @@ const AppProviders = () => {
       <ThirdwebProvider clientId={import.meta.env.VITE_THIRDWEB_CLIENT_ID}>
         <ChakraProvider>
           <ErrorBoundary FallbackComponent={ErrorPage}>
-            <AppProvider>
+            <MySorobanReactProvider>
               <AppRoutes />
-            </AppProvider>
+            </MySorobanReactProvider>
           </ErrorBoundary>
         </ChakraProvider>
       </ThirdwebProvider>

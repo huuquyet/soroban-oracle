@@ -25,6 +25,7 @@ import {
   useColorModeValue,
   useDisclosure,
 } from '@chakra-ui/react'
+import { SorobanContextType } from '@soroban-react/core'
 import { Link, Outlet } from 'react-router-dom'
 
 const ButtonToggleTheme = () => {
@@ -48,7 +49,7 @@ const ButtonToggleTheme = () => {
   )
 }
 
-export default function Layout() {
+export default function Layout({ sorobanContext }: { sorobanContext: SorobanContextType }) {
   const { isOpen, onToggle } = useDisclosure()
 
   return (
@@ -88,7 +89,7 @@ export default function Layout() {
             </Flex>
 
             <Flex align={'center'} direction={'row'} gap={4}>
-              <Wallet />
+              <Wallet sorobanContext={sorobanContext} />
               <ButtonToggleTheme />
             </Flex>
           </Flex>

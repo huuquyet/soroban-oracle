@@ -10,7 +10,7 @@ import {
 } from '@stellar/stellar-sdk'
 import cron from 'node-cron'
 
-const API_NINJA_KEY = "YOUR_API_KEY"
+const API_NINJA_KEY = 'YOUR_API_KEY'
 
 const sourceSecretKey = 'SBYZZJLHOAZI2KMZX6V7CNWHIS7ZYBVYD6IYWQIMJNNICT54LFAKJTZF'
 const sourceKeypair = Keypair.fromSecret(sourceSecretKey)
@@ -100,7 +100,7 @@ const getPairPrice = async (pairName: any) => {
     //     'X-Api-Key': API_NINJA_KEY,
     //   },
     // })
-    const response = await fetch('https://blockchain.info/ticker').then(res => res.json())
+    const response = await fetch('https://blockchain.info/ticker').then((res) => res.json())
     const result = response.USD.last
     return parseInt(String(parseFloat(result) * 10 ** 5))
   } catch (e) {

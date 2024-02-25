@@ -60,7 +60,7 @@ testnet)
   FRIENDBOT_URL="https://friendbot.stellar.org/"
   ;;
 *)
-  echo "Usage: $0 standalone|futurenet!testnet [rpc-host]"
+  echo "Usage: $0 standalone|futurenet|testnet [rpc-host]"
   exit 1
   ;;
 esac

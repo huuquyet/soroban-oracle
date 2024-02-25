@@ -1,6 +1,5 @@
 import DepositForm from '@/components/Forms/DepositForm.tsx'
 import WithdrawForm from '@/components/Forms/WithdrawForm.tsx'
-import { useAccount } from '@/hooks'
 import { donation } from '@/shared/contracts'
 import { oracle } from '@/shared/contracts'
 import { btc } from '@/shared/contracts'
@@ -16,11 +15,12 @@ import {
   Text,
   useColorModeValue,
 } from '@chakra-ui/react'
+import { SorobanContextType } from '@soroban-react/core'
 import { EpochData, PairInfo } from 'oracle-contract'
 import React, { useEffect, useState } from 'react'
 
-const Donate = () => {
-  const account = useAccount()
+function Donate({ sorobanContext }: { sorobanContext: SorobanContextType }) {
+  const account = sorobanContext.address ? sorobanContext.address : ''
 
   const [isLoadingDeposits, setIsLoadingDeposits] = useState(false)
   const [deposits, setDeposits] = useState(0)
@@ -91,7 +91,7 @@ const Donate = () => {
       setIsLoadingMyBalance(true)
       await btc
         .balance({
-          id: account!.address,
+          id: account,
         })
         .then((tx) => setMyBalance(parseFloat(tx.result.toString()) / 10 ** 10))
       setIsLoadingMyBalance(false)
@@ -178,12 +178,14 @@ const Donate = () => {
       )}
       <>
         <DepositForm
+          sorobanContext={sorobanContext}
           myBalance={myBalance}
           recipient={recipient}
           pairInfo={pairInfo}
           submitFormCallback={getData}
         />
         <WithdrawForm
+          sorobanContext={sorobanContext}
           contractBalance={contractBalance}
           myBalance={myBalance}
           recipient={recipient}

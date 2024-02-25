@@ -1,4 +1,3 @@
-import { useAccount } from '@/hooks'
 import { oracle } from '@/shared/contracts'
 import {
   Box,
@@ -18,15 +17,19 @@ import {
   useColorModeValue,
   useToast,
 } from '@chakra-ui/react'
+import { SorobanContextType } from '@soroban-react/core'
 import { PairInfo } from 'oracle-contract'
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 type FormTypes = { relayer: string; time: string }
 
-const OracleAddress = ({ pairInfo }: { pairInfo: PairInfo | null }) => {
+function OracleAddress({
+  sorobanContext,
+  pairInfo,
+}: { sorobanContext: SorobanContextType; pairInfo: PairInfo | null }) {
   const toast = useToast()
-  const account = useAccount()
+  const account = sorobanContext.address ? sorobanContext.address : ''
 
   const [isLoadingSetRelayer, setIsLoadingSetRelayer] = useState(false)
 
@@ -53,7 +56,7 @@ const OracleAddress = ({ pairInfo }: { pairInfo: PairInfo | null }) => {
       try {
         const txPairEpochInterval = await oracle.updateRelayerAddress(
           {
-            caller: account!.address,
+            caller: account,
             new_relayer_address: formData?.relayer,
           },
           { fee: 1000 }
@@ -130,9 +133,12 @@ const OracleAddress = ({ pairInfo }: { pairInfo: PairInfo | null }) => {
   )
 }
 
-const OracleEpochInterval = ({ pairInfo }: { pairInfo: PairInfo | null }) => {
+function OracleEpochInterval({
+  sorobanContext,
+  pairInfo,
+}: { sorobanContext: SorobanContextType; pairInfo: PairInfo | null }) {
   const toast = useToast()
-  const account = useAccount()
+  const account = sorobanContext.address ? sorobanContext.address : ''
 
   const [isLoadingSetEpochData, setIsLoadingSetEpochData] = useState(false)
 
@@ -158,7 +164,7 @@ const OracleEpochInterval = ({ pairInfo }: { pairInfo: PairInfo | null }) => {
     try {
       const txPairEpochInterval = await oracle.updatePairEpochInterval(
         {
-          caller: account!.address,
+          caller: account,
           epoch_interval: Number(formData!.time),
         },
         { fee: 1000 }
@@ -234,7 +240,10 @@ const OracleEpochInterval = ({ pairInfo }: { pairInfo: PairInfo | null }) => {
   )
 }
 
-const OracleForm = ({ pairInfo }: { pairInfo: PairInfo | null }) => {
+function OracleForm({
+  sorobanContext,
+  pairInfo,
+}: { sorobanContext: SorobanContextType; pairInfo: PairInfo | null }) {
   return (
     <Box
       bg={useColorModeValue('white', 'gray.800')}
@@ -257,7 +266,7 @@ const OracleForm = ({ pairInfo }: { pairInfo: PairInfo | null }) => {
             w={'100%'}
             m="10px auto"
           >
-            <OracleAddress pairInfo={pairInfo} />
+            <OracleAddress sorobanContext={sorobanContext} pairInfo={pairInfo} />
           </Box>
           <Box
             bg={useColorModeValue('white', 'gray.800')}
@@ -267,7 +276,7 @@ const OracleForm = ({ pairInfo }: { pairInfo: PairInfo | null }) => {
             w={'100%'}
             m="10px auto"
           >
-            <OracleEpochInterval pairInfo={pairInfo} />
+            <OracleEpochInterval sorobanContext={sorobanContext} pairInfo={pairInfo} />
           </Box>
         </Stack>
       </>

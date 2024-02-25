@@ -1,4 +1,3 @@
-import { useAccount } from '@/hooks'
 import { btc } from '@/shared/contracts'
 import {
   Badge,
@@ -20,12 +19,13 @@ import {
   useColorModeValue,
   useToast,
 } from '@chakra-ui/react'
+import { SorobanContextType } from '@soroban-react/core'
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-function Mint() {
+function Mint({ sorobanContext }: { sorobanContext: SorobanContextType }) {
   const toast = useToast()
-  const account = useAccount()
+  const account = sorobanContext.address ? sorobanContext.address : ''
 
   const [myBalance, setMyBalance] = useState(0)
   const [isLoadingMint, setIsLoadingMint] = useState(false)
@@ -49,7 +49,7 @@ function Mint() {
       setIsLoadingMyBalance(true)
       await btc
         .balance({
-          id: account!.address,
+          id: account,
         })
         .then((tx) => setMyBalance(parseFloat(tx.result.toString()) / 10 ** 10))
       setIsLoadingMyBalance(false)
@@ -66,7 +66,7 @@ function Mint() {
         const txMint = await btc.mint(
           {
             amount: BigInt(parseFloat(formData!.amount) * 10 ** 10),
-            to: account!.address,
+            to: account,
           },
           { fee: 100 }
         )

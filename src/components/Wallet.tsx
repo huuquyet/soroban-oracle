@@ -1,100 +1,17 @@
 import CopyButton from '@/components/CopyButton.tsx'
-import { useAppContext } from '@/context/appContext'
 import { formatShortAddress } from '@/utils/utils.tsx'
 import { Button, useToast } from '@chakra-ui/react'
+import { SorobanContextType } from '@soroban-react/core'
 import { IconLoader, IconLogout, IconWallet } from '@tabler/icons-react'
 import { useEffect, useState } from 'react'
-import { ISupportedWallet, StellarWalletsKit, WalletNetwork, WalletType } from 'stellar-wallets-kit'
 
-// Soroban is only supported on Futurenet right now
-const FUTURENET_DETAILS = {
-  network: 'FUTURENET',
-  networkUrl: 'https://horizon-futurenet.stellar.org',
-  networkPassphrase: 'Test SDF Future Network ; October 2022',
-}
-
-const ERRORS = {
-  WALLET_CONNECTION_REJECTED: 'Wallet connection rejected',
-}
-
-const STORAGE_WALLET_KEY = 'wallet'
-
-const allowedWallets = [
-  WalletType.FREIGHTER,
-  // WalletType.ALBEDO,
-  // WalletType.XBULL,
-]
-
-export const Wallet = () => {
-  const toast = useToast()
-  const { walletAddress, setWalletAddress } = useAppContext()
-
-  // Update is not only Futurenet is available
-  const [selectedNetwork] = useState(FUTURENET_DETAILS)
-  // Setup swc, user will set the desired wallet on connect
-  const [SWKKit] = useState(
-    new StellarWalletsKit({
-      network: selectedNetwork.networkPassphrase as WalletNetwork,
-      selectedWallet: WalletType.FREIGHTER,
-    })
-  )
+export function Wallet({ sorobanContext }: { sorobanContext: SorobanContextType }) {
+  const { connect, activeChain } = sorobanContext
+  const openConnectModal = async (): Promise<void> => {
+    await connect()
+  }
 
   const [isLoading, setIsLoading] = useState(false)
-
-  // Whenever the selected network changes, set the network on swc
-  useEffect(() => {
-    SWKKit.setNetwork(selectedNetwork.networkPassphrase as WalletNetwork)
-  }, [selectedNetwork.networkPassphrase, SWKKit])
-
-  const getWalletAddress = async (type: WalletType) => {
-    try {
-      setIsLoading(true)
-      // Set selected wallet, network, and public key
-      SWKKit.setWallet(type)
-      const publicKey = await SWKKit.getPublicKey()
-      SWKKit.setNetwork(WalletNetwork.FUTURENET)
-
-      // Short timeout to prevent blick on loading address
-      setTimeout(() => {
-        setWalletAddress(publicKey)
-        localStorage.setItem(STORAGE_WALLET_KEY, type)
-        setIsLoading(false)
-      }, 500)
-    } catch (error) {
-      localStorage.removeItem(STORAGE_WALLET_KEY)
-      setIsLoading(false)
-      toast({
-        title: ERRORS.WALLET_CONNECTION_REJECTED,
-        description: '',
-        position: 'bottom-right',
-        status: 'error',
-        duration: 3000,
-        isClosable: true,
-        variant: 'subtle',
-      })
-    }
-  }
-
-  useEffect(() => {
-    const storedWallet = localStorage.getItem(STORAGE_WALLET_KEY)
-    if (storedWallet && Object.values(WalletType).includes(storedWallet as WalletType)) {
-      ;(async () => {
-        await getWalletAddress(storedWallet as WalletType)
-      })()
-    }
-  }, [])
-
-  const onClick = async () => {
-    if (!walletAddress) {
-      // See https://github.com/Creit-Tech/Stellar-Wallets-Kit/tree/main for more options
-      await SWKKit.openModal({
-        allowedWallets,
-        onWalletSelected: async (option: ISupportedWallet) => {
-          await getWalletAddress(option.type)
-        },
-      })
-    }
-  }
 
   if (isLoading) {
     return (
@@ -110,45 +27,23 @@ export const Wallet = () => {
     )
   }
 
-  if (walletAddress) {
-    const onDisconnect = () => {
-      setWalletAddress('')
-      localStorage.removeItem(STORAGE_WALLET_KEY)
-    }
-
-    return (
-      <>
-        <CopyButton
-          str={String(formatShortAddress(walletAddress))}
-          value={walletAddress}
-          size={'xs'}
-        />
+  return (
+    <>
+      {activeChain ? (
+        <div>{activeChain.name}</div>
+      ) : (
         <Button
           fontSize={'sm'}
           fontWeight={600}
           color={'white'}
-          bg={'gray.400'}
-          rightIcon={<IconLogout />}
-          onClick={onDisconnect}
-          _hover={{ bg: 'gray.300' }}
+          bg={'pink.400'}
+          rightIcon={<IconWallet />}
+          onClick={openConnectModal}
+          _hover={{ bg: 'pink.300' }}
         >
-          Disconnect
+          Connect
         </Button>
-      </>
-    )
-  }
-
-  return (
-    <Button
-      fontSize={'sm'}
-      fontWeight={600}
-      color={'white'}
-      bg={'pink.400'}
-      rightIcon={<IconWallet />}
-      onClick={onClick}
-      _hover={{ bg: 'pink.300' }}
-    >
-      Connect
-    </Button>
+      )}
+    </>
   )
 }

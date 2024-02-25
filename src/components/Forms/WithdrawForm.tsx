@@ -1,4 +1,3 @@
-import { useAccount } from '@/hooks'
 import { donation } from '@/shared/contracts'
 import {
   Alert,
@@ -12,16 +11,19 @@ import {
   useColorModeValue,
   useToast,
 } from '@chakra-ui/react'
+import { SorobanContextType } from '@soroban-react/core'
 import { EpochData, PairInfo } from 'oracle-contract'
 import React, { useState } from 'react'
 
 function WithdrawForm({
+  sorobanContext,
   submitFormCallback,
   pairInfo,
   recipient,
   myBalance,
   contractBalance,
 }: {
+  sorobanContext: SorobanContextType
   recipient: any
   myBalance: any
   contractBalance: any
@@ -29,7 +31,7 @@ function WithdrawForm({
   pairInfo: (PairInfo & EpochData) | null
 }) {
   const toast = useToast()
-  const account = useAccount()
+  const account = sorobanContext.address ? sorobanContext.address : ''
   const [isLoadingWithdraw, setIsLoadingWithdraw] = useState(false)
 
   const onSubmitWithdraw4 = async (): Promise<void> => {
@@ -39,7 +41,7 @@ function WithdrawForm({
         try {
           const txWithdraw = await donation.withdraw(
             {
-              caller: account!.address,
+              caller: account,
             },
             { fee: 100 }
           )
@@ -99,7 +101,7 @@ function WithdrawForm({
     }
   }
 
-  if (!recipient || !account || (!isLoadingWithdraw && account?.address !== recipient)) return <></>
+  if (!recipient || !account || (!isLoadingWithdraw && account !== recipient)) return <></>
 
   return (
     <Box
@@ -114,7 +116,7 @@ function WithdrawForm({
           Withdraw
         </Heading>
         <Stack>
-          {account?.address === recipient ? (
+          {account === recipient ? (
             <Flex gap={3} align={'flex-end'}>
               <Button
                 onClick={onSubmitWithdraw4}

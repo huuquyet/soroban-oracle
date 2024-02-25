@@ -1,13 +1,16 @@
 import OracleForm from '@/components/OracleForm.tsx'
-import { useAccount } from '@/hooks'
 import { oracle } from '@/shared/contracts.ts'
 import { Stack } from '@chakra-ui/react'
+import { SorobanContextType } from '@soroban-react/core'
 import { EpochData, PairInfo } from 'oracle-contract'
 import { useEffect, useState } from 'react'
 import PairCard, { ItemCardContainer } from './PairCard.tsx'
 
-const PairDetails = ({ contract }: { contract: typeof oracle }) => {
-  const account = useAccount()
+function PairDetails({
+  sorobanContext,
+  contract,
+}: { sorobanContext: SorobanContextType; contract: typeof oracle }) {
+  const account = sorobanContext.address ? sorobanContext.address : ''
   const [pairInfo, setPairInfo] = useState<(PairInfo & EpochData) | null>(null)
   const [isLoadingContractOwner, setIsLoadingContractOwner] = useState<boolean>(false)
   const [isContractOwner, setIsContractOwner] = useState(false)
@@ -40,7 +43,7 @@ const PairDetails = ({ contract }: { contract: typeof oracle }) => {
     setIsLoadingContractOwner(true)
     try {
       const txContractOwner = await contract.getContractOwner().then((tx) => tx.result)
-      if (txContractOwner === account?.address) {
+      if (txContractOwner === account) {
         setIsContractOwner(true)
       }
       setIsLoadingContractOwner(false)
@@ -62,7 +65,7 @@ const PairDetails = ({ contract }: { contract: typeof oracle }) => {
         callback={setPairInfo}
         contract={contract}
       />
-      {isContractOwner && <OracleForm pairInfo={pairInfo} />}
+      {isContractOwner && <OracleForm sorobanContext={sorobanContext} pairInfo={pairInfo} />}
     </Stack>
   )
 }

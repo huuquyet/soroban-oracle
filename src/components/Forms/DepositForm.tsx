@@ -1,4 +1,3 @@
-import { useAccount } from '@/hooks'
 import { donation } from '@/shared/contracts'
 import {
   Alert,
@@ -26,23 +25,26 @@ import {
   useColorModeValue,
   useToast,
 } from '@chakra-ui/react'
+import { SorobanContextType } from '@soroban-react/core'
 import { EpochData, PairInfo } from 'oracle-contract'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-const DepositForm = ({
+function DepositForm({
+  sorobanContext,
   submitFormCallback,
   pairInfo,
   recipient,
   myBalance,
 }: {
+  sorobanContext: SorobanContextType
   submitFormCallback: any
   recipient: any
   myBalance: any
   pairInfo: (PairInfo & EpochData) | null
-}) => {
+}) {
   const toast = useToast()
-  const account = useAccount()
+  const account = sorobanContext.address ? sorobanContext.address : ''
   const [isLoadingDeposit, setIsLoadingDeposit] = useState(false)
   const [calculateValue, setCalculateValue] = useState(0)
   const [isCalculating, setIsCalculating] = useState(false)
@@ -71,7 +73,7 @@ const DepositForm = ({
           const txDeposit = await donation.deposit(
             {
               amount: BigInt(Number(calculateValue) * 10 ** 10),
-              user: account!.address,
+              user: account,
             },
             { fee: 100 }
           )
@@ -158,7 +160,7 @@ const DepositForm = ({
           Donate
         </Heading>
         <Stack>
-          {account?.address !== recipient ? (
+          {account !== recipient ? (
             <form onSubmit={handleSubmit(onSubmitDeposit)}>
               <Flex gap={3} align={'flex-start'}>
                 <FormControl isInvalid={!!errors.amount} id="bio" mt={1}>
