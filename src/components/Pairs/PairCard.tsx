@@ -1,6 +1,6 @@
-import CopyButton from '@/components/CopyButton.tsx'
+import CopyButton from '@/components/CopyButton'
 import { oracle } from '@/shared/contracts'
-import { formatDate, formatShortAddress } from '@/utils/utils.tsx'
+import { formatDate, formatShortAddress } from '@/utils/utils'
 import {
   Badge,
   Box,

@@ -20,7 +20,7 @@ import {
   useToast,
 } from '@chakra-ui/react'
 import { SorobanContextType } from '@soroban-react/core'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 function Mint({ sorobanContext }: { sorobanContext: SorobanContextType }) {

@@ -19,7 +19,7 @@ import {
 } from '@chakra-ui/react'
 import { SorobanContextType } from '@soroban-react/core'
 import { PairInfo } from 'oracle-contract'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 type FormTypes = { relayer: string; time: string }

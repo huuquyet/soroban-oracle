@@ -1,12 +1,12 @@
-import Donate from '@/components/Forms/Donate.tsx'
-import Mint from '@/components/Forms/Mint.tsx'
-import { NotFoundPage } from '@/pages/Share/NotFoundPage.tsx'
-import { oracle } from '@/shared/contracts.ts'
+import Donate from '@/components/Forms/Donate'
+import Mint from '@/components/Forms/Mint'
+import { NotFoundPage } from '@/pages/Share/NotFoundPage'
+import { oracle } from '@/shared/contracts'
 import { useSorobanReact } from '@soroban-react/core'
 import { Route, Routes } from 'react-router-dom'
-import Layout from './Layout.tsx'
-import PairDetails from './Pairs/PairDetails.tsx'
-import { PairsList } from './Pairs/PairsList.tsx'
+import Layout from './Layout'
+import PairDetails from './Pairs/PairDetails'
+import { PairsList } from './Pairs/PairsList'
 
 const AppRoutes = () => {
   const sorobanContext = useSorobanReact()

@@ -13,7 +13,7 @@ import {
 } from '@chakra-ui/react'
 import { SorobanContextType } from '@soroban-react/core'
 import { EpochData, PairInfo } from 'oracle-contract'
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 function WithdrawForm({
   sorobanContext,

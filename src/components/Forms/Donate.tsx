@@ -1,5 +1,5 @@
-import DepositForm from '@/components/Forms/DepositForm.tsx'
-import WithdrawForm from '@/components/Forms/WithdrawForm.tsx'
+import DepositForm from '@/components/Forms/DepositForm'
+import WithdrawForm from '@/components/Forms/WithdrawForm'
 import { donation } from '@/shared/contracts'
 import { oracle } from '@/shared/contracts'
 import { btc } from '@/shared/contracts'
@@ -17,7 +17,7 @@ import {
 } from '@chakra-ui/react'
 import { SorobanContextType } from '@soroban-react/core'
 import { EpochData, PairInfo } from 'oracle-contract'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 function Donate({ sorobanContext }: { sorobanContext: SorobanContextType }) {
   const account = sorobanContext.address ? sorobanContext.address : ''

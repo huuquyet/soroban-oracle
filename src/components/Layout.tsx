@@ -1,4 +1,4 @@
-import { Wallet } from '@/components/Wallet.tsx'
+import { Wallet } from '@/components/Wallet'
 import {
   ChevronDownIcon,
   ChevronRightIcon,

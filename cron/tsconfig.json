@@ -12,7 +12,7 @@
       "rootDir": ".",
       "lib": ["ESNext", "DOM", "DOM.Iterable"],
     },
-    "include": ["*.ts"],
+    "include": ["/**/*.ts", "/**/*.tsx"],
     "exclude": ["node_modules"],
     "ts-node": {
       "esm": true,

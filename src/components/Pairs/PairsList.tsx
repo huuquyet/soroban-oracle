@@ -1,4 +1,4 @@
-import { ItemCardContainer } from '@/components/Pairs/PairCard.tsx'
+import { ItemCardContainer } from '@/components/Pairs/PairCard'
 import { oracle } from '@/shared/contracts'
 import { Stack } from '@chakra-ui/react'
 

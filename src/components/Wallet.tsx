@@ -1,5 +1,5 @@
-import CopyButton from '@/components/CopyButton.tsx'
-import { formatShortAddress } from '@/utils/utils.tsx'
+import CopyButton from '@/components/CopyButton'
+import { formatShortAddress } from '@/utils/utils'
 import { Button, useToast } from '@chakra-ui/react'
 import { SorobanContextType } from '@soroban-react/core'
 import { IconLoader, IconLogout, IconWallet } from '@tabler/icons-react'

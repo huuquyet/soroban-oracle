@@ -3,8 +3,8 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { ThirdwebProvider } from '@thirdweb-dev/react'
 import { ErrorBoundary } from 'react-error-boundary'
 import { BrowserRouter } from 'react-router-dom'
-import ErrorPage from '../pages/Share/ErrorPage.tsx'
-import AppRoutes from './AppRoutes.tsx'
+import ErrorPage from '../pages/Share/ErrorPage'
+import AppRoutes from './AppRoutes'
 
 const AppProviders = () => {
   return (

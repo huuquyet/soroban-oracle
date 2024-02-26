@@ -1,10 +1,10 @@
-import OracleForm from '@/components/OracleForm.tsx'
-import { oracle } from '@/shared/contracts.ts'
+import OracleForm from '@/components/OracleForm'
+import { oracle } from '@/shared/contracts'
 import { Stack } from '@chakra-ui/react'
 import { SorobanContextType } from '@soroban-react/core'
 import { EpochData, PairInfo } from 'oracle-contract'
 import { useEffect, useState } from 'react'
-import PairCard, { ItemCardContainer } from './PairCard.tsx'
+import PairCard, { ItemCardContainer } from './PairCard'
 
 function PairDetails({
   sorobanContext,
