@@ -39,7 +39,7 @@ const getTimestamp = async () => {
     if (!SorobanRpc.Api.isSimulationSuccess(resultSimulation)) {
       throw new Error(`[ERROR] [getTimestamp]: ${JSON.stringify(resultSimulation)}`)
     }
-    return scValToNative(resultSimulation.result!.retval)
+    return scValToNative(resultSimulation.result?.retval)
   } catch (e) {
     console.error(e)
     throw new Error('[getTimestamp] ERROR')
@@ -61,17 +61,17 @@ const getPairInfo = async () => {
     if (!SorobanRpc.Api.isSimulationSuccess(resultSimulation)) {
       throw new Error(`[ERROR] [getPairInfo]: ${JSON.stringify(resultSimulation)}`)
     }
-    return scValToNative(resultSimulation.result!.retval)
+    return scValToNative(resultSimulation.result?.retval)
   } catch (e) {
     console.error(e)
     throw new Error('[getPairInfo] ERROR')
   }
 }
 
-const getEpochData = async (epochNr: any) => {
+const getEpochData = async (epoch: any) => {
   const account = await server.getAccount(sourcePublicKey)
   try {
-    epochNr = nativeToScVal(epochNr, { type: 'u32' })
+    const epochNr = nativeToScVal(epoch, { type: 'u32' })
 
     const transaction = new TransactionBuilder(account, {
       fee,
@@ -86,7 +86,7 @@ const getEpochData = async (epochNr: any) => {
       throw new Error(`[ERROR] [const getEpochData = async (epochNr) => {
         ]: ${JSON.stringify(resultSimulation)}`)
     }
-    return scValToNative(resultSimulation.result!.retval)
+    return scValToNative(resultSimulation.result?.retval)
   } catch (e) {
     console.error(e)
     throw new Error('[getEpochData] ERROR')
@@ -139,7 +139,7 @@ const updatePairPrice = async (price: any) => {
       throw new Error('[updatePairPrice] ERROR STATUS')
     }
 
-    while (response.status != 'PENDING') {
+    while (response.status !== 'PENDING') {
       const response = await server.getTransaction(hash)
       console.log('[updatePairPrice] response.status: ', response.status)
       await new Promise((resolve) => setTimeout(resolve, 60))

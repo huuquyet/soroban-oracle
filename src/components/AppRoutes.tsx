@@ -9,7 +9,7 @@ import PairDetails from './Pairs/PairDetails'
 import { PairsList } from './Pairs/PairsList'
 
 const AppRoutes = () => {
-  const sorobanContext = useSorobanReact()
+const sorobanContext = useSorobanReact()
 
   const routes = [
     { element: <PairsList />, path: '/' },

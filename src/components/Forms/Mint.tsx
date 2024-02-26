@@ -25,7 +25,7 @@ import { useForm } from 'react-hook-form'
 
 function Mint({ sorobanContext }: { sorobanContext: SorobanContextType }) {
   const toast = useToast()
-  const account = sorobanContext.address ? sorobanContext.address : ''
+    const account = sorobanContext.address ? sorobanContext.address : ''
 
   const [myBalance, setMyBalance] = useState(0)
   const [isLoadingMint, setIsLoadingMint] = useState(false)
@@ -65,7 +65,7 @@ function Mint({ sorobanContext }: { sorobanContext: SorobanContextType }) {
       try {
         const txMint = await btc.mint(
           {
-            amount: BigInt(parseFloat(formData!.amount) * 10 ** 10),
+            amount: BigInt(parseFloat(formData?.amount) * 10 ** 10),
             to: account,
           },
           { fee: 100 }
@@ -141,7 +141,7 @@ function Mint({ sorobanContext }: { sorobanContext: SorobanContextType }) {
                     fontWeight="md"
                     color="gray.700"
                     _dark={{ color: 'gray.50' }}
-                  ></FormLabel>
+                  />
 
                   <NumberInput>
                     <NumberInputField
@@ -163,7 +163,7 @@ function Mint({ sorobanContext }: { sorobanContext: SorobanContextType }) {
                     </NumberInputStepper>
                   </NumberInput>
 
-                  <FormErrorMessage>{errors.amount && errors.amount.message}</FormErrorMessage>
+                  <FormErrorMessage>{errors.amount?.message}</FormErrorMessage>
                 </FormControl>
 
                 <Button

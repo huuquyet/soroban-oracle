@@ -125,7 +125,7 @@ export default function PairCard({
                     Created time:
                   </Text>
                   <Text fontWeight={600} color={'gray.500'} size="sm">
-                    {formatDate(new Date(parseInt(pairInfo!.create_time?.toString()) * 1000))}
+                    {formatDate(new Date(parseInt(pairInfo?.create_time?.toString()) * 1000))}
                   </Text>
                 </Flex>
                 <Flex gap={10} justify={'space-between'}>
@@ -133,7 +133,7 @@ export default function PairCard({
                     Updated time:
                   </Text>
                   <Text fontWeight={600} color={'gray.500'} size="sm">
-                    {formatDate(new Date(parseInt(pairInfo!.time?.toString()) * 1000))}
+                    {formatDate(new Date(parseInt(pairInfo?.time?.toString()) * 1000))}
                   </Text>
                 </Flex>
                 <Flex gap={10} justify={'space-between'}>
@@ -141,7 +141,7 @@ export default function PairCard({
                     Epoch interval:
                   </Text>
                   <Text fontWeight={600} color={'gray.500'} size="sm">
-                    {pairInfo!.epoch_interval} sec
+                    {pairInfo?.epoch_interval} sec
                   </Text>
                 </Flex>
                 <Flex gap={10} justify={'space-between'}>
@@ -149,7 +149,7 @@ export default function PairCard({
                     Last epoch:
                   </Text>
                   <Text fontWeight={600} color={'gray.500'} size="sm">
-                    {pairInfo!.last_epoch}
+                    {pairInfo?.last_epoch}
                   </Text>
                 </Flex>
               </Box>
@@ -157,8 +157,8 @@ export default function PairCard({
                 Relayer Address:
               </Text>
               <CopyButton
-                str={String(formatShortAddress(pairInfo!.relayer))}
-                value={pairInfo!.relayer}
+                str={String(formatShortAddress(pairInfo?.relayer))}
+                value={pairInfo?.relayer}
                 size={'md'}
               />
               <Stack

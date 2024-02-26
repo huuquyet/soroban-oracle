@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom'
 import ErrorPage from '../pages/Share/ErrorPage'
 import AppRoutes from './AppRoutes'
 
-const AppProviders = () => {
+function AppProviders() {
   return (
     <BrowserRouter>
       <ThirdwebProvider clientId={import.meta.env.VITE_THIRDWEB_CLIENT_ID}>

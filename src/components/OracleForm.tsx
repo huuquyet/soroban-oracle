@@ -117,7 +117,7 @@ function OracleAddress({
               minLength: { value: 1, message: 'Minimum length should be 1' },
             })}
           />
-          <FormErrorMessage>{errors.relayer && errors.relayer.message}</FormErrorMessage>
+          <FormErrorMessage>{errors.relayer?.message}</FormErrorMessage>
         </FormControl>
         <Button
           isLoading={isLoadingSetRelayer}
@@ -165,7 +165,7 @@ function OracleEpochInterval({
       const txPairEpochInterval = await oracle.updatePairEpochInterval(
         {
           caller: account,
-          epoch_interval: Number(formData!.time),
+          epoch_interval: Number(formData?.time),
         },
         { fee: 1000 }
       )
@@ -223,7 +223,7 @@ function OracleEpochInterval({
             </NumberInputStepper>
           </NumberInput>
 
-          <FormErrorMessage>{errors.time && errors.time.message}</FormErrorMessage>
+          <FormErrorMessage>{errors.time?.message}</FormErrorMessage>
         </FormControl>
 
         <Button

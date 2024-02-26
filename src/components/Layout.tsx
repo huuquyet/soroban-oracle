@@ -118,10 +118,7 @@ const DesktopNav = () => {
         <Box key={navItem.label}>
           <Popover trigger={'hover'} placement={'bottom-start'}>
             <PopoverTrigger>
-              <Link
-                style={{ cursor: 'pointer', width: '100%', height: '100%' }}
-                to={navItem!.href!}
-              >
+              <Link style={{ cursor: 'pointer', width: '100%', height: '100%' }} to={navItem?.href}>
                 <Box
                   p={2}
                   fontSize={'sm'}
@@ -170,7 +167,7 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
       _hover={{ bg: useColorModeValue('pink.50', 'gray.900') }}
     >
       <Stack direction={'row'} align={'center'}>
-        <Link style={{ cursor: 'pointer', width: '100%', height: '100%' }} to={href!}>
+        <Link style={{ cursor: 'pointer', width: '100%', height: '100%' }} to={href}>
           <Box>
             <Text transition={'all .3s ease'} _groupHover={{ color: 'pink.400' }} fontWeight={500}>
               {label}
@@ -217,7 +214,7 @@ const MobileNavItem = ({
       <Link
         onClick={onToggleNavbar}
         style={{ cursor: 'pointer', width: '100%', height: '100%' }}
-        to={href!}
+        to={href}
       >
         <Box
           py={2}
@@ -253,14 +250,13 @@ const MobileNavItem = ({
           borderColor={useColorModeValue('gray.200', 'gray.700')}
           align={'start'}
         >
-          {children &&
-            children.map((child) => (
-              <Link style={{ cursor: 'pointer', width: '100%', height: '100%' }} to={child!.href!}>
-                <Box key={child.label} py={2}>
-                  {child?.label}
-                </Box>
-              </Link>
-            ))}
+          {children?.map((child) => (
+            <Link style={{ cursor: 'pointer', width: '100%', height: '100%' }} to={child?.href}>
+              <Box key={child.label} py={2}>
+                {child?.label}
+              </Box>
+            </Link>
+          ))}
         </Stack>
       </Collapse>
     </Stack>

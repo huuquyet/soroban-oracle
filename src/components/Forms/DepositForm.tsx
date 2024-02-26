@@ -142,7 +142,7 @@ function DepositForm({
     if (pairInfo && getValues) {
       setCalculateValue(
         // @ts-ignore
-        Number(Number(getValues()!.amount) / (Number(pairInfo!.value) / 10 ** 5)).toFixed(10)
+        Number(Number(getValues()?.amount) / (Number(pairInfo?.value) / 10 ** 5)).toFixed(10)
       )
     }
   }
@@ -203,7 +203,7 @@ function DepositForm({
                     </NumberInputStepper>
                   </NumberInput>
 
-                  <FormErrorMessage>{errors.amount && errors.amount.message}</FormErrorMessage>
+                  <FormErrorMessage>{errors.amount?.message}</FormErrorMessage>
                 </FormControl>
 
                 {isCalculating ? (

@@ -52,16 +52,15 @@ export function useSubscription(
         if (response.latestLedger) {
           paging[id].lastLedgerStart = response.latestLedger
         }
-        response.events &&
-          response.events.forEach((event) => {
-            try {
-              onEvent(event)
-            } catch (error) {
-              console.error('Poll Events: subscription callback had error: ', error)
-            } finally {
-              paging[id].pagingToken = event.pagingToken
-            }
-          })
+        response.events?.forEach((event) => {
+          try {
+            onEvent(event)
+          } catch (error) {
+            console.error('Poll Events: subscription callback had error: ', error)
+          } finally {
+            paging[id].pagingToken = event.pagingToken
+          }
+        })
       } catch (error) {
         console.error('Poll Events: error: ', error)
       } finally {
