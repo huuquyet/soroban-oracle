@@ -10,7 +10,7 @@ function PairDetails({
   sorobanContext,
   contract,
 }: { sorobanContext: SorobanContextType; contract: typeof oracle }) {
-    const account = sorobanContext.address ? sorobanContext.address : ''
+  const account = sorobanContext.address ? sorobanContext.address : ''
   const [pairInfo, setPairInfo] = useState<(PairInfo & EpochData) | null>(null)
   const [isLoadingContractOwner, setIsLoadingContractOwner] = useState<boolean>(false)
   const [isContractOwner, setIsContractOwner] = useState(false)

@@ -6,17 +6,18 @@
   "files": {
     "ignoreUnknown": true,
     "ignore": [
-      "**/node_modules",
-      "**/.git*",
-      "**/.next",
-      "**/.pnp*",
-      "**/.soroban",
-      "**/.vercel",
-      "**/dist",
-      "**/types",
-      "**/public",
-      "**/build",
-      "**/target"
+      "./node_modules",
+      "./.git*",
+      "./.next",
+      "./.pnp*",
+      "./.soroban",
+      "./.vercel",
+      "./.vscode",
+      "./dist",
+      "./types",
+      "./public",
+      "./build",
+      "./target"
     ]
   },
   "linter": {

@@ -8,7 +8,7 @@ SOROBAN_RPC_HOST="$2"
 
 PATH=./target/bin:$PATH
 
-USER="YOUR_PUBLIC_KEY" # your freighter public key
+# USER="YOUR_PUBLIC_KEY" # your freighter public key
 
 if [[ -f "./.soroban/contracts/oracle" ]]; then
   echo "Found existing '.soroban/contracts' directory; already initialized."
@@ -46,18 +46,17 @@ else
 fi
 
 case "$1" in
-standalone)
-  SOROBAN_NETWORK_PASSPHRASE="Standalone Network ; February 2017"
-  FRIENDBOT_URL="$SOROBAN_RPC_HOST/friendbot"
-  ;;
 futurenet)
+  echo "Using Futurenet network with RPC URL: $SOROBAN_RPC_URL"
   SOROBAN_NETWORK_PASSPHRASE="Test SDF Future Network ; October 2022"
-  FRIENDBOT_URL="https://friendbot-futurenet.stellar.org/"
   ;;
 testnet)
   echo "Using Testnet network with RPC URL: $SOROBAN_RPC_URL"
   SOROBAN_NETWORK_PASSPHRASE="Test SDF Network ; September 2015"
-  FRIENDBOT_URL="https://friendbot.stellar.org/"
+  ;;
+standalone)
+  echo "Using standalone network with RPC URL: $SOROBAN_RPC_URL"
+  SOROBAN_NETWORK_PASSPHRASE="Standalone Network ; February 2017"
   ;;
 *)
   echo "Usage: $0 standalone|futurenet|testnet [rpc-host]"
@@ -67,9 +66,8 @@ esac
 
 echo "Using $NETWORK network"
 echo "  RPC URL: $SOROBAN_RPC_URL"
-echo "  Friendbot URL: $FRIENDBOT_URL"
 
-echo Add the $NETWORK network to cli client
+echo "Add the $NETWORK network to cli client"
 soroban config network add \
   --rpc-url "$SOROBAN_RPC_URL" \
   --network-passphrase "$SOROBAN_NETWORK_PASSPHRASE" "$NETWORK"
@@ -87,7 +85,6 @@ ADMIN_ADDRESS="$(soroban config identity address token-admin)"
 echo "Fund token-admin & user account from friendbot"
 soroban config identity fund token-admin --network $NETWORK
 # soroban config identity fund $USER --network $NETWORK
-# curl --silent -X POST "$FRIENDBOT_URL?addr=$ADMIN_ADDRESS" >/dev/null
 
 ARGS="--network $NETWORK --source token-admin"
 
@@ -178,8 +175,23 @@ soroban contract invoke \
   --value $BTC_PRICE
 
 echo "Generate bindings contracts"
-soroban contract bindings typescript --network $NETWORK --id $BTC_TOKEN_ID --wasm $TOKEN_PATH".optimized.wasm" --output-dir ./.soroban/contracts/token --overwrite
-soroban contract bindings typescript --network $NETWORK --id $DONATION_ID --wasm $DONATION_PATH".optimized.wasm" --output-dir ./.soroban/contracts/donation --overwrite
-soroban contract bindings typescript --network $NETWORK --id $ORACLE_ID --wasm $ORACLE_PATH".optimized.wasm" --output-dir ./.soroban/contracts/oracle --overwrite
+soroban contract bindings typescript \
+  --network $NETWORK \
+  --id $BTC_TOKEN_ID \
+  --wasm $TOKEN_PATH".optimized.wasm" \
+  --output-dir ./.soroban/contracts/token \
+  --overwrite
+soroban contract bindings typescript \
+  --network $NETWORK \
+  --id $DONATION_ID \
+  --wasm $DONATION_PATH".optimized.wasm" \
+  --output-dir ./.soroban/contracts/donation \
+  --overwrite
+soroban contract bindings typescript \
+  --network $NETWORK \
+  --id $ORACLE_ID \
+  --wasm $ORACLE_PATH".optimized.wasm" \
+  --output-dir ./.soroban/contracts/oracle \
+  --overwrite
 
 echo "Done"

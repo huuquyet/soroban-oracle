@@ -25,7 +25,7 @@ import { useForm } from 'react-hook-form'
 
 function Mint({ sorobanContext }: { sorobanContext: SorobanContextType }) {
   const toast = useToast()
-    const account = sorobanContext.address ? sorobanContext.address : ''
+  const account = sorobanContext.address ? sorobanContext.address : ''
 
   const [myBalance, setMyBalance] = useState(0)
   const [isLoadingMint, setIsLoadingMint] = useState(false)
