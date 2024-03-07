@@ -3880,37 +3880,37 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@soroban-react/chains@npm:^9.0.0":
-  version: 9.0.0
-  resolution: "@soroban-react/chains@npm:9.0.0"
+"@soroban-react/chains@npm:^9.0.2":
+  version: 9.0.2
+  resolution: "@soroban-react/chains@npm:9.0.2"
   dependencies:
-    "@soroban-react/types": "npm:^9.0.0"
+    "@soroban-react/types": "npm:^9.0.2"
     stellar-sdk: "npm:11.1.0"
-  checksum: 10c0/e51d224e2cd3461428042d59ad4920d5b75adf70e6a19b194836762a7cf80c0a6e877b7218cec8953832fb8b6235dcfc1774c757261fb58fe115327e27d476f1
+  checksum: 10c0/a04c596dcb7a0385281cd1626ef5fdff8c56c853a220aa4b824de941bf714ad9c2e73ff0137474016e3354714a80c9058eca8b320e35e7e84544bc0ed31c0b7f
   languageName: node
   linkType: hard
 
-"@soroban-react/core@npm:^9.0.0":
-  version: 9.0.0
-  resolution: "@soroban-react/core@npm:9.0.0"
+"@soroban-react/core@npm:^9.0.2":
+  version: 9.0.2
+  resolution: "@soroban-react/core@npm:9.0.2"
   dependencies:
-    "@soroban-react/freighter": "npm:^9.0.0"
-    "@soroban-react/types": "npm:^9.0.0"
+    "@soroban-react/freighter": "npm:^9.0.2"
+    "@soroban-react/types": "npm:^9.0.2"
     "@soroban-react/xbull": "npm:^1.0.1"
     stellar-sdk: "npm:11.1.0"
   peerDependencies:
     react: ">=16.8"
-  checksum: 10c0/855c056c14e2bbe4d93c070e7653ccfafdb90a3c8ce4b7f760c530c71fc667901c482f6af1b0b1f37a5ccb41acb75d19382fb348c8d5a01dfe68b7e997d0ffda
+  checksum: 10c0/7c6e199a77a317fe56032a9ef853a11ff9f6110621568a8370e6c6b791368ad3947d30ec8438d879212d314b63848c405dadf6a45fe4172e4bc94a95c56f49b1
   languageName: node
   linkType: hard
 
-"@soroban-react/freighter@npm:^9.0.0":
-  version: 9.0.0
-  resolution: "@soroban-react/freighter@npm:9.0.0"
+"@soroban-react/freighter@npm:^9.0.2":
+  version: 9.0.2
+  resolution: "@soroban-react/freighter@npm:9.0.2"
   dependencies:
-    "@soroban-react/types": "npm:^9.0.0"
+    "@soroban-react/types": "npm:^9.0.2"
     "@stellar/freighter-api": "npm:1.7.1"
-  checksum: 10c0/02ceff26480ed55933e174d58a968d188b7a6cfa3949adf623b388dcdc9d526a5e091f83cc9585a92e3fc7ddad6c61e634399b9586bd6a09443e641b5f1eb054
+  checksum: 10c0/1262fcd7a5cb3a3fc73cc590c565bba49ed439c883880aa1d7ea489d48877e906e18a0585483116e74a8db7558a5439c5dc9ff37a4a52b69163e4079380dfc6c
   languageName: node
   linkType: hard
 
@@ -3921,10 +3921,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@soroban-react/types@npm:^9.0.0":
-  version: 9.0.0
-  resolution: "@soroban-react/types@npm:9.0.0"
-  checksum: 10c0/1cd5048f126dd824c89ca1b7bd2f903a5a54e5e6dfa6daac66249b42968c5b66f780a3be57d5299c2475cf82dabfe5fe8bc61807849098e7c7de1cdae1f92277
+"@soroban-react/types@npm:^9.0.2":
+  version: 9.0.2
+  resolution: "@soroban-react/types@npm:9.0.2"
+  dependencies:
+    stellar-sdk: "npm:11.1.0"
+  checksum: 10c0/c60f3eaba70d43f087d73da8296cf7b115613d6afa35db8c40dba8f5ce180780b3b86c943bdc8f462ccbeb2b0794b1fe6a0b3dcd5f6be09afb029cac062ed3ae
   languageName: node
   linkType: hard
 
@@ -4375,12 +4377,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@thirdweb-dev/auth@npm:4.1.36":
-  version: 4.1.36
-  resolution: "@thirdweb-dev/auth@npm:4.1.36"
+"@thirdweb-dev/auth@npm:4.1.37":
+  version: 4.1.37
+  resolution: "@thirdweb-dev/auth@npm:4.1.37"
   dependencies:
     "@fastify/cookie": "npm:^9.1.0"
-    "@thirdweb-dev/wallets": "npm:2.4.14"
+    "@thirdweb-dev/wallets": "npm:2.4.15"
     cookie: "npm:^0.5.0"
     fastify-type-provider-zod: "npm:^1.1.9"
     uuid: "npm:^9.0.1"
@@ -4405,14 +4407,14 @@ __metadata:
       optional: true
     next-auth:
       optional: true
-  checksum: 10c0/0228e0433f074908861988065084ae65d119dd67874ab763c563bd4c8689c5cf44bfd54aa3da86531005feb9ba74e2d6dc02f0b9685f6d481f7a28245dbd4afe
+  checksum: 10c0/4941d84263abf20ff806f800a29b81bdda09f81b90701cc085b2f418fc05c3d2f9c8b472f1dac486fd4cded6bda457c7434c893ce155b362291f6779785a06a5
   languageName: node
   linkType: hard
 
-"@thirdweb-dev/chains@npm:0.1.76":
-  version: 0.1.76
-  resolution: "@thirdweb-dev/chains@npm:0.1.76"
-  checksum: 10c0/33c64564653b021aef6d55b88466fcd74204d0b3e3f1f4eff7b8d49dce0865fe9c202716194ec4af1c7f2f704750002d59d49cc416de6e47be702c19b734847e
+"@thirdweb-dev/chains@npm:0.1.77":
+  version: 0.1.77
+  resolution: "@thirdweb-dev/chains@npm:0.1.77"
+  checksum: 10c0/156bab5d0391d24f1a9a1707ce3582205ea38a95c893b723d1dbcd417a4b9c1c169fa965a8c908d20e91a58468eec576b6a42e0587c842be31212cd1b2de78f3
   languageName: node
   linkType: hard
 
@@ -4485,29 +4487,29 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@thirdweb-dev/react-core@npm:4.4.12":
-  version: 4.4.12
-  resolution: "@thirdweb-dev/react-core@npm:4.4.12"
+"@thirdweb-dev/react-core@npm:4.4.13":
+  version: 4.4.13
+  resolution: "@thirdweb-dev/react-core@npm:4.4.13"
   dependencies:
     "@tanstack/react-query": "npm:^4.33.0"
-    "@thirdweb-dev/auth": "npm:4.1.36"
-    "@thirdweb-dev/chains": "npm:0.1.76"
+    "@thirdweb-dev/auth": "npm:4.1.37"
+    "@thirdweb-dev/chains": "npm:0.1.77"
     "@thirdweb-dev/generated-abis": "npm:^0.0.1"
-    "@thirdweb-dev/sdk": "npm:4.0.39"
+    "@thirdweb-dev/sdk": "npm:4.0.40"
     "@thirdweb-dev/storage": "npm:2.0.10"
-    "@thirdweb-dev/wallets": "npm:2.4.14"
+    "@thirdweb-dev/wallets": "npm:2.4.15"
     mime: "npm:3.0.0"
     tiny-invariant: "npm:^1.2.0"
   peerDependencies:
     ethers: ">=5.5.1"
     react: ">=18.0.0"
-  checksum: 10c0/5ce9b1c9a0d6897e382c0c9743e3b1d79ace4823f74066643f04cb9ef24971208eaeedd66ea43fb13115960771ac92c62758455ed847c76276a3c497b63dbccd
+  checksum: 10c0/14ff3c5e6dab5990f9c4f6dc6384fd618ac854f9904304da7d7f7afd1c0303aafed0094ecdb5fa02046e8a84de2c1d9590ebc949d34a3fe0ff8ea93a269c551f
   languageName: node
   linkType: hard
 
-"@thirdweb-dev/react@npm:^4.4.12":
-  version: 4.4.12
-  resolution: "@thirdweb-dev/react@npm:4.4.12"
+"@thirdweb-dev/react@npm:^4.4.13":
+  version: 4.4.13
+  resolution: "@thirdweb-dev/react@npm:4.4.13"
   dependencies:
     "@emotion/css": "npm:11.10.5"
     "@emotion/react": "npm:^11.11.1"
@@ -4522,11 +4524,11 @@ __metadata:
     "@radix-ui/react-tabs": "npm:^1.0.4"
     "@radix-ui/react-tooltip": "npm:^1.0.7"
     "@tanstack/react-query": "npm:^4.33.0"
-    "@thirdweb-dev/chains": "npm:0.1.76"
+    "@thirdweb-dev/chains": "npm:0.1.77"
     "@thirdweb-dev/payments": "npm:1.0.2"
-    "@thirdweb-dev/react-core": "npm:4.4.12"
-    "@thirdweb-dev/sdk": "npm:4.0.39"
-    "@thirdweb-dev/wallets": "npm:2.4.14"
+    "@thirdweb-dev/react-core": "npm:4.4.13"
+    "@thirdweb-dev/sdk": "npm:4.0.40"
+    "@thirdweb-dev/wallets": "npm:2.4.15"
     buffer: "npm:^6.0.3"
     copy-to-clipboard: "npm:^3.3.2"
     detect-browser: "npm:^5.3.0"
@@ -4534,19 +4536,19 @@ __metadata:
     qrcode: "npm:^1.5.3"
     tiny-invariant: "npm:^1.2.0"
   peerDependencies:
-    "@thirdweb-dev/sdk": ^4.0.39
+    "@thirdweb-dev/sdk": ^4.0.40
     ethers: ">=5.5.1"
     react: ">=18.0.0"
     react-dom: ">=18.0.0"
-  checksum: 10c0/90c12ae13a5fe46cb19e95f1b2c694a55cd90f93da53d5aa9da2edb360a0312d70660751058e258c2282009a7b44ce1a5631bd45675649c074c4a511d4974960
+  checksum: 10c0/fa51064fdc3f85e5facb0c7c96239e7fffeb76e295f6afa061f0bab0054cab703e0afdf525f71f1b5eeda3da51db1f0d8bac8058120237ce545f347db6973170
   languageName: node
   linkType: hard
 
-"@thirdweb-dev/sdk@npm:4.0.39":
-  version: 4.0.39
-  resolution: "@thirdweb-dev/sdk@npm:4.0.39"
+"@thirdweb-dev/sdk@npm:4.0.40":
+  version: 4.0.40
+  resolution: "@thirdweb-dev/sdk@npm:4.0.40"
   dependencies:
-    "@thirdweb-dev/chains": "npm:0.1.76"
+    "@thirdweb-dev/chains": "npm:0.1.77"
     "@thirdweb-dev/contracts-js": "npm:1.3.16"
     "@thirdweb-dev/crypto": "npm:0.2.1"
     "@thirdweb-dev/generated-abis": "npm:0.0.1"
@@ -4575,7 +4577,7 @@ __metadata:
       optional: true
     zksync-web3:
       optional: true
-  checksum: 10c0/b6f217e85f2fe7273e43cd9aca8b355de174b172a0bca23af129debc05c22447f2383bfe858992eb5fb7e89ea3c005d98acd00a0dad72d80422f826bcebf96ef
+  checksum: 10c0/a26a37a6ec1dd55fa2aee729a46917c68a139050b8e5eece77aceb04c7594bfaff90ded7ef20b43505a6154c13883b6fc75d6882f1c48f4b1868c3728842a16e
   languageName: node
   linkType: hard
 
@@ -4591,9 +4593,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@thirdweb-dev/wallets@npm:2.4.14":
-  version: 2.4.14
-  resolution: "@thirdweb-dev/wallets@npm:2.4.14"
+"@thirdweb-dev/wallets@npm:2.4.15":
+  version: 2.4.15
+  resolution: "@thirdweb-dev/wallets@npm:2.4.15"
   dependencies:
     "@account-abstraction/contracts": "npm:^0.5.0"
     "@blocto/sdk": "npm:^0.5.4"
@@ -4608,10 +4610,10 @@ __metadata:
     "@safe-global/safe-core-sdk": "npm:^3.3.4"
     "@safe-global/safe-ethers-adapters": "npm:0.1.0-alpha.17"
     "@safe-global/safe-ethers-lib": "npm:^1.9.4"
-    "@thirdweb-dev/chains": "npm:0.1.76"
+    "@thirdweb-dev/chains": "npm:0.1.77"
     "@thirdweb-dev/contracts-js": "npm:1.3.16"
     "@thirdweb-dev/crypto": "npm:0.2.1"
-    "@thirdweb-dev/sdk": "npm:4.0.39"
+    "@thirdweb-dev/sdk": "npm:4.0.40"
     "@walletconnect/core": "npm:^2.9.1"
     "@walletconnect/ethereum-provider": "npm:^2.9.1"
     "@walletconnect/jsonrpc-utils": "npm:^1.0.8"
@@ -4648,7 +4650,7 @@ __metadata:
       optional: true
     tweetnacl:
       optional: true
-  checksum: 10c0/4316048d05dae6aa04666803b9dc4f6c6f67cd46a9a2b04eab3eea0efec9e312845d354a8fd80ad74909313652af46664f62c95c131253effe4b68e8ce6f2acc
+  checksum: 10c0/b69a0a48b2ae11bd5bb5864230a735f42722a6734f3d60a5bf4b302003ed039d35c2db76744161bcb2ab7625f36aed516d211cc7b80df70f020ce562d2efcb7d
   languageName: node
   linkType: hard
 
@@ -4819,12 +4821,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^18.2.20":
-  version: 18.2.20
-  resolution: "@types/react-dom@npm:18.2.20"
+"@types/react-dom@npm:^18.2.21":
+  version: 18.2.21
+  resolution: "@types/react-dom@npm:18.2.21"
   dependencies:
     "@types/react": "npm:*"
-  checksum: 10c0/d352fb9c4fbb773f1db1e463b0228dfb0dc0a670a742983ae840d77f54ad9d4ac38084b23c975487fc37814f44425fc6d1adafbb432a7c48957669c124b5f8df
+  checksum: 10c0/a887b4b647071df48173f054854713b68fdacfceeba7fa14f64ba26688d7d43574d7dc88a2a346e28f2e667eeab1b9bdbcad8a54353869835e52638607f61ff5
   languageName: node
   linkType: hard
 
@@ -4839,14 +4841,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^18.2.63":
-  version: 18.2.63
-  resolution: "@types/react@npm:18.2.63"
+"@types/react@npm:^18.2.64":
+  version: 18.2.64
+  resolution: "@types/react@npm:18.2.64"
   dependencies:
     "@types/prop-types": "npm:*"
     "@types/scheduler": "npm:*"
     csstype: "npm:^3.0.2"
-  checksum: 10c0/53d86727b966a3ba097553b5ef75a1f2bea78bd8c54ebcf6d00bd338000112b208ab30536c8c0a9f5fc61055cc3fbabbc7a23910c55092341602845de4c13714
+  checksum: 10c0/ab3ba9597990d08ffd419a5ad28fd22393c7a9a241ae455fb1d5d193d209471aa1909fa7ad016fd8d161eab6d0babba77b013b56a5170bedf78833085b9ee424
   languageName: node
   linkType: hard
 
@@ -6176,7 +6178,7 @@ __metadata:
     "@stellar/stellar-sdk": "npm:^11.2.2"
     "@types/node-cron": "npm:^3.0.11"
     node-cron: "npm:^3.0.3"
-    typescript: "npm:^5.3.3"
+    typescript: "npm:^5.4.2"
   languageName: unknown
   linkType: soft
 
@@ -10095,15 +10097,15 @@ __metadata:
     "@ethersproject/hash": "npm:^5.7.0"
     "@ethersproject/web": "npm:^5.7.1"
     "@safe-global/safe-core-sdk-types": "npm:^4.0.1"
-    "@soroban-react/chains": "npm:^9.0.0"
-    "@soroban-react/core": "npm:^9.0.0"
-    "@soroban-react/freighter": "npm:^9.0.0"
-    "@soroban-react/types": "npm:^9.0.0"
+    "@soroban-react/chains": "npm:^9.0.2"
+    "@soroban-react/core": "npm:^9.0.2"
+    "@soroban-react/freighter": "npm:^9.0.2"
+    "@soroban-react/types": "npm:^9.0.2"
     "@stellar/stellar-sdk": "npm:^11.2.2"
     "@tabler/icons-react": "npm:^2.47.0"
-    "@thirdweb-dev/react": "npm:^4.4.12"
-    "@types/react": "npm:^18.2.63"
-    "@types/react-dom": "npm:^18.2.20"
+    "@thirdweb-dev/react": "npm:^4.4.13"
+    "@types/react": "npm:^18.2.64"
+    "@types/react-dom": "npm:^18.2.21"
     "@vitejs/plugin-react-swc": "npm:^3.6.0"
     axios: "npm:^1.6.7"
     donation-contract: "file:.soroban/contracts/donation"
@@ -10118,7 +10120,7 @@ __metadata:
     react-hook-form: "npm:^7.51.0"
     react-router-dom: "npm:^6.22.2"
     token-contract: "file:.soroban/contracts/token"
-    typescript: "npm:^5.3.3"
+    typescript: "npm:^5.4.2"
     vite: "npm:^5.1.5"
     zustand: "npm:^4.5.2"
   languageName: unknown
@@ -10537,6 +10539,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"typescript@npm:^5.4.2":
+  version: 5.4.2
+  resolution: "typescript@npm:5.4.2"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 10c0/583ff68cafb0c076695f72d61df6feee71689568179fb0d3a4834dac343df6b6ed7cf7b6f6c801fa52d43cd1d324e2f2d8ae4497b09f9e6cfe3d80a6d6c9ca52
+  languageName: node
+  linkType: hard
+
 "typescript@patch:typescript@npm%3A^5.3.3#optional!builtin<compat/typescript>":
   version: 5.3.3
   resolution: "typescript@patch:typescript@npm%3A5.3.3#optional!builtin<compat/typescript>::version=5.3.3&hash=e012d7"
@@ -10544,6 +10556,16 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 10c0/1d0a5f4ce496c42caa9a30e659c467c5686eae15d54b027ee7866744952547f1be1262f2d40de911618c242b510029d51d43ff605dba8fb740ec85ca2d3f9500
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@npm%3A^5.4.2#optional!builtin<compat/typescript>":
+  version: 5.4.2
+  resolution: "typescript@patch:typescript@npm%3A5.4.2#optional!builtin<compat/typescript>::version=5.4.2&hash=d69c25"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 10c0/22e2f213c3ffe5960c5eaec6c95c04e01858fed57a94be250746f540b935b2c18c3c3fc80d3ab65d28c0aba1eb76284557ba3bf521d28caee811c44ba2b648f9
   languageName: node
   linkType: hard
 
