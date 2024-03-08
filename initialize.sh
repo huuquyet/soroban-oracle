@@ -2,20 +2,20 @@
 
 set -e
 
-NETWORK="$1"
+NETWORK=$1
 
-SOROBAN_RPC_HOST="$2"
+SOROBAN_RPC_HOST=$2
 
 PATH=./target/bin:$PATH
 
 # USER="YOUR_PUBLIC_KEY" # your freighter public key
 
-if [[ -f "./.soroban/contracts/oracle" ]]; then
+if [[ -d "./.soroban/contracts" ]]; then
   echo "Found existing '.soroban/contracts' directory; already initialized."
   exit 0
 fi
 
-if [[ -f "./target/bin/soroban" ]]; then
+if [[ -d "./target/bin" ]]; then
   echo "Using soroban binary from ./target/bin"
 elif command -v soroban &> /dev/null; then
   echo "Using soroban cli"
@@ -29,23 +29,18 @@ if ! command -v jq &> /dev/null; then
   sudo apt install jq bc -y
 fi
 
-if [[ "$SOROBAN_RPC_HOST" == "" ]]; then
-  if [[ "$NETWORK" == "futurenet" ]]; then
-    SOROBAN_RPC_HOST="https://rpc-futurenet.stellar.org"
-    SOROBAN_RPC_URL="$SOROBAN_RPC_HOST"
-  elif [[ "$NETWORK" == "testnet" ]]; then
-    SOROBAN_RPC_HOST="https://soroban-testnet.stellar.org"
-    SOROBAN_RPC_URL="$SOROBAN_RPC_HOST"
-  else
-     # assumes standalone on quickstart, which has the soroban/rpc path
-    SOROBAN_RPC_HOST="http://localhost:8000"
-    SOROBAN_RPC_URL="$SOROBAN_RPC_HOST/soroban/rpc"
-  fi
-else 
+if [[ $SOROBAN_RPC_HOST != "" ]]; then
   SOROBAN_RPC_URL="$SOROBAN_RPC_HOST"
+if [[ $NETWORK == "futurenet" ]]; then
+  SOROBAN_RPC_URL="https://rpc-futurenet.stellar.org"
+elif [[ "$NETWORK" == "testnet" ]]; then
+  SOROBAN_RPC_URL="https://soroban-testnet.stellar.org"
+else
+    # assumes standalone on quickstart, which has the soroban/rpc path
+  SOROBAN_RPC_URL="http://localhost:8000/soroban/rpc"
 fi
 
-case "$1" in
+case "$NETWORK" in
 futurenet)
   echo "Using Futurenet network with RPC URL: $SOROBAN_RPC_URL"
   SOROBAN_NETWORK_PASSPHRASE="Test SDF Future Network ; October 2022"
@@ -64,27 +59,24 @@ standalone)
   ;;
 esac
 
-echo "Using $NETWORK network"
-echo "  RPC URL: $SOROBAN_RPC_URL"
-
 echo "Add the $NETWORK network to cli client"
-soroban config network add \
-  --rpc-url "$SOROBAN_RPC_URL" \
-  --network-passphrase "$SOROBAN_NETWORK_PASSPHRASE" "$NETWORK"
+soroban network add \
+  --rpc-url $SOROBAN_RPC_URL \
+  --network-passphrase "$SOROBAN_NETWORK_PASSPHRASE" $NETWORK
 
 echo "Add $NETWORK to shared config"
 echo "{ \"network\": \"$NETWORK\", \"rpcUrl\": \"$SOROBAN_RPC_URL\", \"networkPassphrase\": \"$SOROBAN_NETWORK_PASSPHRASE\" }" > ./src/shared/config.json
 
-if !(soroban config identity ls | grep token-admin 2>&1 >/dev/null); then
+if !(soroban keys ls | grep token-admin 2>&1 >/dev/null); then
   echo "Create the token-admin identity"
-  soroban config identity generate token-admin --network $NETWORK
+  soroban keys generate token-admin --network $NETWORK
 fi
-ADMIN_ADDRESS="$(soroban config identity address token-admin)"
+ADMIN_ADDRESS="$(soroban keys address token-admin)"
 
 # This will fail if the account already exists, but it'll still be fine.
 echo "Fund token-admin & user account from friendbot"
-soroban config identity fund token-admin --network $NETWORK
-# soroban config identity fund $USER --network $NETWORK
+soroban keys fund token-admin --network $NETWORK
+# soroban keys fund $USER --network $NETWORK
 
 ARGS="--network $NETWORK --source token-admin"
 
@@ -131,7 +123,7 @@ echo "Contract deployed succesfully with ID: $ORACLE_ID"
 echo "Initialize the BTC TOKEN contract"
 soroban contract invoke \
   $ARGS \
-  --id "$BTC_TOKEN_ID" \
+  --id $BTC_TOKEN_ID \
   -- \
   initialize \
   --symbol BTC \
@@ -144,17 +136,17 @@ soroban contract invoke \
 echo "Initialize the DONATION contract"
 soroban contract invoke \
   $ARGS \
-  --id "$DONATION_ID" \
+  --id $DONATION_ID \
   -- \
   initialize \
   --recipient token-admin \
-  --token "$BTC_TOKEN_ID"
+  --token $BTC_TOKEN_ID
 
 # Relayer is the account that will be used to relay transactions to the oracle contract
 echo "Initialize the ORACLE contract"
 soroban contract invoke \
   $ARGS \
-  --id "$ORACLE_ID" \
+  --id $ORACLE_ID \
   -- \
   initialize \
   --caller token-admin \
@@ -168,7 +160,7 @@ PRICE_STRING="$(curl -s https://blockchain.info/ticker | jq -r '.USD.last')"
 BTC_PRICE=$( echo "$PRICE_STRING * 10 ^ 5 / 1" | bc )
 soroban contract invoke \
   $ARGS \
-  --id "$ORACLE_ID" \
+  --id $ORACLE_ID \
   -- \
   set_epoch_data \
   --caller token-admin \
