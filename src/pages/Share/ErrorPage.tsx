@@ -1,5 +1,5 @@
 import { Alert, AlertDescription, AlertIcon, AlertTitle, Button, Stack } from '@chakra-ui/react'
-import { FC } from 'react'
+import type { FC } from 'react'
 
 type ErrorPageProps = { error: any; resetErrorBoundary: any }
 

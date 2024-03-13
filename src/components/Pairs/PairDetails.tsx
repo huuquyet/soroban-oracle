@@ -1,8 +1,8 @@
 import OracleForm from '@/components/OracleForm'
-import { oracle } from '@/shared/contracts'
+import type { oracle } from '@/shared/contracts'
 import { Stack } from '@chakra-ui/react'
-import { SorobanContextType } from '@soroban-react/core'
-import { EpochData, PairInfo } from 'oracle-contract'
+import type { SorobanContextType } from '@soroban-react/core'
+import type { EpochData, PairInfo } from 'oracle-contract'
 import { useEffect, useState } from 'react'
 import PairCard, { ItemCardContainer } from './PairCard'
 

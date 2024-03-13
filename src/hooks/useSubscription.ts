@@ -1,4 +1,4 @@
-import { SorobanRpc, xdr } from '@stellar/stellar-sdk'
+import { type SorobanRpc, xdr } from '@stellar/stellar-sdk'
 import { useEffect } from 'react'
 
 interface GeneratedLibrary {

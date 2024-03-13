@@ -1,7 +1,7 @@
 import CopyButton from '@/components/CopyButton'
 import { formatShortAddress } from '@/utils/utils'
 import { Button, useToast } from '@chakra-ui/react'
-import { SorobanContextType } from '@soroban-react/core'
+import type { SorobanContextType } from '@soroban-react/core'
 import { IconLoader, IconLogout, IconWallet } from '@tabler/icons-react'
 import { useEffect, useState } from 'react'
 

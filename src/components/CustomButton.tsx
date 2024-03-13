@@ -1,5 +1,5 @@
 import { Button } from '@chakra-ui/react'
-import { ReactNode } from 'react'
+import type { ReactNode } from 'react'
 
 export const ButtonBlue = ({ children }: { children: ReactNode }) => {
   return (

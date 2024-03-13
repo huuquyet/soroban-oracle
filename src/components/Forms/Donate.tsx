@@ -15,8 +15,8 @@ import {
   Text,
   useColorModeValue,
 } from '@chakra-ui/react'
-import { SorobanContextType } from '@soroban-react/core'
-import { EpochData, PairInfo } from 'oracle-contract'
+import type { SorobanContextType } from '@soroban-react/core'
+import type { EpochData, PairInfo } from 'oracle-contract'
 import { useEffect, useState } from 'react'
 
 function Donate({ sorobanContext }: { sorobanContext: SorobanContextType }) {
@@ -54,7 +54,7 @@ function Donate({ sorobanContext }: { sorobanContext: SorobanContextType }) {
       setIsLoadingDeposits(true)
       await donation
         .getTotalDeposits()
-        .then((tx) => setDeposits(parseFloat(tx.result.toString()) / 10 ** 10))
+        .then((tx) => setDeposits(Number.parseFloat(tx.result.toString()) / 10 ** 10))
       setIsLoadingDeposits(false)
     } catch (e) {
       console.log(e)
@@ -67,7 +67,7 @@ function Donate({ sorobanContext }: { sorobanContext: SorobanContextType }) {
       setIsLoadingDeposits(true)
       await donation
         .getContractBalance()
-        .then((tx) => setContractBalance(parseFloat(tx.result.toString()) / 10 ** 10))
+        .then((tx) => setContractBalance(Number.parseFloat(tx.result.toString()) / 10 ** 10))
       setIsLoadingDeposits(false)
     } catch (e) {
       console.log(e)
@@ -93,7 +93,7 @@ function Donate({ sorobanContext }: { sorobanContext: SorobanContextType }) {
         .balance({
           id: account,
         })
-        .then((tx) => setMyBalance(parseFloat(tx.result.toString()) / 10 ** 10))
+        .then((tx) => setMyBalance(Number.parseFloat(tx.result.toString()) / 10 ** 10))
       setIsLoadingMyBalance(false)
     } catch (e) {
       console.log(e)

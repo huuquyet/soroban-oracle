@@ -15,7 +15,7 @@ if [[ -d "./.soroban/contracts" ]]; then
   exit 0
 fi
 
-if [[ -d "./target/bin" ]]; then
+if [[ -f "./target/bin/soroban" ]]; then
   echo "Using soroban binary from ./target/bin"
 elif command -v soroban &> /dev/null; then
   echo "Using soroban cli"
@@ -30,17 +30,17 @@ if ! command -v jq &> /dev/null; then
 fi
 
 if [[ $SOROBAN_RPC_HOST != "" ]]; then
-  SOROBAN_RPC_URL="$SOROBAN_RPC_HOST"
+  SOROBAN_RPC_URL=$SOROBAN_RPC_HOST
 if [[ $NETWORK == "futurenet" ]]; then
   SOROBAN_RPC_URL="https://rpc-futurenet.stellar.org"
-elif [[ "$NETWORK" == "testnet" ]]; then
+elif [[ $NETWORK == "testnet" ]]; then
   SOROBAN_RPC_URL="https://soroban-testnet.stellar.org"
 else
     # assumes standalone on quickstart, which has the soroban/rpc path
   SOROBAN_RPC_URL="http://localhost:8000/soroban/rpc"
 fi
 
-case "$NETWORK" in
+case $NETWORK in
 futurenet)
   echo "Using Futurenet network with RPC URL: $SOROBAN_RPC_URL"
   SOROBAN_NETWORK_PASSPHRASE="Test SDF Future Network ; October 2022"
@@ -71,7 +71,6 @@ if !(soroban keys ls | grep token-admin 2>&1 >/dev/null); then
   echo "Create the token-admin identity"
   soroban keys generate token-admin --network $NETWORK
 fi
-ADMIN_ADDRESS="$(soroban keys address token-admin)"
 
 # This will fail if the account already exists, but it'll still be fine.
 echo "Fund token-admin & user account from friendbot"

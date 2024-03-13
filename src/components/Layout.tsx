@@ -25,7 +25,7 @@ import {
   useColorModeValue,
   useDisclosure,
 } from '@chakra-ui/react'
-import { SorobanContextType } from '@soroban-react/core'
+import type { SorobanContextType } from '@soroban-react/core'
 import { Link, Outlet } from 'react-router-dom'
 
 const ButtonToggleTheme = () => {
