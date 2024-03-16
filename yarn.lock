@@ -6426,12 +6426,12 @@ __metadata:
 
 "donation-contract@file:.soroban/contracts/donation::locator=soroban-oracle-project%40workspace%3A.":
   version: 0.0.0
-  resolution: "donation-contract@file:.soroban/contracts/donation#.soroban/contracts/donation::hash=180b3e&locator=soroban-oracle-project%40workspace%3A."
+  resolution: "donation-contract@file:.soroban/contracts/donation#.soroban/contracts/donation::hash=7d82ba&locator=soroban-oracle-project%40workspace%3A."
   dependencies:
     "@stellar/freighter-api": "npm:1.7.1"
     "@stellar/stellar-sdk": "npm:11.2.0"
     buffer: "npm:6.0.3"
-  checksum: 10c0/b69f00739eb1a5a351046719e1ba021a0917f511f71c976f40aa418418603cf8650e74bd5003c4be12c1acc968fe6f50f678373ec8751ed6c730313c23c5e76b
+  checksum: 10c0/64ac9edb600dffae6324091616017146cb3b699465ea61deeb90db20b815fbf94fc0acc2dea29af95b97d6acc4c7a27d636c4683aa963a7a2ff5018cd2299db4
   languageName: node
   linkType: hard
 
@@ -7234,12 +7234,12 @@ __metadata:
   linkType: hard
 
 "follow-redirects@npm:^1.14.0, follow-redirects@npm:^1.14.9, follow-redirects@npm:^1.15.4":
-  version: 1.15.5
-  resolution: "follow-redirects@npm:1.15.5"
+  version: 1.15.6
+  resolution: "follow-redirects@npm:1.15.6"
   peerDependenciesMeta:
     debug:
       optional: true
-  checksum: 10c0/418d71688ceaf109dfd6f85f747a0c75de30afe43a294caa211def77f02ef19865b547dfb73fde82b751e1cc507c06c754120b848fe5a7400b0a669766df7615
+  checksum: 10c0/9ff767f0d7be6aa6870c82ac79cf0368cd73e01bbc00e9eb1c2a16fbb198ec105e3c9b6628bb98e9f3ac66fe29a957b9645bcb9a490bb7aa0d35f908b6b85071
   languageName: node
   linkType: hard
 
@@ -9085,12 +9085,12 @@ __metadata:
 
 "oracle-contract@file:.soroban/contracts/oracle::locator=soroban-oracle-project%40workspace%3A.":
   version: 0.0.0
-  resolution: "oracle-contract@file:.soroban/contracts/oracle#.soroban/contracts/oracle::hash=c1533b&locator=soroban-oracle-project%40workspace%3A."
+  resolution: "oracle-contract@file:.soroban/contracts/oracle#.soroban/contracts/oracle::hash=ff3b44&locator=soroban-oracle-project%40workspace%3A."
   dependencies:
     "@stellar/freighter-api": "npm:1.7.1"
     "@stellar/stellar-sdk": "npm:11.2.0"
     buffer: "npm:6.0.3"
-  checksum: 10c0/a100cca5b64f034a7cd3b713bf1dca793f0e6f1321b31ec1a37e8ebcba137811d91ff05f8752fd7a5d570b54262e288f85f0c902555b286369b7d433aec07b1b
+  checksum: 10c0/91faa2d7028c023e1ad6e1ee8a061deb15fcf99b81876d0c61adc8bc6647f31e8cf86673222d1864b77fdcf440c41b573562fd660e09eb8a132b3a8c5b2f0b71
   languageName: node
   linkType: hard
 
@@ -10499,12 +10499,12 @@ __metadata:
 
 "token-contract@file:.soroban/contracts/token::locator=soroban-oracle-project%40workspace%3A.":
   version: 0.0.0
-  resolution: "token-contract@file:.soroban/contracts/token#.soroban/contracts/token::hash=526d4e&locator=soroban-oracle-project%40workspace%3A."
+  resolution: "token-contract@file:.soroban/contracts/token#.soroban/contracts/token::hash=8016d5&locator=soroban-oracle-project%40workspace%3A."
   dependencies:
     "@stellar/freighter-api": "npm:1.7.1"
     "@stellar/stellar-sdk": "npm:11.2.0"
     buffer: "npm:6.0.3"
-  checksum: 10c0/ac943ccfdc1de5313b7507fabe36a52393a8bbdd64618d35494a7292356bce292d600e718b79633555e83e00a28be8607c09bb6f10c41802b5cbf3123b8a3a11
+  checksum: 10c0/89dde4ec14fa3d92b1fc2a66ec63ad20aa823cea2c4c524e6141b6c112a4ee951e91aae0ca7d03be1ae4262448302fab60fc1684402e2612b9efdbff71e31b6a
   languageName: node
   linkType: hard
 
