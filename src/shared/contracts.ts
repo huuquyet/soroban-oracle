@@ -3,6 +3,7 @@ import * as Donation from 'donation-contract'
 import * as Oracle from 'oracle-contract'
 import * as Token from 'token-contract'
 import config from './config.json'
+
 const { network, rpcUrl } = config
 
 export const btc = new Token.Contract({

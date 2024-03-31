@@ -7,17 +7,18 @@ import {
   TransactionBuilder,
   nativeToScVal,
   scValToNative,
+  xdr,
 } from '@stellar/stellar-sdk'
 import cron from 'node-cron'
+import config from './config.json' assert { type: 'json' }
 
+const { oracle_id, admin_secret } = config
 const API_NINJA_KEY = 'YOUR_API_KEY'
 
-const sourceSecretKey = 'SBYZZJLHOAZI2KMZX6V7CNWHIS7ZYBVYD6IYWQIMJNNICT54LFAKJTZF'
-const sourceKeypair = Keypair.fromSecret(sourceSecretKey)
+const sourceKeypair = Keypair.fromSecret(admin_secret)
 const sourcePublicKey = sourceKeypair.publicKey()
 
-const contractId = 'CBWYZKHCLXBQ756UUXNBPVZX72YMWIYWGJBFWBV5ZGCQM6XLWBQKITLL'
-const contract = new Contract(contractId)
+const contract = new Contract(oracle_id)
 
 const server = new SorobanRpc.Server('https://rpc-futurenet.stellar.org', { allowHttp: true })
 
@@ -39,7 +40,7 @@ const getTimestamp = async () => {
     if (!SorobanRpc.Api.isSimulationSuccess(resultSimulation)) {
       throw new Error(`[ERROR] [getTimestamp]: ${JSON.stringify(resultSimulation)}`)
     }
-    return scValToNative(resultSimulation.result?.retval)
+    return scValToNative(resultSimulation.result?.retval as xdr.ScVal)
   } catch (e) {
     console.error(e)
     throw new Error('[getTimestamp] ERROR')
@@ -61,7 +62,7 @@ const getPairInfo = async () => {
     if (!SorobanRpc.Api.isSimulationSuccess(resultSimulation)) {
       throw new Error(`[ERROR] [getPairInfo]: ${JSON.stringify(resultSimulation)}`)
     }
-    return scValToNative(resultSimulation.result?.retval)
+    return scValToNative(resultSimulation.result?.retval as xdr.ScVal)
   } catch (e) {
     console.error(e)
     throw new Error('[getPairInfo] ERROR')
@@ -86,7 +87,7 @@ const getEpochData = async (epoch: any) => {
       throw new Error(`[ERROR] [const getEpochData = async (epochNr) => {
         ]: ${JSON.stringify(resultSimulation)}`)
     }
-    return scValToNative(resultSimulation.result?.retval)
+    return scValToNative(resultSimulation.result?.retval as xdr.ScVal)
   } catch (e) {
     console.error(e)
     throw new Error('[getEpochData] ERROR')

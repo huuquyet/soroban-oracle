@@ -31,7 +31,7 @@ fi
 
 if [[ $SOROBAN_RPC_HOST != "" ]]; then
   SOROBAN_RPC_URL=$SOROBAN_RPC_HOST
-if [[ $NETWORK == "futurenet" ]]; then
+elif [[ $NETWORK == "futurenet" ]]; then
   SOROBAN_RPC_URL="https://rpc-futurenet.stellar.org"
 elif [[ $NETWORK == "testnet" ]]; then
   SOROBAN_RPC_URL="https://soroban-testnet.stellar.org"
@@ -65,7 +65,9 @@ soroban network add \
   --network-passphrase "$SOROBAN_NETWORK_PASSPHRASE" $NETWORK
 
 echo "Add $NETWORK to shared config"
-echo "{ \"network\": \"$NETWORK\", \"rpcUrl\": \"$SOROBAN_RPC_URL\", \"networkPassphrase\": \"$SOROBAN_NETWORK_PASSPHRASE\" }" > ./src/shared/config.json
+echo "{ \"network\": \"$NETWORK\",
+  \"rpcUrl\": \"$SOROBAN_RPC_URL\",
+  \"networkPassphrase\": \"$SOROBAN_NETWORK_PASSPHRASE\" }" > ./src/shared/config.json
 
 if !(soroban keys ls | grep token-admin 2>&1 >/dev/null); then
   echo "Create the token-admin identity"
@@ -77,6 +79,7 @@ echo "Fund token-admin & user account from friendbot"
 soroban keys fund token-admin --network $NETWORK
 # soroban keys fund $USER --network $NETWORK
 
+ADMIN_SECRET="$( soroban keys show token-admin )"
 ARGS="--network $NETWORK --source token-admin"
 
 WASM_PATH="./target/wasm32-unknown-unknown/release/"
@@ -117,6 +120,12 @@ ORACLE_ID="$(
     --wasm $ORACLE_PATH".optimized.wasm"
 )"
 echo "Contract deployed succesfully with ID: $ORACLE_ID"
+
+echo "Add data to cron config"
+echo "{ \"token_id\": \"$BTC_TOKEN_ID\",
+  \"donation_id\": \"$DONATION_ID\",
+  \"oracle_id\": \"$ORACLE_ID\",
+  \"admin_secret\": \"$ADMIN_SECRET\" }" > ./cron/config.json
 
 # Initialize the contracts
 echo "Initialize the BTC TOKEN contract"

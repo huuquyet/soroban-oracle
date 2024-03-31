@@ -6507,12 +6507,12 @@ __metadata:
 
 "donation-contract@file:.soroban/contracts/donation::locator=soroban-oracle-project%40workspace%3A.":
   version: 0.0.0
-  resolution: "donation-contract@file:.soroban/contracts/donation#.soroban/contracts/donation::hash=180b3e&locator=soroban-oracle-project%40workspace%3A."
+  resolution: "donation-contract@file:.soroban/contracts/donation#.soroban/contracts/donation::hash=0012d8&locator=soroban-oracle-project%40workspace%3A."
   dependencies:
     "@stellar/freighter-api": "npm:1.7.1"
     "@stellar/stellar-sdk": "npm:11.2.0"
     buffer: "npm:6.0.3"
-  checksum: 10c0/b69f00739eb1a5a351046719e1ba021a0917f511f71c976f40aa418418603cf8650e74bd5003c4be12c1acc968fe6f50f678373ec8751ed6c730313c23c5e76b
+  checksum: 10c0/f20763112919bf4f603c154835db95145d7c1fc00c57a54d5a7767936a732733fa9280b792032cb74c0c2e0c3b08685b492752c2b5a8570166b5ac4529ebd67b
   languageName: node
   linkType: hard
 
@@ -9166,12 +9166,12 @@ __metadata:
 
 "oracle-contract@file:.soroban/contracts/oracle::locator=soroban-oracle-project%40workspace%3A.":
   version: 0.0.0
-  resolution: "oracle-contract@file:.soroban/contracts/oracle#.soroban/contracts/oracle::hash=c1533b&locator=soroban-oracle-project%40workspace%3A."
+  resolution: "oracle-contract@file:.soroban/contracts/oracle#.soroban/contracts/oracle::hash=011699&locator=soroban-oracle-project%40workspace%3A."
   dependencies:
     "@stellar/freighter-api": "npm:1.7.1"
     "@stellar/stellar-sdk": "npm:11.2.0"
     buffer: "npm:6.0.3"
-  checksum: 10c0/a100cca5b64f034a7cd3b713bf1dca793f0e6f1321b31ec1a37e8ebcba137811d91ff05f8752fd7a5d570b54262e288f85f0c902555b286369b7d433aec07b1b
+  checksum: 10c0/83e54d73cbc14cdddd854c021ec21976e9b1e1667157f5ce666c2c77690d5ab8919fc18ae98bff6482982ddbed2d2e4575dd92f3e4605e4acc6f74b17d6846cf
   languageName: node
   linkType: hard
 
@@ -10595,12 +10595,12 @@ __metadata:
 
 "token-contract@file:.soroban/contracts/token::locator=soroban-oracle-project%40workspace%3A.":
   version: 0.0.0
-  resolution: "token-contract@file:.soroban/contracts/token#.soroban/contracts/token::hash=526d4e&locator=soroban-oracle-project%40workspace%3A."
+  resolution: "token-contract@file:.soroban/contracts/token#.soroban/contracts/token::hash=d403c5&locator=soroban-oracle-project%40workspace%3A."
   dependencies:
     "@stellar/freighter-api": "npm:1.7.1"
     "@stellar/stellar-sdk": "npm:11.2.0"
     buffer: "npm:6.0.3"
-  checksum: 10c0/ac943ccfdc1de5313b7507fabe36a52393a8bbdd64618d35494a7292356bce292d600e718b79633555e83e00a28be8607c09bb6f10c41802b5cbf3123b8a3a11
+  checksum: 10c0/84dd0e20d2f7260d3f7d01a607db2895a8a63b81ccbffff27804333fa026c33fcceda135c56cb3471ea2a6e79188edecafe4f919b565f65f7d4b01a894f86107
   languageName: node
   linkType: hard
 
