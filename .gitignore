@@ -2,6 +2,8 @@
 /.soroban-example-dapp
 /.soroban
 /src/shared/config.json
+/cron/config.json
+
 # dependencies
 **/node_modules
 /.pnp.*

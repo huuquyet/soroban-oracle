@@ -1,5 +1,5 @@
 import { Button, Tooltip, useClipboard } from '@chakra-ui/react'
-import { Address } from '@stellar/stellar-sdk'
+import type { Address } from '@stellar/stellar-sdk'
 import { IconCopy } from '@tabler/icons-react'
 
 type CopyButtonProps = {

@@ -19,13 +19,13 @@ import {
   useColorModeValue,
   useToast,
 } from '@chakra-ui/react'
-import { SorobanContextType } from '@soroban-react/core'
+import type { SorobanContextType } from '@soroban-react/core'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 function Mint({ sorobanContext }: { sorobanContext: SorobanContextType }) {
   const toast = useToast()
-    const account = sorobanContext.address ? sorobanContext.address : ''
+  const account = sorobanContext.address ? sorobanContext.address : ''
 
   const [myBalance, setMyBalance] = useState(0)
   const [isLoadingMint, setIsLoadingMint] = useState(false)
@@ -51,7 +51,7 @@ function Mint({ sorobanContext }: { sorobanContext: SorobanContextType }) {
         .balance({
           id: account,
         })
-        .then((tx) => setMyBalance(parseFloat(tx.result.toString()) / 10 ** 10))
+        .then((tx) => setMyBalance(Number.parseFloat(tx.result.toString()) / 10 ** 10))
       setIsLoadingMyBalance(false)
     } catch (e) {
       console.log(e)
@@ -65,7 +65,7 @@ function Mint({ sorobanContext }: { sorobanContext: SorobanContextType }) {
       try {
         const txMint = await btc.mint(
           {
-            amount: BigInt(parseFloat(formData?.amount) * 10 ** 10),
+            amount: BigInt(Number.parseFloat(formData?.amount) * 10 ** 10),
             to: account,
           },
           { fee: 100 }

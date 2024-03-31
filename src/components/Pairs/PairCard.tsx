@@ -1,5 +1,5 @@
 import CopyButton from '@/components/CopyButton'
-import { oracle } from '@/shared/contracts'
+import type { oracle } from '@/shared/contracts'
 import { formatDate, formatShortAddress } from '@/utils/utils'
 import {
   Badge,
@@ -14,7 +14,7 @@ import {
   Text,
   useColorModeValue,
 } from '@chakra-ui/react'
-import { EpochData, PairInfo } from 'oracle-contract'
+import type { EpochData, PairInfo } from 'oracle-contract'
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
@@ -125,7 +125,9 @@ export default function PairCard({
                     Created time:
                   </Text>
                   <Text fontWeight={600} color={'gray.500'} size="sm">
-                    {formatDate(new Date(parseInt(pairInfo?.create_time?.toString()) * 1000))}
+                    {formatDate(
+                      new Date(Number.parseInt(pairInfo?.create_time?.toString()) * 1000)
+                    )}
                   </Text>
                 </Flex>
                 <Flex gap={10} justify={'space-between'}>
@@ -133,7 +135,7 @@ export default function PairCard({
                     Updated time:
                   </Text>
                   <Text fontWeight={600} color={'gray.500'} size="sm">
-                    {formatDate(new Date(parseInt(pairInfo?.time?.toString()) * 1000))}
+                    {formatDate(new Date(Number.parseInt(pairInfo?.time?.toString()) * 1000))}
                   </Text>
                 </Flex>
                 <Flex gap={10} justify={'space-between'}>
