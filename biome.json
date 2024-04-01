@@ -8,15 +8,18 @@
     "ignore": [
       "./node_modules",
       "./.git*",
-      "./.next",
       "./.pnp*",
+      "./.tamagui",
+      "./.next",
+      "./.expo",
       "./.soroban",
       "./.vercel",
-      "./.vscode",
       "./dist",
       "./types",
       "./public",
       "./build",
+      "./android",
+      "./ios",
       "./target"
     ]
   },
@@ -24,11 +27,15 @@
     "enabled": true,
     "rules": {
       "recommended": true,
-      "correctness": {
-        "useExhaustiveDependencies": "off"
+      "security": {
+        "noDangerouslySetInnerHtml": "off"
       },
       "suspicious": {
+        "noEmptyInterface": "off",
         "noExplicitAny": "off"
+      },
+      "style": {
+        "noNonNullAssertion": "off"
       }
     }
   },
@@ -45,6 +52,11 @@
       "quoteStyle": "single",
       "trailingComma": "es5",
       "semicolons": "asNeeded"
+    }
+  },
+  "json": {
+    "parser": {
+      "allowComments": true
     }
   }
 }
