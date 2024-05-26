@@ -6,8 +6,6 @@ NETWORK=$1
 
 SOROBAN_RPC_HOST=$2
 
-PATH=./target/bin:$PATH
-
 # USER="YOUR_PUBLIC_KEY" # your freighter public key
 
 if [[ -d "./.soroban/contracts" ]]; then
@@ -15,16 +13,14 @@ if [[ -d "./.soroban/contracts" ]]; then
   exit 0
 fi
 
-if [[ -f "./target/bin/soroban" ]]; then
-  echo "Using soroban binary from ./target/bin"
-elif command -v soroban &> /dev/null; then
+if type soroban > /dev/null; then
   echo "Using soroban cli"
 else
   echo "Soroban not found, install soroban cli"
-  cargo install_soroban
+  cargo install --locked soroban-cli --features opt --debug
 fi
 
-if ! command -v jq &> /dev/null; then
+if ! type jq > /dev/null; then
   echo "Install jq to get price"
   sudo apt install jq bc -y
 fi
