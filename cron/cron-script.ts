@@ -7,7 +7,7 @@ import {
   TransactionBuilder,
   nativeToScVal,
   scValToNative,
-  xdr,
+  type xdr,
 } from '@stellar/stellar-sdk'
 import cron from 'node-cron'
 import config from './config.json' assert { type: 'json' }

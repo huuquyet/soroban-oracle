@@ -4,9 +4,7 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "workspaces": [
-    "./cron"
-  ],
+  "workspaces": ["./cron"],
   "scripts": {
     "android": "expo run android",
     "check": "expo install --fix",

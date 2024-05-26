@@ -1,4 +1,5 @@
 import type { Address } from 'oracle-contract'
+
 export const formatShortAddress = (
   inputString: string | null | undefined | typeof Address,
   maxLength = 20

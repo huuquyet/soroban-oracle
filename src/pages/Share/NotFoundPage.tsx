@@ -1,16 +1,13 @@
-import { Alert, AlertDescription, AlertIcon, AlertTitle, Button, Stack } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
+import { Button, H1, Text, YStack } from 'tamagui'
 
 export const NotFoundPage = () => {
   const navigate = useNavigate()
   return (
-    <Stack mt={20}>
-      <Alert status="info">
-        <AlertIcon />
-        <AlertTitle>404</AlertTitle>
-        <AlertDescription>You have found a secret place.</AlertDescription>
-      </Alert>
-      <Button onClick={() => navigate('/')}>Home</Button>
-    </Stack>
+    <YStack mt={20} gap>
+      <H1>404</H1>
+      <Text>You have found a secret place.</Text>
+      <Button onPress={() => navigate('/')}>Home</Button>
+    </YStack>
   )
 }
