@@ -6,17 +6,17 @@ import config from './config.json'
 
 const { network, rpcUrl } = config
 
-export const btc = new Token.Contract({
+export const btc = new Token.Client({
   rpcUrl,
   ...Token.networks[network as keyof typeof Token.networks],
 })
 
-export const donation = new Donation.Contract({
+export const donation = new Donation.Client({
   rpcUrl,
   ...Donation.networks[network as keyof typeof Donation.networks],
 })
 
-export const oracle = new Oracle.Contract({
+export const oracle = new Oracle.Client({
   rpcUrl,
   ...Oracle.networks[network as keyof typeof Oracle.networks],
 })
