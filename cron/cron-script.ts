@@ -20,9 +20,9 @@ const sourcePublicKey = sourceKeypair.publicKey()
 
 const contract = new Contract(oracle_id)
 
-const server = new SorobanRpc.Server('https://rpc-futurenet.stellar.org', { allowHttp: true })
+const server = new SorobanRpc.Server('https://soroban-testnet.stellar.org', { allowHttp: true })
 
-const networkPassphrase = Networks.FUTURENET
+const networkPassphrase = Networks.TESTNET
 const fee = '100'
 
 const getTimestamp = async () => {
@@ -131,7 +131,7 @@ const updatePairPrice = async (price: any) => {
     const resultSimulation = await server.simulateTransaction(transaction)
     console.log(
       '[updatePairPrice] Transaction hash:',
-      `https://futurenet.steexp.com/${response.hash}`
+      `https://testnet.steexp.com/${response.hash}`
     )
 
     const hash = response.hash

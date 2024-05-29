@@ -4106,6 +4106,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@stellar/freighter-api@npm:2.0.0":
+  version: 2.0.0
+  resolution: "@stellar/freighter-api@npm:2.0.0"
+  checksum: 10c0/ff3379a89f001930504e129d04b6b8d408b120b6a5c39c25bbf927cf7a1dc66381baeb877610049492055fffe2a91ac877d253ad73521079a74895cc1e97d996
+  languageName: node
+  linkType: hard
+
 "@stellar/js-xdr@npm:^3.0.1, @stellar/js-xdr@npm:^3.1.1":
   version: 3.1.1
   resolution: "@stellar/js-xdr@npm:3.1.1"
@@ -4149,18 +4156,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@stellar/stellar-sdk@npm:11.2.0":
-  version: 11.2.0
-  resolution: "@stellar/stellar-sdk@npm:11.2.0"
+"@stellar/stellar-base@npm:^12.0.0-rc.1":
+  version: 12.0.0-rc.1
+  resolution: "@stellar/stellar-base@npm:12.0.0-rc.1"
   dependencies:
-    "@stellar/stellar-base": "npm:10.0.1"
-    axios: "npm:^1.6.5"
+    "@stellar/js-xdr": "npm:^3.1.1"
+    base32.js: "npm:^0.1.0"
     bignumber.js: "npm:^9.1.2"
-    eventsource: "npm:^2.0.2"
-    randombytes: "npm:^2.1.0"
-    toml: "npm:^3.0.0"
-    urijs: "npm:^1.19.1"
-  checksum: 10c0/a3470cd18276d8007a39bd2706cb5d8000bb16000635dd34f7e35a09ba2c7248a6d8250ec0c3c309cbdc82d40e318a8f851962c6b6d033abdb9f5c01e96e943c
+    buffer: "npm:^6.0.3"
+    sha.js: "npm:^2.3.6"
+    sodium-native: "npm:^4.1.1"
+    tweetnacl: "npm:^1.0.3"
+  dependenciesMeta:
+    sodium-native:
+      optional: true
+  checksum: 10c0/5307bde5b02a08c842da55b5db0abb817522e460ec477f86951443cea55adff6238985349208a5968ea285d32cf376e142f4520f43a8e0204979247e186d601a
   languageName: node
   linkType: hard
 
@@ -4176,6 +4186,21 @@ __metadata:
     toml: "npm:^3.0.0"
     urijs: "npm:^1.19.1"
   checksum: 10c0/7850a1894a236b4d5d5c1d942a7c950faf25a508ba98baf426a24a02e0e335419d5aae9926a6e69333a5c41ccd384feeae1956ed847b10d4046ad102e9da5fd2
+  languageName: node
+  linkType: hard
+
+"@stellar/stellar-sdk@npm:12.0.0-rc.3":
+  version: 12.0.0-rc.3
+  resolution: "@stellar/stellar-sdk@npm:12.0.0-rc.3"
+  dependencies:
+    "@stellar/stellar-base": "npm:^12.0.0-rc.1"
+    axios: "npm:^1.6.8"
+    bignumber.js: "npm:^9.1.2"
+    eventsource: "npm:^2.0.2"
+    randombytes: "npm:^2.1.0"
+    toml: "npm:^3.0.0"
+    urijs: "npm:^1.19.1"
+  checksum: 10c0/2c5368c02062c71dea445fb70f15dfb81c2665f5765d8a8b9536d738bfe795e380d8e3d2668d96aac6da3add6371e8bcc541799ac008b098c0f48ec2b55de19b
   languageName: node
   linkType: hard
 
@@ -5595,7 +5620,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.6.0, axios@npm:^1.6.5, axios@npm:^1.6.8, axios@npm:^1.7.2":
+"axios@npm:^1.6.0, axios@npm:^1.6.8, axios@npm:^1.7.2":
   version: 1.7.2
   resolution: "axios@npm:1.7.2"
   dependencies:
@@ -6580,12 +6605,12 @@ __metadata:
 
 "donation-contract@file:.soroban/contracts/donation::locator=soroban-oracle-project%40workspace%3A.":
   version: 0.0.0
-  resolution: "donation-contract@file:.soroban/contracts/donation#.soroban/contracts/donation::hash=0012d8&locator=soroban-oracle-project%40workspace%3A."
+  resolution: "donation-contract@file:.soroban/contracts/donation#.soroban/contracts/donation::hash=0a8070&locator=soroban-oracle-project%40workspace%3A."
   dependencies:
-    "@stellar/freighter-api": "npm:1.7.1"
-    "@stellar/stellar-sdk": "npm:11.2.0"
+    "@stellar/freighter-api": "npm:2.0.0"
+    "@stellar/stellar-sdk": "npm:12.0.0-rc.3"
     buffer: "npm:6.0.3"
-  checksum: 10c0/f20763112919bf4f603c154835db95145d7c1fc00c57a54d5a7767936a732733fa9280b792032cb74c0c2e0c3b08685b492752c2b5a8570166b5ac4529ebd67b
+  checksum: 10c0/d4e13cc11b9066565f9b59c6eda587ffe3b1149d7abaacf85847f457ef015563e374f4c61013044c3f8079ca8c845fe5106e8865c72a40a46ab65c29dd9c37a1
   languageName: node
   linkType: hard
 
@@ -9115,12 +9140,12 @@ __metadata:
 
 "oracle-contract@file:.soroban/contracts/oracle::locator=soroban-oracle-project%40workspace%3A.":
   version: 0.0.0
-  resolution: "oracle-contract@file:.soroban/contracts/oracle#.soroban/contracts/oracle::hash=011699&locator=soroban-oracle-project%40workspace%3A."
+  resolution: "oracle-contract@file:.soroban/contracts/oracle#.soroban/contracts/oracle::hash=25a9c9&locator=soroban-oracle-project%40workspace%3A."
   dependencies:
-    "@stellar/freighter-api": "npm:1.7.1"
-    "@stellar/stellar-sdk": "npm:11.2.0"
+    "@stellar/freighter-api": "npm:2.0.0"
+    "@stellar/stellar-sdk": "npm:12.0.0-rc.3"
     buffer: "npm:6.0.3"
-  checksum: 10c0/83e54d73cbc14cdddd854c021ec21976e9b1e1667157f5ce666c2c77690d5ab8919fc18ae98bff6482982ddbed2d2e4575dd92f3e4605e4acc6f74b17d6846cf
+  checksum: 10c0/968faa9c362952ea2528dd53e377a64662d1d9321440f28aaddc4da67fac65cc8cf0b0e52ec136928ca9d8821cdd0d3706465caf85fd03a5abd3d4d71f3fdd1e
   languageName: node
   linkType: hard
 
@@ -10197,7 +10222,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sodium-native@npm:^4.0.1, sodium-native@npm:^4.0.10":
+"sodium-native@npm:^4.0.1, sodium-native@npm:^4.0.10, sodium-native@npm:^4.1.1":
   version: 4.1.1
   resolution: "sodium-native@npm:4.1.1"
   dependencies:
@@ -10686,12 +10711,12 @@ __metadata:
 
 "token-contract@file:.soroban/contracts/token::locator=soroban-oracle-project%40workspace%3A.":
   version: 0.0.0
-  resolution: "token-contract@file:.soroban/contracts/token#.soroban/contracts/token::hash=d403c5&locator=soroban-oracle-project%40workspace%3A."
+  resolution: "token-contract@file:.soroban/contracts/token#.soroban/contracts/token::hash=9c61db&locator=soroban-oracle-project%40workspace%3A."
   dependencies:
-    "@stellar/freighter-api": "npm:1.7.1"
-    "@stellar/stellar-sdk": "npm:11.2.0"
+    "@stellar/freighter-api": "npm:2.0.0"
+    "@stellar/stellar-sdk": "npm:12.0.0-rc.3"
     buffer: "npm:6.0.3"
-  checksum: 10c0/84dd0e20d2f7260d3f7d01a607db2895a8a63b81ccbffff27804333fa026c33fcceda135c56cb3471ea2a6e79188edecafe4f919b565f65f7d4b01a894f86107
+  checksum: 10c0/e2c0d0a7661199b76dd12df9323bf2b0ff0b4003cd861e3bde4085fb090708143e8ddaef4ea76c21ace24c1d5ec87e1fe48227177838d7a2367a727ed56daac8
   languageName: node
   linkType: hard
 

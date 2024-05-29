@@ -1,17 +1,17 @@
 {
   "name": "soroban-oracle-project",
-  "private": true,
   "version": "0.1.0",
   "type": "module",
   "workspaces": ["./cron"],
   "scripts": {
     "build": "vite build",
     "clean": "cargo clean && yarn cache clean && git clean -xdf",
+    "completion": "source <(soroban completion --shell bash)",
     "dev": "vite --host --port 4000",
     "doctor": "yarn dlx @yarnpkg/doctor",
     "lint": "yarn dlx @biomejs/biome check --apply .",
     "reset": "yarn clean && npm run setup",
-    "setup": "./initialize.sh ${NETWORK:-futurenet} && yarn install",
+    "setup": "./initialize.sh ${NETWORK:-testnet} && yarn install",
     "start:cron": "yarn workspace cron run start",
     "update": "yarn upgrade-interactive",
     "vscode": "yarn dlx @yarnpkg/sdks vscode"

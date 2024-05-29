@@ -251,10 +251,12 @@ const MobileNavItem = ({
           align={'start'}
         >
           {children?.map((child) => (
-            <Link style={{ cursor: 'pointer', width: '100%', height: '100%' }} to={child?.href}>
-              <Box key={child.label} py={2}>
-                {child?.label}
-              </Box>
+            <Link
+              style={{ cursor: 'pointer', width: '100%', height: '100%' }}
+              to={child?.href}
+              key={child.label}
+            >
+              <Box py={2}>{child?.label}</Box>
             </Link>
           ))}
         </Stack>

@@ -13,14 +13,14 @@ if [[ -d "./.soroban/contracts" ]]; then
   exit 0
 fi
 
-if type soroban > /dev/null; then
+if type soroban >/dev/null; then
   echo "Using soroban cli"
 else
   echo "Soroban not found, install soroban cli"
-  cargo install --locked soroban-cli --features opt --debug
+  cargo install --locked soroban-cli --features opt --debug --version 21.0.0-rc.1
 fi
 
-if ! type jq > /dev/null; then
+if ! type jq >/dev/null; then
   echo "Install jq to get price"
   sudo apt install jq bc -y
 fi
@@ -32,7 +32,7 @@ elif [[ $NETWORK == "futurenet" ]]; then
 elif [[ $NETWORK == "testnet" ]]; then
   SOROBAN_RPC_URL="https://soroban-testnet.stellar.org"
 else
-    # assumes standalone on quickstart, which has the soroban/rpc path
+  # assumes standalone on quickstart, which has the soroban/rpc path
   SOROBAN_RPC_URL="http://localhost:8000/soroban/rpc"
 fi
 
@@ -56,26 +56,26 @@ standalone)
 esac
 
 echo "Add the $NETWORK network to cli client"
-soroban network add \
+soroban network add --global \
   --rpc-url $SOROBAN_RPC_URL \
   --network-passphrase "$SOROBAN_NETWORK_PASSPHRASE" $NETWORK
 
 echo "Add $NETWORK to shared config"
 echo "{ \"network\": \"$NETWORK\",
   \"rpcUrl\": \"$SOROBAN_RPC_URL\",
-  \"networkPassphrase\": \"$SOROBAN_NETWORK_PASSPHRASE\" }" > ./src/shared/config.json
+  \"networkPassphrase\": \"$SOROBAN_NETWORK_PASSPHRASE\" }" >./src/shared/config.json
 
 if !(soroban keys ls | grep token-admin 2>&1 >/dev/null); then
   echo "Create the token-admin identity"
-  soroban keys generate token-admin --network $NETWORK
+  soroban keys generate --global token-admin --network $NETWORK
 fi
 
 # This will fail if the account already exists, but it'll still be fine.
 echo "Fund token-admin & user account from friendbot"
-soroban keys fund token-admin --network $NETWORK
-# soroban keys fund $USER --network $NETWORK
+soroban keys fund --global token-admin --network $NETWORK
+# soroban keys fund --global $USER --network $NETWORK
 
-ADMIN_SECRET="$( soroban keys show token-admin )"
+ADMIN_SECRET="$(soroban keys show token-admin)"
 ARGS="--network $NETWORK --source token-admin"
 
 WASM_PATH="./target/wasm32-unknown-unknown/release/"
@@ -121,7 +121,7 @@ echo "Add data to cron config"
 echo "{ \"token_id\": \"$BTC_TOKEN_ID\",
   \"donation_id\": \"$DONATION_ID\",
   \"oracle_id\": \"$ORACLE_ID\",
-  \"admin_secret\": \"$ADMIN_SECRET\" }" > ./cron/config.json
+  \"admin_secret\": \"$ADMIN_SECRET\" }" >./cron/config.json
 
 # Initialize the contracts
 echo "Initialize the BTC TOKEN contract"
@@ -161,7 +161,7 @@ soroban contract invoke \
 # Call set_epoch_data to set price for BTC_USDT
 echo "Initialize BTC_USDT price"
 PRICE_STRING="$(curl -s https://blockchain.info/ticker | jq -r '.USD.last')"
-BTC_PRICE=$( echo "$PRICE_STRING * 10 ^ 5 / 1" | bc )
+BTC_PRICE=$(echo "$PRICE_STRING * 10 ^ 5 / 1" | bc)
 soroban contract invoke \
   $ARGS \
   --id $ORACLE_ID \

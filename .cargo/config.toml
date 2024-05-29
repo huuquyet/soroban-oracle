@@ -1,3 +1,3 @@
 [alias] # command aliases
-install_soroban = "install --locked soroban-cli --debug --features opt"
+install_soroban = "install --locked soroban-cli --debug --features opt --version 21.0.0-rc.1"
 b = "build --target wasm32-unknown-unknown --release"

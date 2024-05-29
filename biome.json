@@ -24,6 +24,9 @@
     "enabled": true,
     "rules": {
       "recommended": true,
+      "complexity": {
+        "noForEach": "off"
+      },
       "correctness": {
         "useExhaustiveDependencies": "off"
       },
