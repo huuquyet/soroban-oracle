@@ -3,10 +3,12 @@
 <h3 align="center">Soroban Bitcoin Price Oracle</h3>
 
   <p align="center"> Bitcoin Price Oracle on Soroban Stellar (Futurenet)</p>
-    - Live app: https://crypto-oracle-p11-oyvhddvfh-julian-dev28.vercel.app<br/>
-    - Tutorial (article): https://dev.to/user1122/soroban-bitcoin-price-oracle-tutorial-3ldk<br/>
-    - Tutorial (video): <a href="https://www.youtube.com/watch?v=YEHb36HEUyc">Link</a><br/>
-    - Inspired by: <a href="https://github.com/stellar/sorobounty-spectacular/discussions/29">This Sorobounty Submission</a>
+
+  - Live app: https://soroban-oracle.vercel.app
+  - Original from: https://github.com/stellar/soroban-dapps-challenge/tree/oracle
+  - Tutorial (article): https://dev.to/user1122/soroban-bitcoin-price-oracle-tutorial-3ldk
+  - Tutorial (video): <a href="https://www.youtube.com/watch?v=YEHb36HEUyc">Link</a>
+  - Inspired by: <a href="https://github.com/stellar/sorobounty-spectacular/discussions/29">This Sorobounty Submission</a>
 </div>
 
 ## Built With

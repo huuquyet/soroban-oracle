@@ -1,6 +1,7 @@
 import MySorobanReactProvider from '@/soroban/provider'
 import { ChakraProvider } from '@chakra-ui/react'
 import { ThirdwebProvider } from '@thirdweb-dev/react'
+import { Analytics } from '@vercel/analytics/react'
 import { ErrorBoundary } from 'react-error-boundary'
 import { BrowserRouter } from 'react-router-dom'
 import ErrorPage from '../pages/Share/ErrorPage'
@@ -18,6 +19,7 @@ function AppProviders() {
           </ErrorBoundary>
         </ChakraProvider>
       </ThirdwebProvider>
+      <Analytics />
     </BrowserRouter>
   )
 }

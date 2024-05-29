@@ -1,10 +1,11 @@
 {
   "name": "soroban-oracle-project",
+  "description": "Clone of https://github.com/stellar/soroban-dapps-challenge/tree/oracle",
   "version": "0.1.0",
   "type": "module",
   "workspaces": ["./cron"],
   "scripts": {
-    "build": "vite build",
+    "build": "cross-env NODE_OPTIONS=--max-old-space-size=3072 vite build",
     "clean": "cargo clean && yarn cache clean && git clean -xdf",
     "completion": "source <(soroban completion --shell bash)",
     "dev": "vite --host --port 4000",
@@ -25,7 +26,7 @@
     "@soroban-react/types": "^9.1.3",
     "@stellar/stellar-sdk": "^11.3.0",
     "@tabler/icons-react": "^2.47.0",
-    "@thirdweb-dev/react": "^4.6.26",
+    "@thirdweb-dev/react": "^4.6.28",
     "axios": "^1.7.2",
     "donation-contract": "file:.soroban/contracts/donation",
     "oracle-contract": "file:.soroban/contracts/oracle",
@@ -53,13 +54,15 @@
     "@safe-global/safe-core-sdk-types": "^4.1.1",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
+    "@vercel/analytics": "^1.3.1",
     "@vitejs/plugin-react-swc": "^3.7.0",
+    "cross-env": "^7.0.3",
     "ethers": "^5.7.2",
     "framer-motion": "^11.2.6",
     "lit-html": "^3.1.3",
     "magic-sdk": "^22.1.1",
     "typescript": "^5.4.5",
-    "vite": "^5.2.11"
+    "vite": "^5.2.12"
   },
   "packageManager": "yarn@4.2.2"
 }
