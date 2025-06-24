@@ -27,7 +27,7 @@
     "@stellar/stellar-sdk": "^11.3.0",
     "@tabler/icons-react": "^2.47.0",
     "@thirdweb-dev/react": "^4.6.28",
-    "axios": "^1.8.3",
+    "axios": "^1.10.0",
     "donation-contract": "file:.soroban/contracts/donation",
     "oracle-contract": "file:.soroban/contracts/oracle",
     "react": "^18.3.1",
